@@ -3,11 +3,36 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+
+
+const theme = extendTheme({
+  colors: {
+    black : {
+      100: "#000",
+      200: "#000",
+      300: "#000",
+      400: "#000",
+      500: "#000",
+      600: "#000",
+      700: "#000",
+      800: "#000",
+      900: "#000",
+
+    }
+  },
+});
+
+export default theme;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ChakraProvider>
+
     <App />
+    </ChakraProvider>
+
   </React.StrictMode>
 );
 
