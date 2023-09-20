@@ -8,6 +8,12 @@ import {
   Heading,
   SimpleGrid,
   Divider,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  HStack,
 } from "@chakra-ui/react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -189,153 +195,179 @@ function Interviewee() {
         Interviewee
       </Heading>
 
-      {interviews.map((interview) => (
-        <Fragment key={interview.id}>
-          <Heading as="h3" size="md" mb={4}>
-            {interview.id}
-          </Heading>
+      <Accordion allowToggle>
+        {interviews.map((interview) => (
+          <AccordionItem key={interview.id}>
+            <h2>
+            <AccordionButton bgColor={'blackAlpha.50'} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
+                <Box flex="1" textAlign="left" fontWeight={'bold'}>
+                  {interview.id}
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel>
+              <SimpleGrid columns={[1, 2]} columnGap={4} rowGap={2}>
+                {/* Contact Method */}
+                <FormControl>
+                  <label>Contact Method</label>
+                  <ReactSelect
+                    placeholder="Select Contact Method"
+                    options={contactMethodOptions}
+                    onChange={(selectedOption) =>
+                      handleContactMethodChange(selectedOption, interview.id)
+                    }
+                    value={contactMethodOptions.find(
+                      (option) => option.value === interview.contactMethod
+                    )}
+                  />
+                </FormControl>
 
-          <SimpleGrid columns={[1, 2]} columnGap={4} rowGap={2}>
-            {/* Contact Method */}
-            <FormControl>
-              <label>Contact Method</label>
-              <ReactSelect
-                placeholder="Select Contact Method"
-                options={contactMethodOptions}
-                onChange={(selectedOption) =>
-                  handleContactMethodChange(selectedOption, interview.id)
-                }
-                value={contactMethodOptions.find(
-                  (option) => option.value === interview.contactMethod
-                )}
-              />
-            </FormControl>
+                {/* Personal Information */}
+                <FormControl>
+                  <label>Title</label>
+                  <ReactSelect
+                    placeholder="Select Mr. / Ms."
+                    options={titleOptions}
+                    onChange={(selectedOption) =>
+                      handleTitleChange(selectedOption, interview.id)
+                    }
+                    value={titleOptions.find(
+                      (option) => option.value === interview.title
+                    )}
+                  />
+                </FormControl>
 
-            {/* Personal Information */}
-            <FormControl>
-              <label>Title</label>
-              <ReactSelect
-                placeholder="Select Mr. / Ms."
-                options={titleOptions}
-                onChange={(selectedOption) =>
-                  handleTitleChange(selectedOption, interview.id)
-                }
-                value={titleOptions.find(
-                  (option) => option.value === interview.title
-                )}
-              />
-            </FormControl>
+                <FormControl mt={4}>
+                  <label>First Name</label>
+                  <Input
+                    type="text"
+                    placeholder="Enter First Name"
+                    value={interview.firstName}
+                    onChange={(event) =>
+                      handleFirstNameChange(event, interview.id)
+                    }
+                  />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <label>First Name</label>
-              <Input
-                type="text"
-                placeholder="Enter First Name"
-                value={interview.firstName}
-                onChange={(event) => handleFirstNameChange(event, interview.id)}
-              />
-            </FormControl>
+                <FormControl mt={4}>
+                  <label>Last Name</label>
+                  <Input
+                    type="text"
+                    placeholder="Enter Last Name"
+                    value={interview.lastName}
+                    onChange={(event) =>
+                      handleLastNameChange(event, interview.id)
+                    }
+                  />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <label>Last Name</label>
-              <Input
-                type="text"
-                placeholder="Enter Last Name"
-                value={interview.lastName}
-                onChange={(event) => handleLastNameChange(event, interview.id)}
-              />
-            </FormControl>
+                {/* Roofing Contract */}
+                <FormControl mt={4}>
+                  <label>Roofing Contract</label>
+                  <Select
+                    options={roofingOptions.map((option) => ({
+                      value: option,
+                      label: option,
+                    }))}
+                    onChange={(selectedOption) =>
+                      handleRoofingContractChange(selectedOption, interview.id)
+                    }
+                    placeholder="Select Roofing Contract"
+                    value={roofingOptions.find(
+                      (option) => option === interview.roofingContract
+                    )}
+                  />
+                </FormControl>
 
-            {/* Roofing Contract */}
-            <FormControl mt={4}>
-              <label>Roofing Contract</label>
-              <Select
-                options={roofingOptions.map((option) => ({
-                  value: option,
-                  label: option,
-                }))}
-                onChange={(selectedOption) =>
-                  handleRoofingContractChange(selectedOption, interview.id)
-                }
-                placeholder="Select Roofing Contract"
-                value={roofingOptions.find(
-                  (option) => option === interview.roofingContract
-                )}
-              />
-            </FormControl>
+                <FormControl mt={4}>
+                  <label>Company Name</label>
+                  <Input
+                    placeholder="Enter Company Name"
+                    type="text"
+                    value={interview.companyName}
+                    onChange={(event) =>
+                      handleCompanyNameChange(event, interview.id)
+                    }
+                  />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <label>Company Name</label>
-              <Input
-                placeholder="Enter Company Name"
-                type="text"
-                value={interview.companyName}
-                onChange={(event) =>
-                  handleCompanyNameChange(event, interview.id)
-                }
-              />
-            </FormControl>
+                {/* Interview Significance */}
+                <FormControl mt={4}>
+                  <label>Interviewee Significance</label>
+                  <ReactSelect
+                    placeholder="Select Interviewee Significance"
+                    options={interviewSignificanceOptions}
+                    onChange={(selectedOption) =>
+                      handleInterviewSignificanceChange(
+                        selectedOption,
+                        interview.id
+                      )
+                    }
+                    value={interviewSignificanceOptions.find(
+                      (option) =>
+                        option.value === interview.interviewSignificance
+                    )}
+                  />
+                </FormControl>
 
-            {/* Interview Significance */}
-            <FormControl mt={4}>
-              <label>Interviewee Significance</label>
-              <ReactSelect
-                placeholder="Select Interviewee Significance"
-                options={interviewSignificanceOptions}
-                onChange={(selectedOption) =>
-                  handleInterviewSignificanceChange(
-                    selectedOption,
-                    interview.id
-                  )
-                }
-                value={interviewSignificanceOptions.find(
-                  (option) => option.value === interview.interviewSignificance
-                )}
-              />
-            </FormControl>
+                {/* Document Uploads */}
+                <FormControl mt={4}>
+                  <label>Business Card Front</label>
+                  <Input
+                    placeholder="Upload Business Card Front"
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) =>
+                      handleFrontBusinessCardUpload(event, interview.id)
+                    }
+                  />
+                </FormControl>
 
-            {/* Document Uploads */}
-            <FormControl mt={4}>
-              <label>Business Card Front</label>
-              <Input
-                placeholder="Upload Business Card Front"
-                type="file"
-                accept="image/*"
-                onChange={(event) =>
-                  handleFrontBusinessCardUpload(event, interview.id)
-                }
-              />
-            </FormControl>
+                <FormControl mt={4}>
+                  <label>Business Card Back</label>
+                  <Input
+                    placeholder="Upload Business Card Back"
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) =>
+                      handleBackBusinessCardUpload(event, interview.id)
+                    }
+                  />
+                </FormControl>
 
-            <FormControl mt={4}>
-              <label>Business Card Back</label>
-              <Input
-                placeholder="Upload Business Card Back"
-                type="file"
-                accept="image/*"
-                onChange={(event) =>
-                  handleBackBusinessCardUpload(event, interview.id)
-                }
-              />
-            </FormControl>
+                <FormControl mt={4}>
+                  <label>Other Document</label>
+                  <Input
+                    placeholder="Upload Other Document"
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) =>
+                      handleDocumentImageUpload(event, interview.id)
+                    }
+                  />
+                </FormControl>
+              </SimpleGrid>
+              <Divider my={4} />
+              <Divider my={4} />
+            </AccordionPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
 
-            <FormControl mt={4}>
-              <label>Other Document</label>
-              <Input
-                placeholder="Upload Other Document"
-                type="file"
-                accept="image/*"
-                onChange={(event) =>
-                  handleDocumentImageUpload(event, interview.id)
-                }
-              />
-            </FormControl>
-          </SimpleGrid>
-          <Divider my={4} />
-        </Fragment>
-      ))}
-
-      <Button onClick={handleAddInterview}>Add Interview</Button>
+      <HStack alignItems="end" justifyContent="end">
+        <Button
+          onClick={handleAddInterview}
+          bg="black"
+          _hover={{ bg: "gray.700" }}
+          color="white"
+          rounded="md"
+          ml={"auto"}
+          my={4}
+        >
+          Add Interview
+        </Button>
+      </HStack>
     </Box>
   );
 }

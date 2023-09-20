@@ -118,7 +118,6 @@ export function FieldForm() {
           {tabData.map((tab, index) => (
             <TabPanel key={index}>
               {tab.component}
-              <HStack justifyItems={"end"} alignItems={"end"}>
                 <Button
                   bg="black"
                   _hover={{ bg: "gray.700" }}
@@ -127,10 +126,10 @@ export function FieldForm() {
                   type="submit"
                   ml="auto"
                   pr="4"
+                  w="full"
                 >
                   {tabIndex === tabData.length - 1 ? "Finish" : "Next"}
                 </Button>
-              </HStack>
             </TabPanel>
           ))}
         </TabPanels>

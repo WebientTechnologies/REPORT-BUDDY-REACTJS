@@ -15,6 +15,7 @@ import {
   FormControl,
   AccordionIcon,
   HStack,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { MdExpandMore } from "react-icons/md"; // Import accordion icon
 import ReactQuill from "react-quill";
@@ -26,6 +27,7 @@ import {
   roomAreaOptions,
 } from "./data";
 import ReactSelect from "react-select";
+import { AddIcon } from "@chakra-ui/icons";
 
 function InterviewQnAComponent() {
   // State to store Q&A data
@@ -145,17 +147,18 @@ function InterviewQnAComponent() {
       </VStack>
 
       <Heading as="h3" size="lg" my={2}>
-Structures</Heading>
+        Structures
+      </Heading>
 
       {/* Display structures */}
-      <Accordion allowMultiple >
+      <Accordion defaultIndex={[0]} allowMultiple>
         {qna.structures.map((structure, structureIndex) => (
           <AccordionItem key={structureIndex} my={2}>
-            <AccordionButton>
+            <AccordionButton bgColor={"blackAlpha.50"}  _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
               <Box flex="1" textAlign="left">
                 Structure {structureIndex + 1}
               </Box>
-              <AccordionIcon/>
+              <AccordionIcon />
             </AccordionButton>
             <AccordionPanel pb={4}>
               <VStack spacing={4} align="start" w="100%">
@@ -200,71 +203,84 @@ Structures</Heading>
                     // Add your onChange logic here
                   />
                 </Box>
-                <Box w="100%">
-                  <Heading as="h6" size="sm">
-                    Exterior
-                  </Heading>
-                  <FormControl mb={4} isRequired height={'200px'}>
-                    <ReactQuill
-                      modules={quillModules}
-                      placeholder="1. Which items were damaged? 2. When were they installed? 3. When was the damage first noticed? 4. Which specific items were repaired and when? 5. Which specific items were replaced and when?"
-                      style={{ height: "150px" }}
-                    />
-                  </FormControl>
+                <SimpleGrid columns={[1, 2]} gap={4}>
                   <Box w="100%">
-                    <Text>Notes</Text>
-                    <Input
-                      type="text"
-                      value={structure.exteriorDamageNotes}
-                      onChange={(e) => {
-                        const updatedStructures = [...qna.structures];
-                        updatedStructures[structureIndex].exteriorDamageNotes =
-                          e.target.value;
-                        setQna({
-                          ...qna,
-                          structures: updatedStructures,
-                        });
-                      }}
-                    />
+                    <Heading as="h6" size="sm" mb={2}>
+                      Exterior
+                    </Heading>
+                    <FormControl mb={4} isRequired height={"200px"}>
+                      <ReactQuill
+                        modules={quillModules}
+                        placeholder={`1. Which items were damaged? 
+2. When were they installed? 
+3. When was the damage first noticed?
+4. Which specific items were repaired and when?
+5. Which specific items were replaced and when?`}
+                        style={{ height: "150px" }}
+                      />
+                    </FormControl>
+                    <Box w="100%">
+                      <Text>Notes</Text>
+                      <Input
+                        type="text"
+                        placeholder={"Notes"}
+                        value={structure.exteriorDamageNotes}
+                        onChange={(e) => {
+                          const updatedStructures = [...qna.structures];
+                          updatedStructures[
+                            structureIndex
+                          ].exteriorDamageNotes = e.target.value;
+                          setQna({
+                            ...qna,
+                            structures: updatedStructures,
+                          });
+                        }}
+                      />
+                    </Box>
                   </Box>
-                </Box>
-                <Box w="100%">
-                  <Heading as="h6" size="sm">
-                    Roof
-                  </Heading>
-                  <FormControl mb={4} isRequired height={'200px'}>
-                    <ReactQuill
-                      modules={quillModules}
-                      placeholder="1. Which areas were damaged? 2. When were they installed? 3. When was each area of damage first noticed? 4. Which specific items were repaired and when? 5. Which specific items were replaced and when?"
-                      style={{ height: "150px" }}
-                    />
-                  </FormControl>
                   <Box w="100%">
-                    <Text>Notes</Text>
-                    <Input
-                      type="text"
-                      value={structure.roofDamageNotes}
-                      onChange={(e) => {
-                        const updatedStructures = [...qna.structures];
-                        updatedStructures[structureIndex].roofDamageNotes =
-                          e.target.value;
-                        setQna({
-                          ...qna,
-                          structures: updatedStructures,
-                        });
-                      }}
-                    />
+                    <Heading as="h6" size="sm" mb={2}>
+                      Roof
+                    </Heading>
+                    <FormControl mb={4} isRequired height={"200px"}>
+                      <ReactQuill
+                        modules={quillModules}
+                        placeholder={`1. Which areas were damaged?
+ 2. When were they installed?
+ 3. When was each area of damage first noticed?
+ 4. Which specific items were repaired and when? 
+ 5. Which specific items were replaced and when?`}
+                        style={{ height: "150px" }}
+                      />
+                    </FormControl>
+                    <Box w="100%">
+                      <Text>Notes</Text>
+                      <Input
+                        placeholder={"Notes"}
+                        type="text"
+                        value={structure.roofDamageNotes}
+                        onChange={(e) => {
+                          const updatedStructures = [...qna.structures];
+                          updatedStructures[structureIndex].roofDamageNotes =
+                            e.target.value;
+                          setQna({
+                            ...qna,
+                            structures: updatedStructures,
+                          });
+                        }}
+                      />
+                    </Box>
                   </Box>
-                </Box>
+                </SimpleGrid>
 
                 {structure.rooms?.map((room, roomIndex) => (
-                  <Accordion allowMultiple key={roomIndex} w={"full"} gap={4}>
-                    <AccordionItem my={2}>
-                      <AccordionButton>
+                  <Accordion defaultIndex={[0]} allowMultiple key={roomIndex} w={"full"} gap={4}>
+                    <AccordionItem my={2} >
+                      <AccordionButton bgColor={'blackAlpha.50'} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
                         <Box flex="1" textAlign="left">
                           Room/Area {roomIndex + 1}
                         </Box>
-                        <AccordionIcon/>
+                        <AccordionIcon />
                       </AccordionButton>
                       <AccordionPanel pb={4}>
                         <VStack spacing={4} align="start" w="100%">
@@ -279,14 +295,14 @@ Structures</Heading>
                           </Box>
                           <Accordion allowMultiple w="full">
                             {room.damages.map((damage, damageIndex) => (
-                              <AccordionItem key={damageIndex} my={2}>
-                                <AccordionButton>
+                              <AccordionItem key={damageIndex}>
+                                <AccordionButton bgColor={'blackAlpha.50'} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
                                   <Box flex="1" textAlign="left">
                                     Damage #{damageIndex + 1}
                                   </Box>
-                                  <AccordionIcon/>
+                                  <AccordionIcon />
                                 </AccordionButton>
-                                <AccordionPanel pb={4}>
+                                <AccordionPanel  display = "flex" gap= {[2,4]} w="full" alignItems={'start'} flexDir={'column'}>
                                   <Box w="100%">
                                     <Text>Damage location</Text>
                                     <ReactSelect
@@ -318,13 +334,12 @@ Structures</Heading>
                             _hover={{ bg: "gray.700" }}
                             color="white"
                             rounded="md"
-                            mt={4}
                             ml={"auto"}
                             onClick={() =>
                               addDamageToRoom(structureIndex, roomIndex)
                             }
                           >
-                            Add Damage
+                            <AddIcon fontSize={'md'} mr={1}/> Damage
                           </Button>
                         </VStack>
                       </AccordionPanel>
@@ -336,32 +351,28 @@ Structures</Heading>
                   _hover={{ bg: "gray.700" }}
                   color="white"
                   rounded="md"
-                  mt={4}
                   ml={"auto"}
-
                   onClick={() => addRoomToStructure(structureIndex)}
                 >
-                  Add Room/Area
+                 <AddIcon fontSize={'md'} mr={1}/>  Room/Area
                 </Button>
               </VStack>
             </AccordionPanel>
           </AccordionItem>
         ))}
       </Accordion>
-<HStack alignItems={'end'}>
-<Button
-        bg="black"
-        _hover={{ bg: "gray.700" }}
-        color="white"
-        rounded="md"
-        ml={"auto"}
-
-        mt={4}
-        onClick={addStructure}
-      >
-        Add Structure
-      </Button>
-</HStack>
+      <HStack alignItems={"end"}>
+        <Button
+          bg="black"
+          _hover={{ bg: "gray.700" }}
+          color="white"
+          rounded="md"
+          ml={"auto"}
+          onClick={addStructure}
+        >
+          <AddIcon fontSize={'md'} mr={1}/> Structure
+        </Button>
+      </HStack>
     </Box>
   );
 }
