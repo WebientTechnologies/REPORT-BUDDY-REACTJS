@@ -7,16 +7,18 @@ import { quillModules, selectOptionForStandardScope } from "./data";
 
 function ScopeOfWorkComponent() {
   return (
-    <Box>
+    <Box p ="4">
       {/* Heading: Scope of Work */}
       <Heading as="h2" size="xl" mb={4}>
         Scope of Work
       </Heading>
-
+      <Box p={4}>
+        
       {/* Heading: Scope Worksheet */}
       <Heading as="h3" size="md" mb={4}>
         Scope Worksheet
       </Heading>
+      <Box p={4}>
 
       {/* Heading: Additional Details */}
       <Heading as="h3" fontWeight={"semibold"} size="md" mb={2}>
@@ -39,6 +41,7 @@ function ScopeOfWorkComponent() {
         (321) 249-1338 Additional Notes/Instructions: Please contact OC and set
         inspection to determine the C&O of leak and duration of leaking
       </Text>
+      </Box>
 
       {/* Heading: Scope from Received Document */}
       <Heading as="h3" fontWeight={"semibold"} size="md" mb={2}>
@@ -67,6 +70,8 @@ function ScopeOfWorkComponent() {
           style={{ height: "150px" }}
         />
       </FormControl>
+
+      </Box>
 
       {/* Heading: SOW Statement */}
       <Heading fontWeight={"semibold"} as="h3" size="md" mb={2}>

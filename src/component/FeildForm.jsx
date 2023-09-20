@@ -72,7 +72,7 @@ export function FieldForm() {
           h={"100vh"}
           overflowY={"auto"}
           position={"sticky"}
-          w="250px"
+          w="300px"
           justifyContent={"start"}
           gap={"2"}
           alignItems={"start"}
@@ -93,7 +93,6 @@ export function FieldForm() {
                 borderColor: "black",
               }}
               textAlign={"start"}
-              px="2"
               w="full"
               _active={{
                 bgColor: "gray.50",
@@ -101,8 +100,9 @@ export function FieldForm() {
                 fontWeight: "bold",
                 borderColor: "black",
               }}
+              
             >
-              <Text w="full" textAlign={"start"}>
+              <Text w="full" textAlign={"start" } px="4" display={"block"}>
                 {tab.label}
               </Text>
             </Tab>
