@@ -50,7 +50,7 @@ function DocumentReviewComponent() {
         Document Review
       </Heading>
       {documents.map((doc, index) => (
-        <Box p={4} key={index} border={"1px solid"} borderColor={"gray.200"}>
+        <Fragment key={index}>
           {/* Document 1 */}
           <HStack justifyContent={"space-between"} alignItems={"end"}>
             <Heading as="h3" size="md" mb={2}>
@@ -62,7 +62,6 @@ function DocumentReviewComponent() {
               </IconButton>
             )}
           </HStack>
-          <Box px={8}>
             <Heading as="h4" size="sm" mb={2}>
               Click here to upload Document
             </Heading>
@@ -80,9 +79,9 @@ function DocumentReviewComponent() {
               Construction Estimate
             </Heading>
             {/* React Quill for Construction Estimate */}
-            <FormControl mb={4} minH={"200px"} isRequired>
+            <FormControl mb={4} minH={"350px"} isRequired>
               <ReactQuill
-                style={{ height: "150px" }}
+                style={{ height: "300px" }}
                 modules={quillModules}
                 value={doc.constructionEstimate}
                 onChange={(value) => {
@@ -99,11 +98,11 @@ function DocumentReviewComponent() {
             <Heading as="h4" size="sm" mb={2}>
               Document Review Notes
             </Heading>
-            <FormControl mb={4} minH={"200px"} isRequired>
+            <FormControl mb={8} minH={"300px"} isRequired>
               <ReactQuill
                 modules={quillModules}
                 value={doc.documentReviewNotes}
-                style={{ height: "150px" }}
+                style={{ height: "250px" }}
                 onChange={(value) => {
                   const updatedDocuments = [...documents];
                   updatedDocuments[index].documentReviewNotes = value;
@@ -119,9 +118,9 @@ function DocumentReviewComponent() {
             </Heading>
 
             {/* React Quill for noteworthy items */}
-            <FormControl mb={4} minH={"200px"} isRequired>
+            <FormControl mb={4} minH={"300px"} isRequired>
               <ReactQuill
-                style={{ height: "150px" }}
+                style={{ height: "250px" }}
                 modules={quillModules}
                 value={doc.noteworthyItems}
                 onChange={(value) => {
@@ -132,8 +131,7 @@ function DocumentReviewComponent() {
                 placeholder="State in a bullet point format the particularly noteworthy items from the document."
               />
             </FormControl>
-          </Box>
-        </Box>
+          </Fragment>
       ))}
       <HStack m={4} justifyItems={"end"} alignItems={"end"}>
         <Button
@@ -143,6 +141,7 @@ function DocumentReviewComponent() {
           rounded="md"
           ml="auto"
           pr="4"
+          mt={4}
           onClick={addDocumentReview}
         >
           Add Document

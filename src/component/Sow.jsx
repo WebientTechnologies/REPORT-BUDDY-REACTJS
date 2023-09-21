@@ -12,13 +12,13 @@ function ScopeOfWorkComponent() {
       <Heading as="h2" size="xl" mb={4}>
         Scope of Work
       </Heading>
-      <Box p={4}>
+      <Box>
         
       {/* Heading: Scope Worksheet */}
       <Heading as="h3" size="md" mb={4}>
         Scope Worksheet
       </Heading>
-      <Box p={4}>
+      <Box>
 
       {/* Heading: Additional Details */}
       <Heading as="h3" fontWeight={"semibold"} size="md" mb={2}>
@@ -49,9 +49,9 @@ function ScopeOfWorkComponent() {
       </Heading>
 
       {/* Scope from Received Document - React Quill */}
-      <FormControl mb={4} minH={"200px"} isRequired>
+      <FormControl mb={4} minH={"250px"} isRequired>
         <ReactQuill
-          style={{ height: "150px" }}
+          style={{ height: "200px" }}
           modules={quillModules}
           placeholder="If any additional documents were received, Experts MUST review them closely and add scope items in this field. Please list each reportedly damaged building material and/or area that was (were) not listed in the “Assignment Sheet Scope” field."
         />
@@ -63,11 +63,11 @@ function ScopeOfWorkComponent() {
       </Heading>
 
       {/* Scope from Interview - React Quill */}
-      <FormControl mb={4} minH={"200px"} isRequired>
+      <FormControl mb={4} minH={"250px"} isRequired>
         <ReactQuill
+          style={{ height: "200px" }}
           modules={quillModules}
           placeholder="If any scope is added from the interviews, Experts MUST add those scope items in this field. Please list each reportedly damaged building material and/or area that was (were) not listed in the “Assignment Sheet Scope” or “Scope from Received Documents” fields."
-          style={{ height: "150px" }}
         />
       </FormControl>
 
@@ -88,9 +88,9 @@ function ScopeOfWorkComponent() {
       </FormControl>
 
       {/* Quill with Placeholder */}
-      <FormControl mb={4} minH={"200px"} isRequired>
+     < FormControl mb={4} minH={"250px"} isRequired>
         <ReactQuill
-          style={{ height: "150px" }}
+          style={{ height: "200px" }}
           modules={quillModules}
           placeholder={`Experts MUST craft a complete SOW Statement (to use "as is" in the report) before the IDP is submitted.`}
         />

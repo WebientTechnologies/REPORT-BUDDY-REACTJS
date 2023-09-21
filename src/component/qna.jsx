@@ -160,7 +160,7 @@ function InterviewQnAComponent() {
               </Box>
               <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel pb={4}>
+            <AccordionPanel p="0">
               <VStack spacing={4} align="start" w="100%">
                 <Box w="100%">
                   <Text>When was the structure built?</Text>
@@ -214,9 +214,9 @@ function InterviewQnAComponent() {
                         placeholder={`1. Which items were damaged? 
 2. When were they installed? 
 3. When was the damage first noticed?
-4. Which specific items were repaired and when?
-5. Which specific items were replaced and when?`}
-                        style={{ height: "150px" }}
+4. Which specific items were repaired or replaced and when?`}
+
+                        style={{ height: "150px" , fontSize:"12px"}}
                       />
                     </FormControl>
                     <Box w="100%">
@@ -248,8 +248,7 @@ function InterviewQnAComponent() {
                         placeholder={`1. Which areas were damaged?
  2. When were they installed?
  3. When was each area of damage first noticed?
- 4. Which specific items were repaired and when? 
- 5. Which specific items were replaced and when?`}
+ 4. Which specific items were repaired or replaced and when?`}
                         style={{ height: "150px" }}
                       />
                     </FormControl>
@@ -274,7 +273,7 @@ function InterviewQnAComponent() {
                 </SimpleGrid>
 
                 {structure.rooms?.map((room, roomIndex) => (
-                  <Accordion defaultIndex={[0]} allowMultiple key={roomIndex} w={"full"} gap={4}>
+                  <Accordion defaultIndex={[0]} allowMultiple key={roomIndex} w={"full"} gap={4} p="0">
                     <AccordionItem my={2} >
                       <AccordionButton bgColor={'blackAlpha.50'} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
                         <Box flex="1" textAlign="left">
@@ -282,7 +281,7 @@ function InterviewQnAComponent() {
                         </Box>
                         <AccordionIcon />
                       </AccordionButton>
-                      <AccordionPanel pb={4}>
+                      <AccordionPanel p="0">
                         <VStack spacing={4} align="start" w="100%">
                           <Box w="100%">
                             <Text>Select Room/Area {roomIndex + 1}</Text>
@@ -293,7 +292,7 @@ function InterviewQnAComponent() {
                               // Add your onChange logic here
                             />
                           </Box>
-                          <Accordion allowMultiple w="full">
+                          <Accordion allowMultiple w="full" p="0">
                             {room.damages.map((damage, damageIndex) => (
                               <AccordionItem key={damageIndex}>
                                 <AccordionButton bgColor={'blackAlpha.50'} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
@@ -302,7 +301,7 @@ function InterviewQnAComponent() {
                                   </Box>
                                   <AccordionIcon />
                                 </AccordionButton>
-                                <AccordionPanel  display = "flex" gap= {[2,4]} w="full" alignItems={'start'} flexDir={'column'}>
+                                <AccordionPanel p="0"  display = "flex" gap= {[2,4]} w="full" alignItems={'start'} flexDir={'column'}>
                                   <Box w="100%">
                                     <Text>Damage location</Text>
                                     <ReactSelect

@@ -6,6 +6,7 @@ import {
   Text,
   Input,
   Button,
+  HStack,
 } from "@chakra-ui/react";
 
 function FieldSketchesComponent() {
@@ -53,7 +54,7 @@ function FieldSketchesComponent() {
         Field Sketches
       </Heading>
       {sketches.map((sketch, index) => (
-        <Box key={index} px={[4, 8]}>
+        <Box key={index}>
           {/* Interior Damage Sketch sub heading */}
           <Heading as="h3" size="md" mb={2}>
             Interior Damage Sketch
@@ -61,7 +62,7 @@ function FieldSketchesComponent() {
 
           {/* Image input for interior damage sketch */}
           <FormControl mb={4}>
-            <Text>
+            <Text mb={2}>
               Click here to upload a sketch showing the locations of the
               damages.
             </Text>
@@ -80,7 +81,7 @@ function FieldSketchesComponent() {
 
           {/* Text input with placeholder for interior damage sketch notes */}
           <FormControl mb={4}>
-            <Text>Experts to add notes, as suitable.</Text>
+            <Text mb={2}>Experts to add notes, as suitable.</Text>
             <Input
               type="text"
               placeholder="Add notes..."
@@ -101,7 +102,7 @@ function FieldSketchesComponent() {
 
           {/* Image input for roof sketch */}
           <FormControl mb={4}>
-            <Text>
+            <Text mb={2}>
               Click here to upload a sketch showing the locations of the
               damages.
             </Text>
@@ -116,7 +117,7 @@ function FieldSketchesComponent() {
 
           {/* Text input with placeholder for roof sketch notes */}
           <FormControl mb={4}>
-            <Text>Experts to add notes, as suitable.</Text>
+            <Text mb={2}>Experts to add notes, as suitable.</Text>
             <Input
               type="text"
               placeholder="Add notes..."
@@ -130,7 +131,18 @@ function FieldSketchesComponent() {
           </FormControl>
         </Box>
       ))}
-      <Button onClick={addSketches}>Add Sketch</Button>
+      <HStack justifyContent={'end'}>
+      <Button 
+       bg="black"
+       _hover={{ bg: "gray.700" }}
+       color="white"
+       rounded="md"
+       ml="auto"
+       pr="4"
+       mb={2}
+      onClick={addSketches}>Add Sketch</Button>
+
+      </HStack>
     </Box>
   );
 }

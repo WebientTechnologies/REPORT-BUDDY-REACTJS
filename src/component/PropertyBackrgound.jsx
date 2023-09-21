@@ -14,15 +14,8 @@ import ReactQuill from "react-quill";
 import Select from "react-select";
 
 import "react-quill/dist/quill.snow.css";
-const quillModules = {
-  toolbar: [
-    [{ header: "1" }, { header: "2" }, { font: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image"],
-    ["clean"],
-  ],
-};
+import { quillModules } from "./data";
+
 const FormStructure = () => {
   const [structure, setStructure] = useState({
     numberOfStories: "",
@@ -48,7 +41,7 @@ const FormStructure = () => {
   return (
     <Box marginBottom="20px">
       {/* Add margin-bottom for separation */}
-      <Grid templateColumns="repeat(2, 1fr)" gap={4} mb={4}>
+      <Grid templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)"]} gap={4} mb={4}>
         <GridItem colSpan={1}>
           <FormControl>
             <FormLabel>Number of Stories</FormLabel>
@@ -161,7 +154,9 @@ const PropertyForm = () => {
           <FormStructure />
         </Fragment>
       ))}
-      <Button
+     <HStack         alignItems={'end'}
+        justifyContent={'end'}>
+     <Button
         onClick={addStructure}
         bg="black"
         _hover={{ bg: "gray.700" }}
@@ -169,13 +164,15 @@ const PropertyForm = () => {
         rounded="md"
         ml="auto"
         pr="4"
-        float="right"
         mt={2}
+        alignSelf={'end'}
+        justifySelf={'end'}
         mb={4}
         marginRight={0}
       >
         Add Structure
       </Button>
+     </HStack>
 
       <Heading as="h2" size="lg" mt={8} mb={4}>
         Property Appraiser's Record

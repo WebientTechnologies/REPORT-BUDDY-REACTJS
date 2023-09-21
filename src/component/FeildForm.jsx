@@ -20,6 +20,7 @@ import Interviewee from "./Interviewee";
 import InterviewQnAComponent from "./qna";
 import FieldSketchesComponent from "./RoofSketch";
 import DocumentReviewComponent from "./DocumentReview";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const tabData = [
   { label: "SOW", component: <ScopeOfWorkComponent /> },
@@ -47,12 +48,15 @@ export function FieldForm() {
     setTabIndex((prevIndex) =>
       prevIndex < tabData.length - 1 ? prevIndex + 1 : 0
     );
+    
   };
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to the server).
     // After handling the submission, switch to the next tab.
+    if( tabIndex === tabData.length - 1) return navigate('/');
     switchToNextTab();
   };
 
@@ -72,7 +76,7 @@ export function FieldForm() {
           h={"100vh"}
           overflowY={"auto"}
           position={"sticky"}
-          w="300px"
+          w={['0',"300px"]}
           justifyContent={"start"}
           gap={"2"}
           alignItems={"start"}
