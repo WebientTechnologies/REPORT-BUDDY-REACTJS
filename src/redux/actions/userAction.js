@@ -3,9 +3,9 @@ import {API_BASE_URL} from '../store.js';
  export const login = (email , password) =>async (dispatch)=>{
     try{
         dispatch({type:"loginRequest"});
-        const res = await axios.post(`${API_BASE_URL}/login-user`, {email,password}, {withCredentials: true});
-        console.log(res);
-        dispatch({type:'loginSuccess', payload:res.data});
+        // const res = await axios.post(`${API_BASE_URL}/login-user`, {email,password}, {withCredentials: true});
+        // console.log(res);
+        dispatch({type:'loginSuccess', payload:{}});
     }
     catch (error){
         console.log(error.response.data);

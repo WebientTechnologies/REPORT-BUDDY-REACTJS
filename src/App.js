@@ -22,8 +22,8 @@ function App() {
   const dispatch = useDispatch();
  
 
-//const isAuthenticated = localStorage.getItem('token')
-  const isAuthenticated = true;
+const isAuthenticated = localStorage.getItem('token')
+  // const isAuthenticated = true;
 console.log({API_BASE_URL})
   useEffect(() => {
     if(error)

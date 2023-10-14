@@ -11,9 +11,7 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Select from "react-select";
 import ScopeOfWorkComponent from "./Sow";
 import PropertyForm from "./PropertyBackrgound";
 import Interviewee from "./Interviewee";
@@ -21,6 +19,11 @@ import InterviewQnAComponent from "./qna";
 import FieldSketchesComponent from "./RoofSketch";
 import DocumentReviewComponent from "./DocumentReview";
 import { Navigate, useNavigate } from "react-router-dom";
+import Wrht from "./WRHT";
+import FloodData from "./FloodData";
+import LightningStrike from "./LightningStrike";
+import SoilData from "./SoilData";
+import HistoricalImageryReview from "./HistoricalImageryReview";
 
 const tabData = [
   { label: "SOW", component: <ScopeOfWorkComponent /> },
@@ -29,11 +32,11 @@ const tabData = [
   { label: "Interview Questions", component: <InterviewQnAComponent /> },
   { label: "Field Sketches", component: <FieldSketchesComponent /> },
   { label: "Document Reviews", component: <DocumentReviewComponent /> },
-  { label: "WRHT Data", component: <DocumentReviewComponent /> },
-  { label: "Lightning Strike", component: <ScopeOfWorkComponent /> },
-  { label: "Flood Data", component: <ScopeOfWorkComponent /> },
-  { label: "Historical Image Review", component: <ScopeOfWorkComponent /> },
-  { label: "Soil Data", component: <ScopeOfWorkComponent /> },
+  { label: "WRHT Data", component: <Wrht /> },
+  { label: "Lightning Strike", component: <LightningStrike /> },
+  { label: "Flood Data", component: <FloodData /> },
+  { label: "Historical Image Review", component: <HistoricalImageryReview /> },
+  { label: "Soil Data", component: <SoilData /> },
 ];
 
 export function FieldForm() {
