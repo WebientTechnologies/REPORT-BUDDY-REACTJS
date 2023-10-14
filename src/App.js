@@ -17,9 +17,13 @@ import FieldForm from './component/FeildForm'
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
 
 function App() {
+  
   const { user, message , error, loading} = useSelector(state => state.user);
   const dispatch = useDispatch();
-const isAuthenticated = localStorage.getItem('token')
+ 
+
+//const isAuthenticated = localStorage.getItem('token')
+  const isAuthenticated = true;
 console.log({API_BASE_URL})
   useEffect(() => {
     if(error)
