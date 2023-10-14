@@ -15,8 +15,8 @@ function ProjectDetails() {
     <div>
       <Link to="/fill-form">
       <Button bg={'black'}  color = 'white' size="lg" m={4}>
-        Fill Form
-      </Button>
+      Field buddy
+            </Button>
       </Link>
 
 
