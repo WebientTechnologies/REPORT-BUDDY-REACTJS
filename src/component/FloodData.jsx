@@ -35,7 +35,7 @@ function FloodData() {
   return (
     <Box p="4">
       <Heading as="h2" size="xl">
-      Lightning Strike
+        Flood Data 
       </Heading>
 
       <Box w="100%" my="8">
