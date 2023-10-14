@@ -60,7 +60,7 @@ function AdminLayout({ children }) {
         h={"100%"}
         gap="0"
       >
-        <Sidebar param={param} />
+        {/* <Sidebar param={param} /> */}
 
         <Box w="100%" h={"100%"} borderTopLeftRadius={"3xl"} overflowY="auto">
           <HStack w="full" p={3} bg="gray.50" justify={"end"}>

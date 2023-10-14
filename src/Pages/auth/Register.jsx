@@ -10,8 +10,8 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import {useDispatch, useSelector} from 'react-redux'
-import { register } from '../../Redux/actions/userAction';
 import PasswordField from './PasswordFelids';
+import { register } from '../../redux/actions/userAction';
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

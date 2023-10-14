@@ -13,6 +13,8 @@ import Login from './Pages/auth/auth'
 import AdminLayout from './Layout/components'
 import DashBoard from './Pages/dashbord'
 import FieldForm from './component/FeildForm'
+import LiveProjects from './Pages/LiveProjects'
+import ProjectDetails from './Pages/ProjectDetails'
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
 
@@ -49,6 +51,8 @@ dispatch(getMyProfile())
           <Route path='/login' element={<ProtectedRoute isAuthenticated = {!isAuthenticated} redirect = '/' ><Login/></ProtectedRoute>} />
           <Route path='/' element={<ProtectedRoute isAuthenticated = {isAuthenticated} ><AdminLayout><DashBoard/></AdminLayout></ProtectedRoute>} />
           <Route path='/fill-form' element={<ProtectedRoute isAuthenticated = {isAuthenticated} ><FieldForm/></ProtectedRoute>} />
+          <Route path='/live-projects' element={<ProtectedRoute isAuthenticated = {isAuthenticated} ><AdminLayout><LiveProjects/></AdminLayout></ProtectedRoute>} />
+          <Route path='/project' element={<ProtectedRoute isAuthenticated = {isAuthenticated} ><AdminLayout><ProjectDetails/></AdminLayout></ProtectedRoute>} />
          </Routes>
          
         <Toaster/>

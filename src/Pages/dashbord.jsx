@@ -1,5 +1,6 @@
-import { Flex, Heading, Grid, Button, useColorModeValue, Box, Stat, StatLabel, StatNumber, StatHelpText, GridItem, VStack } from '@chakra-ui/react';
+import { Flex, Heading, Grid, Button, useColorModeValue, Box, Stat, StatLabel, StatNumber, StatHelpText, GridItem, VStack,  } from '@chakra-ui/react';
 import React from 'react';
+import {Link} from 'react-router-dom';
 // import DashboardCard from './DashboardCard'; // Import the reusable card component
 // import ReactApexChart from 'react-apexcharts'; // Import the React ApexCharts library
 // import { Carousel } from 'react-responsive-carousel';
@@ -31,11 +32,12 @@ function DashBoard() {
       <Heading color={pinkishColor}>Welcome to Prema Consultancy</Heading>
  
 
-      {/* <CustomersReview/> */}
-      {/* Refresh Button
-      <Button colorScheme="brand" variant="outline" mt={4}>
-        Refresh
-      </Button> */}
+      <Link to={'/live-projects'}>
+      
+      <Flex justifyContent={'center'} fontSize={'2xl'} alignItems={'center'} w="200px" h="200px" bg="black" color={'white'} m="8" rounded={'lg'}>
+          Live Projects 
+      </Flex>
+       </Link>
       
     </Flex>
   );
