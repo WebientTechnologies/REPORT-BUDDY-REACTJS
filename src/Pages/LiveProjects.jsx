@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function LiveProjects() {
   const data = [
     { id: 1, name: 'Project A', claimNumber: 'ABC123' },
@@ -9,6 +9,13 @@ function LiveProjects() {
   ];
 
   const navigate = useNavigate();
+
+  const handleClick = (name, num) => {
+    navigate('/project');
+    console.log({ name, num });
+    localStorage.setItem('projectName', name);
+    localStorage.setItem('claimNo', num);
+  }
 
   return (
     <Table variant="simple">
@@ -21,7 +28,7 @@ function LiveProjects() {
       </Thead>
       <Tbody>
         {data.map((project) => (
-          <Tr key={project.id}  onClick={()=>navigate('/project')}>
+          <Tr key={project.id} onClick={() => handleClick(project.name, project.claimNumber)}>
             <Td>{project.id}</Td>
             <Td>{project.name}</Td>
             <Td>{project.claimNumber}</Td>

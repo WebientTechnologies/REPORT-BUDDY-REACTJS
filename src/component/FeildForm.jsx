@@ -143,7 +143,16 @@ export function FieldForm() {
         >
           {tabData.map((tab, index) => (
             <TabPanel key={index}>
-              <Box p={3} fontWeight={500} color='#FFFFFF'>Pages / Field Buddy</Box>
+              <Box p={3} fontWeight={500} color='#FFFFFF'>
+                {
+                  localStorage.getItem('projectName') || ''
+                }
+                {' '}
+                {
+                  localStorage.getItem('claimNo') || ''
+                }
+                {/* Pages / Field Buddy */}
+              </Box>
               <Box bg={'white'} w={'95%'} m='auto' mt={5} mr={{ base: 'auto', sm: 1 }} p={4} borderRadius={'15px'}>
                 {tab.component}
                 <Button
