@@ -191,7 +191,7 @@ function Interviewee() {
 
   return (
     <Box>
-      <Heading as="h2" size="xl" mb={4}>
+      <Heading as="h2" fontWeight={500} textAlign='center' size="xl" mb={4}>
         Interviewee
       </Heading>
 
@@ -207,7 +207,7 @@ function Interviewee() {
               </AccordionButton>
             </h2>
             <AccordionPanel>
-              <SimpleGrid columns={[1, 2]} columnGap={4} rowGap={2}>
+              <SimpleGrid columns={[1, 2]} columnGap={4} rowGap={2} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                 {/* Contact Method */}
                 <FormControl>
                   <label>Contact Method</label>

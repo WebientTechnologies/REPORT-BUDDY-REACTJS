@@ -87,7 +87,7 @@ export function FieldForm() {
         <TabList
           display={"flex"}
           flexDir={"column"}
-          h={"95vh"}
+          h={"100vh"}
           overflowY={"auto"}
           position={"sticky"}
           w={['0', "300px"]}

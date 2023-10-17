@@ -39,10 +39,10 @@ const FormStructure = () => {
   ];
 
   return (
-    <Box marginBottom="20px">
+    <Box marginBottom="20px" >
       {/* Add margin-bottom for separation */}
-      <Grid templateColumns={["repeat(1, 1fr)","repeat(2, 1fr)"]} gap={4} mb={4}>
-        <GridItem colSpan={1}>
+      <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={4} mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
+        <GridItem colSpan={1} >
           <FormControl>
             <FormLabel>Number of Stories</FormLabel>
             <Input
@@ -54,7 +54,7 @@ const FormStructure = () => {
             />
           </FormControl>
         </GridItem>
-        <GridItem colSpan={1}>
+        <GridItem colSpan={1} >
           <FormControl>
             <FormLabel>Story Location</FormLabel>
             <Input
@@ -109,6 +109,7 @@ const FormStructure = () => {
   );
 };
 
+
 const PropertyForm = () => {
   const [structures, setStructures] = useState([{}]);
   const [appraisersRecord, setAppraisersRecord] = useState({
@@ -143,7 +144,7 @@ const PropertyForm = () => {
 
   return (
     <Box pb={"10"}>
-      <Heading as="h2" size="lg" mb={4}>
+      <Heading as="h3" textAlign='center' fontWeight={500} size="lg" mb={4}>
         Property Background
       </Heading>
       {structures.map((structure, index) => (
@@ -154,33 +155,35 @@ const PropertyForm = () => {
           <FormStructure />
         </Fragment>
       ))}
-     <HStack         alignItems={'end'}
-        justifyContent={'end'}>
-     <Button
-        onClick={addStructure}
-        bg="black"
-        _hover={{ bg: "gray.700" }}
-        color="white"
-        rounded="md"
-        ml="auto"
-        pr="4"
-        mt={2}
-        alignSelf={'end'}
-        justifySelf={'end'}
-        mb={4}
-        marginRight={0}
+      <HStack
+        alignItems={'end'}
+        justifyContent={'end'}
       >
-        Add Structure
-      </Button>
-     </HStack>
+        <Button
+          onClick={addStructure}
+          bg="black"
+          _hover={{ bg: "gray.700" }}
+          color="white"
+          rounded="md"
+          ml="auto"
+          pr="4"
+          mt={2}
+          alignSelf={'end'}
+          justifySelf={'end'}
+          mb={4}
+          marginRight={0}
+        >
+          Add Structure
+        </Button>
+      </HStack>
 
-      <Heading as="h2" size="lg" mt={8} mb={4}>
+      <Heading as="h3" fontWeight={500} textAlign='center' size="lg" mt={10} mb={4}>
         Property Appraiser's Record
       </Heading>
 
       <div>
-        <FormLabel>Topographic Map Note</FormLabel>
-        <HStack alignItems={"center"} justifyContent={"center"}>
+        <FormLabel textAlign='center'>Topographic Map Note</FormLabel>
+        <HStack alignItems={"center"} justifyContent={"center"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <Button
             bg="black"
             _hover={{ bg: "gray.700" }}
@@ -195,7 +198,7 @@ const PropertyForm = () => {
           </Button>
         </HStack>
 
-        <FormControl mb={4} minH={"200px"} isRequired>
+        <FormControl mb={4} minH={"200px"} isRequired borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
             placeholder="React Quill"
@@ -205,8 +208,8 @@ const PropertyForm = () => {
       </div>
 
       <div>
-        <FormLabel>Topographic Map Note</FormLabel>
-        <HStack alignItems={"center"} justifyContent={"center"}>
+        <FormLabel textAlign='center'>Topographic Map Note</FormLabel>
+        <HStack alignItems={"center"} justifyContent={"center"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <Button
             bg="black"
             _hover={{ bg: "gray.700" }}
@@ -220,7 +223,7 @@ const PropertyForm = () => {
             View Data File
           </Button>
         </HStack>
-        <FormControl mb={4} minH={"200px"} isRequired>
+        <FormControl mb={4} minH={"200px"} isRequired borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
             placeholder="React Quill"

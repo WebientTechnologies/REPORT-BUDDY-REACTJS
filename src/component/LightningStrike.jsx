@@ -33,13 +33,11 @@ function LightningStrike() {
 
   return (
     <Box p="4">
-      <Heading as="h2" size="xl">
-      Lightning Strike Data 
-            </Heading>
-
+      <Heading as="h2" textAlign='center' fontWeight={500} size="xl">
+        Lightning Strike Data
+      </Heading>
       <Box w="100%" my="8">
-
-        <FormControl mb={4} isRequired height={"200px"}>
+        <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
             placeholder={`We obtained lightning strike and thunderstorm history report for Month Date, Year (the reported date of loss) from the Blitzortung online website of http://en.blitzortung.org. Figure 1 shows a lightning strike map excerpted from this website. This map showed that several lightning strikes were recorded close to the subject property at approximately 1.30 PM Universal Coordinated Time (i.e., 9.30 AM Eastern Standard Time) on Month Date, Year. We also obtained a lightning report for the subject property from Benchmark. This report was prepared for a three-day period from Month Date, Year to Month Date, Year. The closest lightning strike detected on Month Date, Year (the reported date of loss) was 0.1 mile from the subject p `}

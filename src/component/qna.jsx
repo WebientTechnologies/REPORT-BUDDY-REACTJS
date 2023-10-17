@@ -124,12 +124,12 @@ function InterviewQnAComponent() {
 
   return (
     <Box p="4">
-      <Heading as="h2" size="xl">
+      <Heading as="h3" fontWeight={500} textAlign='center' size="xl">
         Interview Q&A
       </Heading>
 
       {/* Display questions */}
-      <VStack spacing={4} align="start" gap={4}>
+      <VStack mb={6} spacing={4} align="start" gap={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
         {qna.questions.map((question, questionIndex) => (
           <Box key={questionIndex} w="100%">
             <Text>{question.label}</Text>
@@ -146,7 +146,7 @@ function InterviewQnAComponent() {
         ))}
       </VStack>
 
-      <Heading as="h3" size="lg" my={2}>
+      <Heading as="h3" fontWeight={500} textAlign='center' size="lg" my={2} mt={5}>
         Structures
       </Heading>
 
@@ -154,15 +154,15 @@ function InterviewQnAComponent() {
       <Accordion defaultIndex={[0]} allowMultiple>
         {qna.structures.map((structure, structureIndex) => (
           <AccordionItem key={structureIndex} my={2}>
-            <AccordionButton bgColor={"blackAlpha.50"}  _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
+            <AccordionButton bgColor={"blackAlpha.50"} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
               <Box flex="1" textAlign="left">
                 Structure {structureIndex + 1}
               </Box>
               <AccordionIcon />
             </AccordionButton>
             <AccordionPanel p="0">
-              <VStack spacing={4} align="start" w="100%">
-                <Box w="100%">
+              <VStack spacing={4} align="start" w="100%" >
+                <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                   <Text>When was the structure built?</Text>
                   <Input
                     type="text"
@@ -178,7 +178,7 @@ function InterviewQnAComponent() {
                     }}
                   />
                 </Box>
-                <Box w="100%">
+                <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                   <Text>When was the roof last replaced?</Text>
                   <Input
                     type="text"
@@ -194,16 +194,16 @@ function InterviewQnAComponent() {
                     }}
                   />
                 </Box>
-                <Box w="100%">
+                <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                   <Text>Interior damage general information</Text>
                   <ReactSelect
                     options={interiorDamageOptions}
                     placeholder="Select interior damage type"
                     isSearchable={false}
-                    // Add your onChange logic here
+                  // Add your onChange logic here
                   />
                 </Box>
-                <SimpleGrid columns={[1, 2]} gap={4}>
+                <SimpleGrid columns={[1, 2]} gap={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                   <Box w="100%">
                     <Heading as="h6" size="sm" mb={2}>
                       Exterior
@@ -216,10 +216,10 @@ function InterviewQnAComponent() {
 3. When was the damage first noticed?
 4. Which specific items were repaired or replaced and when?`}
 
-                        style={{ height: "150px" , fontSize:"12px"}}
+                        style={{ height: "150px", fontSize: "12px" }}
                       />
                     </FormControl>
-                    <Box w="100%">
+                    <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                       <Text>Notes</Text>
                       <Input
                         type="text"
@@ -238,7 +238,7 @@ function InterviewQnAComponent() {
                       />
                     </Box>
                   </Box>
-                  <Box w="100%">
+                  <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                     <Heading as="h6" size="sm" mb={2}>
                       Roof
                     </Heading>
@@ -252,7 +252,7 @@ function InterviewQnAComponent() {
                         style={{ height: "150px" }}
                       />
                     </FormControl>
-                    <Box w="100%">
+                    <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                       <Text>Notes</Text>
                       <Input
                         placeholder={"Notes"}
@@ -283,13 +283,13 @@ function InterviewQnAComponent() {
                       </AccordionButton>
                       <AccordionPanel p="0">
                         <VStack spacing={4} align="start" w="100%">
-                          <Box w="100%">
+                          <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                             <Text>Select Room/Area {roomIndex + 1}</Text>
                             <ReactSelect
                               options={roomAreaOptions}
                               placeholder="Select room/area"
                               isSearchable={false}
-                              // Add your onChange logic here
+                            // Add your onChange logic here
                             />
                           </Box>
                           <Accordion allowMultiple w="full" p="0">
@@ -301,23 +301,23 @@ function InterviewQnAComponent() {
                                   </Box>
                                   <AccordionIcon />
                                 </AccordionButton>
-                                <AccordionPanel p="0"  display = "flex" gap= {[2,4]} w="full" alignItems={'start'} flexDir={'column'}>
-                                  <Box w="100%">
+                                <AccordionPanel p="0" display="flex" gap={[2, 4]} w="full" alignItems={'start'} flexDir={'column'}>
+                                  <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                                     <Text>Damage location</Text>
                                     <ReactSelect
                                       options={damageLocationOptions}
                                       placeholder="Select damage location"
                                       isSearchable={false}
-                                      // Add your onChange logic here
+                                    // Add your onChange logic here
                                     />
                                   </Box>
-                                  <Box w="100%">
+                                  <Box w="100%" borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
                                     <Text>Attic access information</Text>
                                     <ReactSelect
                                       options={atticAccessOptions}
                                       placeholder="Select attic access information"
                                       isSearchable={false}
-                                      // Add your onChange logic here
+                                    // Add your onChange logic here
                                     />
                                   </Box>
                                   <Box w="100%">
@@ -338,7 +338,7 @@ function InterviewQnAComponent() {
                               addDamageToRoom(structureIndex, roomIndex)
                             }
                           >
-                            <AddIcon fontSize={'md'} mr={1}/> Damage
+                            <AddIcon fontSize={'md'} mr={1} /> Damage
                           </Button>
                         </VStack>
                       </AccordionPanel>
@@ -353,7 +353,7 @@ function InterviewQnAComponent() {
                   ml={"auto"}
                   onClick={() => addRoomToStructure(structureIndex)}
                 >
-                 <AddIcon fontSize={'md'} mr={1}/>  Room/Area
+                  <AddIcon fontSize={'md'} mr={1} />  Room/Area
                 </Button>
               </VStack>
             </AccordionPanel>
@@ -369,7 +369,7 @@ function InterviewQnAComponent() {
           ml={"auto"}
           onClick={addStructure}
         >
-          <AddIcon fontSize={'md'} mr={1}/> Structure
+          <AddIcon fontSize={'md'} mr={1} /> Structure
         </Button>
       </HStack>
     </Box>

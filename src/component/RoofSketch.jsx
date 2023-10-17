@@ -50,18 +50,18 @@ function FieldSketchesComponent() {
 
   return (
     <Box>
-      <Heading as="h2" size="lg" mb={4}>
+      <Heading as="h3" fontWeight={500} textAlign='center' size="lg" mb={4}>
         Field Sketches
       </Heading>
       {sketches.map((sketch, index) => (
         <Box key={index}>
           {/* Interior Damage Sketch sub heading */}
-          <Heading as="h3" size="md" mb={2}>
+          <Heading as="h3" fontWeight={500} textAlign='center' size="md" mb={2}>
             Interior Damage Sketch
           </Heading>
 
           {/* Image input for interior damage sketch */}
-          <FormControl mb={4}>
+          <FormControl mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
             <Text mb={2}>
               Click here to upload a sketch showing the locations of the
               damages.
@@ -80,7 +80,7 @@ function FieldSketchesComponent() {
           </FormControl>
 
           {/* Text input with placeholder for interior damage sketch notes */}
-          <FormControl mb={4}>
+          <FormControl mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
             <Text mb={2}>Experts to add notes, as suitable.</Text>
             <Input
               type="text"
@@ -96,12 +96,12 @@ function FieldSketchesComponent() {
           </FormControl>
 
           {/* Roof Sketch sub heading */}
-          <Heading as="h3" size="md" mb={2}>
+          <Heading as="h3" fontWeight={500} textAlign='center' size="md" mb={2}>
             Roof Sketch
           </Heading>
 
           {/* Image input for roof sketch */}
-          <FormControl mb={4}>
+          <FormControl mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
             <Text mb={2}>
               Click here to upload a sketch showing the locations of the
               damages.
@@ -116,7 +116,7 @@ function FieldSketchesComponent() {
           </FormControl>
 
           {/* Text input with placeholder for roof sketch notes */}
-          <FormControl mb={4}>
+          <FormControl mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
             <Text mb={2}>Experts to add notes, as suitable.</Text>
             <Input
               type="text"
@@ -132,15 +132,15 @@ function FieldSketchesComponent() {
         </Box>
       ))}
       <HStack justifyContent={'end'}>
-      <Button 
-       bg="black"
-       _hover={{ bg: "gray.700" }}
-       color="white"
-       rounded="md"
-       ml="auto"
-       pr="4"
-       mb={2}
-      onClick={addSketches}>Add Sketch</Button>
+        <Button
+          bg="black"
+          _hover={{ bg: "gray.700" }}
+          color="white"
+          rounded="md"
+          ml="auto"
+          pr="4"
+          mb={2}
+          onClick={addSketches}>Add Sketch</Button>
 
       </HStack>
     </Box>
