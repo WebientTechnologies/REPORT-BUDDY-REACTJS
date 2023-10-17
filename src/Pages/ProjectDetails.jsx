@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Box, Heading, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function ProjectDetails() {
   const data = {
     id: 1,
@@ -14,11 +14,10 @@ function ProjectDetails() {
   return (
     <div>
       <Link to="/fill-form">
-      <Button bg={'black'}  color = 'white' size="lg" m={4}>
-      Field buddy
-            </Button>
+        <Button bg={'black'} color='white' size="lg" m={4}>
+          Field buddy
+        </Button>
       </Link>
-
 
       <Heading size="lg" mt={4}>
         Project Details
