@@ -15,6 +15,7 @@ import DashBoard from './Pages/dashbord'
 import FieldForm from './component/FeildForm'
 import LiveProjects from './Pages/LiveProjects'
 import ProjectDetails from './Pages/ProjectDetails'
+import { TakePhotosWithAccordions } from './component/TakePhotosWithAccordions'
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
 
@@ -24,7 +25,7 @@ function App() {
   const dispatch = useDispatch();
   const isAuthenticated = localStorage.getItem('token');
 
-  
+
   // const isAuthenticated = true;
   console.log({ API_BASE_URL })
   useEffect(() => {
@@ -51,6 +52,7 @@ function App() {
         <Route path='/fill-form' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><FieldForm /></ProtectedRoute>} />
         <Route path='/live-projects' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><LiveProjects /></AdminLayout></ProtectedRoute>} />
         <Route path='/project' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ProjectDetails /></AdminLayout></ProtectedRoute>} />
+        <Route path='/take-photographs' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></ProtectedRoute>} />
       </Routes>
       <Toaster />
     </Router>

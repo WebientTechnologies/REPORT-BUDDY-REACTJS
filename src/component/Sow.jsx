@@ -13,12 +13,12 @@ function ScopeOfWorkComponent() {
       </Heading>
       <Box>
         {/* Heading: Scope Worksheet */}
-        <Heading as="h4" size="md" mb={4} fontWeight={700} textAlign='center' >
+        <Heading as="h4" size="md" mb={4} fontWeight={700}  >
           Scope Worksheet
         </Heading>
         <Box>
           {/* Heading: Additional Details */}
-          <Heading as="h3" mt={5} size="md" mb={2} fontWeight={500} textAlign='center'>
+          <Heading as="h3" mt={5} size="md" mb={2} fontWeight={500} >
             Scope of Service
           </Heading>
           {/* Scope of Service */}
@@ -27,7 +27,7 @@ function ScopeOfWorkComponent() {
           </Text>
 
           {/* Heading: Additional Details */}
-          <Heading as="h3" fontWeight={"semibold"} size="md" mb={2} textAlign='center'>
+          <Heading as="h3" fontWeight={"semibold"} size="md" mb={2} >
             Additional Details
           </Heading>
 
@@ -41,7 +41,7 @@ function ScopeOfWorkComponent() {
         </Box>
 
         {/* Heading: Scope from Received Document */}
-        <Heading as="h3" fontWeight={"semibold"} size="md" mb={2} textAlign='center'>
+        <Heading as="h3" fontWeight={"semibold"} size="md" mb={2} >
           Scope from Received Documents
         </Heading>
 
@@ -56,7 +56,7 @@ function ScopeOfWorkComponent() {
         </FormControl>
 
         {/* Heading: Scope from Interview */}
-        <Heading fontWeight={"semibold"} as="h3" size="md" mb={2} textAlign='center'>
+        <Heading fontWeight={"semibold"} as="h3" size="md" mb={2} >
           Scope from Interview
         </Heading>
 
@@ -72,7 +72,7 @@ function ScopeOfWorkComponent() {
       </Box>
 
       {/* Heading: SOW Statement */}
-      <Heading fontWeight={"semibold"} as="h3" size="md" mb={2} textAlign='center'>
+      <Heading fontWeight={"semibold"} as="h3" size="md" mb={2} >
         SOW Statement
       </Heading>
 

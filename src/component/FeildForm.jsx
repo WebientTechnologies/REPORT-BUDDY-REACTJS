@@ -19,7 +19,7 @@ import Interviewee from "./Interviewee";
 import InterviewQnAComponent from "./qna";
 import FieldSketchesComponent from "./RoofSketch";
 import DocumentReviewComponent from "./DocumentReview";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import Wrht from "./WRHT";
 import FloodData from "./FloodData";
 import LightningStrike from "./LightningStrike";
@@ -143,16 +143,24 @@ export function FieldForm() {
         >
           {tabData.map((tab, index) => (
             <TabPanel key={index}>
-              <Box p={3} fontWeight={500} color='#FFFFFF'>
-                {
-                  localStorage.getItem('projectName') || ''
-                }
-                {' '}
-                {
-                  localStorage.getItem('claimNo') || ''
-                }
-                {/* Pages / Field Buddy */}
+              <Box display='flex' justifyContent='space-between' alignItems='center' w='full'>
+                <Box p={3} fontWeight={500} color='#FFFFFF'>
+                  {
+                    localStorage.getItem('projectName') || ''
+                  }
+                  {' '}
+                  {
+                    localStorage.getItem('claimNo') || ''
+                  }
+                  {/* Pages / Field Buddy */}
+                </Box>
+                <Box>
+                  <Link to='/take-photographs'>
+                    <Button>Take Photographs</Button>
+                  </Link>
+                </Box>
               </Box>
+
               <Box bg={'white'} w={'95%'} m='auto' mt={5} mr={{ base: 'auto', sm: 1 }} p={4} borderRadius={'15px'}>
                 {tab.component}
                 <Button
