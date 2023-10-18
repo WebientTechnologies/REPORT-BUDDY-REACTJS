@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Box, Heading, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+
 function ProjectDetails() {
+
   const data = {
     id: 1,
     name: 'Project A',
@@ -13,17 +15,19 @@ function ProjectDetails() {
 
   return (
     <div>
-      <Link to="/fill-form">
-        <Button bg={'black'} color='white' size="lg" m={4}>
-          Field buddy
-        </Button>
-      </Link>
+      <Box textAlign='center'>
+        <Link to="/fill-form">
+          <Button bg={'black'} color='white' size="lg" m={4}>
+            Field buddy
+          </Button>
+        </Link>
+      </Box>
 
-      <Heading size="lg" mt={4}>
+      <Heading size="lg" mt={1} textAlign='center' mb={5} color={'white'}>
         Project Details
       </Heading>
 
-      <Box p={4} borderWidth="1px" borderRadius="md">
+      <Box p={4} borderRadius='10px' bg={'white'} w={{ base: '100%', md: '90%', lg: '70%', xl: '60%' }} m='auto' boxShadow="0px 18px 40px 0px #7090B01F">
         <Table variant="simple" mt={4}>
           <Tbody>
             <Tr>
@@ -55,6 +59,6 @@ function ProjectDetails() {
       </Box>
     </div>
   );
-}
+};
 
 export default ProjectDetails;

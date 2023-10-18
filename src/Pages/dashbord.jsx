@@ -28,14 +28,16 @@ function DashBoard() {
 
   return (
     <Flex flexDirection="column" pb={[8, 16]}>
-      <Heading color={pinkishColor}>Welcome to Prema Consultancy</Heading>
-      <Link to={'/live-projects'}>
-        <Flex justifyContent={'center'} fontSize={'2xl'} alignItems={'center'} w="200px" h="200px" bg="black" color={'white'} m="8" rounded={'lg'}>
-          Live Projects
-        </Flex>
-      </Link>
+      <Heading color={'white'} textAlign={'center'} fontWeight={500}>Welcome to Prema Consultancy</Heading>
+      <Box w='full' bg={'white'} mt={5} borderTopRadius='10px'>
+        <Link to={'/live-projects'}>
+          <Flex justifyContent={'center'} fontSize={'2xl'} alignItems={'center'} w="200px" fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
+            Live Projects
+          </Flex>
+        </Link>
+      </Box>
     </Flex>
   );
-}
+};
 
 export default DashBoard;
