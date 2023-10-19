@@ -34,6 +34,7 @@ const generateUniqueId = () => {
      return Math.random().toString(36).substr(2, 9); // This generates a random 9-character ID
 };
 
+
 const InputModal = ({ onAdd, parentId }) => {
 
      const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,6 +47,43 @@ const InputModal = ({ onAdd, parentId }) => {
           <>
                <Box onClick={onOpen}>
                     Add New Folder
+               </Box>
+               <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                         <ModalHeader>Add New Folder</ModalHeader>
+                         <ModalCloseButton />
+                         <ModalBody>
+                              <Input value={name} placeholder="Folder name" onChange={(e) => setName(e.target.value)} />
+                         </ModalBody>
+                         <ModalFooter>
+                              <Button colorScheme='blue' mr={3} onClick={onClose}>
+                                   Close
+                              </Button>
+                              <Button variant='ghost' onClick={handleClick}>Add</Button>
+                         </ModalFooter>
+                    </ModalContent>
+               </Modal>
+          </>
+     );
+};
+
+
+
+
+
+const UpdateNameModal = ({ onAdd, parentId }) => {
+
+     const { isOpen, onOpen, onClose } = useDisclosure();
+     const [name, setName] = useState('');
+     const handleClick = () => {
+          onAdd(parentId, name, onClose);
+     };
+
+     return (
+          <>
+               <Box onClick={onOpen}>
+                    Change Folder Name
                </Box>
                <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
@@ -578,6 +616,24 @@ const TakePhotosWithAccordions = () => {
 
      // console.log({ data });
 
+     function updateFolderName(data, id, newName) {
+          return data.map(item => {
+               const newItem = { ...item };
+               if (newItem.id === id && newItem.identity === 'newFolder') {
+                    newItem.name = newName;
+               }
+               if (newItem.folders && newItem.folders.length > 0) {
+                    newItem.folders = updateFolderName(newItem.folders, id, newName);
+               }
+               return newItem;
+          });
+     };
+
+     const handleUpdateName = (id, newName, onClose) => {
+          setData(updateFolderName(data, id, newName));
+          onClose();
+     }
+
 
      function handleImageUpload(e) {
           const files = e.target.files;
@@ -590,6 +646,7 @@ const TakePhotosWithAccordions = () => {
                setData(updatedData);
           }
      };
+
 
      function addImagesToFolder(data, newImageUrls) {
           return data.map((folder) => {
@@ -630,6 +687,7 @@ const TakePhotosWithAccordions = () => {
           }
           setSelectedImg(updatedData);
      };
+
 
      function removeImagesFromData(data, folderId, values) {
           console.log({ values });
@@ -694,6 +752,7 @@ const TakePhotosWithAccordions = () => {
      const addFolder = (name, parentId, onClose) => {
           const newFolder = {
                name: name,
+               identity: 'newFolder',
                images: [],
                id: generateUniqueId(),
                folders: [], // Subfolders are initially empty
@@ -777,6 +836,9 @@ const TakePhotosWithAccordions = () => {
                                                                  <MenuList>
                                                                       <MenuItem>
                                                                            <InputModal onAdd={addFolder} parentId={folder.id} />
+                                                                      </MenuItem>
+                                                                      <MenuItem>
+                                                                           <UpdateNameModal onAdd={handleUpdateName} parentId={folder.id} />
                                                                       </MenuItem>
                                                                  </MenuList>
                                                             </Menu>
