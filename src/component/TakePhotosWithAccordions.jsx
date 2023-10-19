@@ -1,3 +1,4 @@
+import { SmallCloseIcon } from "@chakra-ui/icons";
 import {
      Accordion,
      AccordionItem,
@@ -19,7 +20,9 @@ import {
      ModalBody,
      Input,
      ModalFooter,
-     Avatar
+     Avatar,
+     AvatarBadge,
+     Checkbox
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { useState } from "react";
@@ -71,6 +74,7 @@ const TakePhotosWithAccordions = () => {
 
 
      const fileInputRef = useRef(null);
+     const [selectedImg, setSelectedImg] = useState([]);
      let imgId = '';
 
      function handleImageSelect(parentId) {
@@ -571,7 +575,7 @@ const TakePhotosWithAccordions = () => {
           },
      ]);
 
-     console.log({ data });
+     // console.log({ data });
 
 
      function handleImageUpload(e) {
@@ -606,6 +610,18 @@ const TakePhotosWithAccordions = () => {
           });
      };
 
+
+     const handleChangeCheckBox = (val) => {
+          console.log({ val });
+          if (selectedImg.includes(val)) {
+               setSelectedImg(selectedImg.filter(el => el !== val));
+          }
+          else {
+               setSelectedImg([...selectedImg, val]);
+          }
+     };
+
+     console.log({ selectedImg });
 
 
      const addFolder = (name, parentId, onClose) => {
@@ -661,7 +677,7 @@ const TakePhotosWithAccordions = () => {
      const renderFolders = (folders) => {
           if (folders && folders.length > 0) {
                return folders.map((folder) => {
-                    console.log({ folder });
+                    // console.log({ folder });
                     return (
                          <AccordionItem key={folder.id}>
                               <h2>
@@ -705,10 +721,19 @@ const TakePhotosWithAccordions = () => {
                                    </AccordionButton>
                               </h2>
                               <AccordionPanel pb={4}>
-                                   <Accordion allowToggle>
-                                        {folder?.images?.map((imageUrl, index) => (
-                                             <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl.imgUrl} alt={`Image ${index}`} />
-                                        ))}
+                                   <Accordion>
+                                        <Box display='flex' flexDir='column'>
+                                             <Button width={'fit-content'} colorScheme="red" size={'sm'} disabled={selectedImg.length === 0}>Remove</Button>
+                                             <Box display='flex' flexDir='row'>
+                                                  {folder?.images?.map((imageUrl, index) => (
+                                                       <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl.imgUrl} alt={`Image ${index}`} >
+                                                            <AvatarBadge>
+                                                                 <Checkbox onChange={() => handleChangeCheckBox(imageUrl.id)} colorScheme="red" isChecked={selectedImg.includes(imageUrl.id)}></Checkbox>
+                                                            </AvatarBadge>
+                                                       </Avatar>
+                                                  ))}
+                                             </Box>
+                                        </Box>
                                         {renderFolders(folder.folders)}
                                    </Accordion>
                               </AccordionPanel>
@@ -720,7 +745,7 @@ const TakePhotosWithAccordions = () => {
 
      return (
           <Box bg={'white'} w={'90%'} m={'auto'} p={3} pt={5} borderRadius='10px' mt='2%'>
-               <Accordion defaultIndex={[0]} allowToggle>
+               <Accordion defaultIndex={[0]}>
                     {data.map((elem) => (
                          <AccordionItem key={elem.id}>
                               <h2>
