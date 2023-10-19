@@ -742,9 +742,9 @@ const TakePhotosWithAccordions = () => {
 
 
      const renderFolders = (folders) => {
-          if (folders && folders.length > 0) {
+          console.log({ folders });
+          if (folders && folders.length > 1) {
                return folders.map((folder) => {
-                    // console.log({ folder });
                     return (
                          <AccordionItem key={folder.id}>
                               <h2>
