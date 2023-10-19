@@ -180,7 +180,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Bonus Room',
                          images: [],
-                         id: 2.100000,
+                         id: 2.000001,
                          folders: [
                               {
 
@@ -611,15 +611,61 @@ const TakePhotosWithAccordions = () => {
      };
 
 
-     const handleChangeCheckBox = (val) => {
-          console.log({ val });
-          if (selectedImg.includes(val)) {
-               setSelectedImg(selectedImg.filter(el => el !== val));
+     const handleChangeCheckBox = (folderId, val) => {
+          const updatedData = [...selectedImg];
+          const index = updatedData.findIndex((item) => item.folderId === folderId);
+
+          if (index === -1) {
+               updatedData.push({ folderId, values: [val] });
           }
           else {
-               setSelectedImg([...selectedImg, val]);
+               const valueIndex = updatedData[index].values.indexOf(val);
+               if (valueIndex === -1) {
+                    updatedData[index].values.push(val);
+               }
+               else {
+                    updatedData[index].values.splice(valueIndex, 1);
+               }
+          }
+          setSelectedImg(updatedData);
+     };
+
+     function removeImagesFromData(data, folderId, values) {
+          console.log({ values });
+          return data.map(item => {
+               if (item.id === folderId) {
+                    setSelectedImg(selectedImg.map(el => {
+                         if (el.folderId === folderId) {
+                              return {
+                                   ...el,
+                                   values: el.values.filter(item => !values.includes(item))
+                              };
+                         } 
+                         else {
+                              return el;
+                         }
+                    }));
+                    return { ...item, images: item?.images?.filter(image => !values?.includes(image.id)) };
+               }
+               else if (item.folders) {
+                    return { ...item, folders: removeImagesFromData(item.folders, folderId, values) };
+               }
+               else {
+                    return item;
+               }
+          });
+     };
+
+
+     const handleClearImg = (val) => {
+          if (selectedImg.some(item => item?.folderId === val && item?.values?.length > 0)) {
+               const selectedData = selectedImg.filter(item => item.folderId === val);
+               console.log({ selectedData });
+               const updatedData = removeImagesFromData(data, val, selectedData[0].values);
+               setData(updatedData);
           }
      };
+
 
      console.log({ selectedImg });
 
@@ -723,12 +769,16 @@ const TakePhotosWithAccordions = () => {
                               <AccordionPanel pb={4}>
                                    <Accordion>
                                         <Box display='flex' flexDir='column'>
-                                             <Button width={'fit-content'} colorScheme="red" size={'sm'} disabled={selectedImg.length === 0}>Remove</Button>
+                                             <Button width={'fit-content'} onClick={() => handleClearImg(folder.id)} colorScheme="red" size={'sm'} isDisabled={!selectedImg.some(item => item.folderId === folder.id && item.values.length > 0)}>Remove</Button>
                                              <Box display='flex' flexDir='row'>
                                                   {folder?.images?.map((imageUrl, index) => (
                                                        <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl.imgUrl} alt={`Image ${index}`} >
                                                             <AvatarBadge>
-                                                                 <Checkbox onChange={() => handleChangeCheckBox(imageUrl.id)} colorScheme="red" isChecked={selectedImg.includes(imageUrl.id)}></Checkbox>
+                                                                 <Checkbox
+                                                                      onChange={() => handleChangeCheckBox(folder.id, imageUrl.id)}
+                                                                      colorScheme="red"
+                                                                      isChecked={selectedImg.some(item => item.folderId === folder.id && item.values.includes(imageUrl.id))}
+                                                                 ></Checkbox>
                                                             </AvatarBadge>
                                                        </Avatar>
                                                   ))}
