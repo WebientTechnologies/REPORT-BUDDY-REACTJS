@@ -75,6 +75,7 @@ const TakePhotosWithAccordions = () => {
 
      const fileInputRef = useRef(null);
      const [selectedImg, setSelectedImg] = useState([]);
+     const [isAllSelected, setIsAllSelected] = useState(false);
      let imgId = '';
 
      function handleImageSelect(parentId) {
@@ -640,7 +641,7 @@ const TakePhotosWithAccordions = () => {
                                    ...el,
                                    values: el.values.filter(item => !values.includes(item))
                               };
-                         } 
+                         }
                          else {
                               return el;
                          }
@@ -657,6 +658,22 @@ const TakePhotosWithAccordions = () => {
      };
 
 
+     function removeAllImages(data) {
+          return data.map(item => {
+               const newItem = { ...item };
+               newItem.images = [];
+               if (newItem.folders && newItem.folders.length > 0) {
+                    newItem.folders = removeAllImages(newItem.folders);
+               }
+               return newItem;
+          });
+     }
+
+     const deleteAllImages = () => {
+          console.log('all images removed');
+          setIsAllSelected(true);
+     }
+
      const handleClearImg = (val) => {
           if (selectedImg.some(item => item?.folderId === val && item?.values?.length > 0)) {
                const selectedData = selectedImg.filter(item => item.folderId === val);
@@ -666,6 +683,10 @@ const TakePhotosWithAccordions = () => {
           }
      };
 
+     const handleRemoveImages = () => {
+          setData(removeAllImages(data));
+          setIsAllSelected(false);
+     };
 
      console.log({ selectedImg });
 
@@ -795,7 +816,11 @@ const TakePhotosWithAccordions = () => {
 
      return (
           <Box bg={'white'} w={'90%'} m={'auto'} p={3} pt={5} borderRadius='10px' mt='2%'>
-               <Accordion defaultIndex={[0]}>
+               <Box p={3} textAlign={'right'} mb={5} display='flex' alignItems={'center'}>
+                    <Checkbox isChecked={isAllSelected} size={'lg'} onChange={() => deleteAllImages()}></Checkbox>
+                    <Button onClick={handleRemoveImages} ml={2} color="red" isDisabled={!isAllSelected} fontWeight={'bold'} size={'sm'}>Remove All</Button>
+               </Box>
+               <Accordion allowToggle>
                     {data.map((elem) => (
                          <AccordionItem key={elem.id}>
                               <h2>
