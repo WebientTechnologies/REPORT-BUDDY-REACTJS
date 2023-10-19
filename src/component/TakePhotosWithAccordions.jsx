@@ -1,4 +1,3 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
      Accordion,
      AccordionItem,
@@ -10,10 +9,6 @@ import {
      MenuButton,
      MenuList,
      MenuItem,
-     MenuItemOption,
-     MenuGroup,
-     MenuOptionGroup,
-     MenuDivider,
      useDisclosure,
      Button,
      Modal,
@@ -35,614 +30,6 @@ import { FaCamera, FaImage } from "react-icons/fa";
 const generateUniqueId = () => {
      return Math.random().toString(36).substr(2, 9); // This generates a random 9-character ID
 };
-
-// const TakePhotosWithAccordions = () => {
-
-//      const [imageUrls, setImageUrls] = useState([]);
-//      const fileInputRef = useRef(null);
-
-//      function handleImageSelect() {
-//           fileInputRef.current.click();
-//      }
-//      const [data, setData] = useState([
-//           {
-//                name: 'Exterior',
-//                level: 1,
-//                id: 1,
-//                folders: [
-//                     {
-//                          name: 'Balcony',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Entrance Porch',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Front Porch',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Patio',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Pool',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Pool Deck',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Rear Porch',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Shed',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                ]
-//           },
-//           {
-//                name: 'Common Spaces',
-//                level: 1,
-//                id: 2,
-//                folders: [
-//                     {
-//                          name: 'Bonus Room',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Den',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Dining Area',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Eat in kitchen',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Entry Foyer',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Family Room',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Garage',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Hallway',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Kitchen',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Living Room',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Office',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Staircase',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Stairlobby',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Sunroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                ]
-//           },
-//           {
-//                name: 'Bedroom',
-//                level: 1,
-//                id: 3,
-//                folders: [
-//                     {
-//                          name: 'Front-left Bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Front-right bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Guest Bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Master Bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Middle-left bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Middle-right bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Rear-left bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Rear-middle bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Rear-right bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Spare bedroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                ]
-//           },
-//           {
-//                name: 'Bathrooms',
-//                level: 1,
-//                id: 5,
-//                folders: [
-//                     {
-//                          name: 'Guest Bathroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Hallway bathroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Master Bathroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Pool bathroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Spare bathroom',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                ]
-//           },
-//           {
-//                name: 'Utility/Closets',
-//                level: 1,
-//                id: 6,
-//                folders: [
-//                     {
-//                          name: 'Air-handler unit closet',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Elevator lobby',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Hallway closet',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Laundary Room',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Master Bedroom Closet',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Mechanical Closet',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Pantry walk-in',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                     {
-//                          name: 'Pantry Closet',
-//                          images: [],
-//                          folders: [
-//                               {
-
-//                               }
-//                          ]
-//                     },
-//                ]
-//           },
-//      ]);
-
-
-//      function handleImageUpload(e) {
-//           const files = e.target.files;
-//           if (files) {
-//                const urls = Array.from(files).map(file => URL.createObjectURL(file));
-//                setImageUrls(prevImageUrls => [...prevImageUrls, ...urls]);
-//           }
-//      };
-
-//      const addFolder = (name, parentId, onClose) => {
-//           const newFolder = {
-//                name: name,
-//                id: generateUniqueId(),
-//                folders: [], // Subfolders are initially empty
-//           };
-
-//           const newData = data.map((el) => {
-//                if (el.id === parentId) {
-//                     return {
-//                          ...el,
-//                          folders: [...el.folders, newFolder],
-//                     };
-//                }
-//                else if (el.folders && el.folders.length > 0) {
-//                     // Recursively search for the parent folder in subfolders
-//                     return {
-//                          ...el,
-//                          folders: addFolderToFolder(el.folders, parentId, newFolder),
-//                     };
-//                }
-//                return el;
-//           });
-
-//           setData(newData);
-//           onClose();
-//      };
-
-//      // Helper function to add a folder to a folder's subfolders
-//      const addFolderToFolder = (folders, parentId, newFolder) => {
-//           return folders.map((folder) => {
-//                if (folder.id === parentId) {
-//                     return {
-//                          ...folder,
-//                          folders: [...folder.folders, newFolder],
-//                     };
-//                } 
-//                else if (folder.folders && folder.folders.length > 0) {
-//                     // Recursively search for the parent folder in subfolders
-//                     return {
-//                          ...folder,
-//                          folders: addFolderToFolder(folder.folders, parentId, newFolder),
-//                     };
-//                }
-//                return folder;
-//           });
-//      };
-
-
-//      return (
-//           <Box w='100%' bg='#2B3674'>
-//                <Box bg={'white'} w={'90%'} m={'auto'}>
-//                     <Accordion defaultIndex={[0]} allowMultiple>
-//                          {
-//                               data?.map((el) => {
-//                                    return (
-//                                         <AccordionItem key={el.id}>
-//                                              <h2>
-//                                                   <AccordionButton>
-//                                                        <Box fontWeight={500} as="span" flex='1' textAlign='left'>
-//                                                             <Box display='flex' justifyContent='space-between' w='full'>
-//                                                                  <Box fontWeight={500}>{el.name}</Box>
-//                                                                  <Box p={1} pr={2}>
-//                                                                       <Menu>
-//                                                                            <MenuButton bg={'white'}>
-//                                                                                 <BsThreeDotsVertical />
-//                                                                            </MenuButton>
-//                                                                            <MenuList>
-//                                                                                 <MenuItem>
-//                                                                                      <InputModal onAdd={addFolder} parentId={el.id} />
-//                                                                                 </MenuItem>
-//                                                                            </MenuList>
-//                                                                       </Menu>
-//                                                                  </Box>
-//                                                             </Box>
-//                                                        </Box>
-//                                                        <AccordionIcon />
-//                                                   </AccordionButton>
-//                                              </h2>
-//                                              <AccordionPanel pb={4}>
-//                                                   {
-//                                                        el?.folders?.map((item) => {
-//                                                             return (
-//                                                                  <Accordion defaultIndex={[0]} allowMultiple>
-//                                                                       <AccordionItem>
-//                                                                            <h2>
-//                                                                                 <AccordionButton>
-//                                                                                      <Box as="span" flex='1' textAlign='left'>
-//                                                                                           <Box display='flex' justifyContent='space-between' w='full'>
-//                                                                                                <Box fontWeight={500}>{item.name}</Box>
-//                                                                                                <Box display='flex'>
-//                                                                                                     <Box p={1} pr={2}>
-//                                                                                                          <FaCamera />
-//                                                                                                     </Box>
-//                                                                                                     <Box p={1} pr={2}>
-//                                                                                                          <FaImage onClick={handleImageSelect} />
-//                                                                                                          <Input
-//                                                                                                               type="file"
-//                                                                                                               accept="image/*"
-//                                                                                                               ref={fileInputRef}
-//                                                                                                               style={{ display: 'none' }}
-//                                                                                                               onChange={handleImageUpload}
-//                                                                                                               multiple
-//                                                                                                          />
-//                                                                                                     </Box>
-//                                                                                                     <Box p={1} pr={2}>
-//                                                                                                          <Menu>
-//                                                                                                               <MenuButton bg={'white'}>
-//                                                                                                                    <BsThreeDotsVertical />
-//                                                                                                               </MenuButton>
-//                                                                                                               <MenuList>
-//                                                                                                                    <MenuItem>
-//                                                                                                                         <InputModal onAdd={addFolder} parentId={item.id} />
-//                                                                                                                    </MenuItem>
-//                                                                                                               </MenuList>
-//                                                                                                          </Menu>
-//                                                                                                     </Box>
-//                                                                                                </Box>
-//                                                                                           </Box>
-//                                                                                      </Box>
-//                                                                                      <AccordionIcon />
-//                                                                                 </AccordionButton>
-//                                                                            </h2>
-//                                                                            <AccordionPanel pb={4}>
-//                                                                                 {imageUrls.map((imageUrl, index) => (
-//                                                                                      <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl} alt={`Image ${index}`} />
-//                                                                                 ))}
-//                                                                            </AccordionPanel>
-//                                                                       </AccordionItem>
-//                                                                  </Accordion>
-//                                                             );
-//                                                        })
-//                                                   }
-//                                              </AccordionPanel>
-//                                         </AccordionItem>
-//                                    );
-//                               })
-//                          }
-//                     </Accordion>
-//                     {/* {renderFolders(data)} */}
-//                </Box>
-//           </Box>
-//      );
-// };
-
-// export { TakePhotosWithAccordions };
-
 
 const InputModal = ({ onAdd, parentId }) => {
 
@@ -683,22 +70,25 @@ const InputModal = ({ onAdd, parentId }) => {
 const TakePhotosWithAccordions = () => {
 
 
-     const [imageUrls, setImageUrls] = useState([]);
      const fileInputRef = useRef(null);
+     let imgId = '';
 
-     function handleImageSelect() {
+     function handleImageSelect(parentId) {
           fileInputRef.current.click();
+          imgId = parentId
      }
 
      const [data, setData] = useState([
           {
                name: 'Exterior',
                level: 1,
+               images: [],
                id: 1,
                folders: [
                     {
                          name: 'Balcony',
                          images: [],
+                         id: 1.1,
                          folders: [
                               {
 
@@ -708,6 +98,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Entrance Porch',
                          images: [],
+                         id: 1.2,
                          folders: [
                               {
 
@@ -717,6 +108,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Front Porch',
                          images: [],
+                         id: 1.3,
                          folders: [
                               {
 
@@ -726,6 +118,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Patio',
                          images: [],
+                         id: 1.4,
                          folders: [
                               {
 
@@ -735,6 +128,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Pool',
                          images: [],
+                         id: 1.5,
                          folders: [
                               {
 
@@ -744,6 +138,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Pool Deck',
                          images: [],
+                         id: 1.6,
                          folders: [
                               {
 
@@ -753,31 +148,35 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Rear Porch',
                          images: [],
+                         id: 1.7,
                          folders: [
                               {
 
                               }
-                         ]
+                         ],
                     },
                     {
                          name: 'Shed',
                          images: [],
+                         id: 1.8,
                          folders: [
                               {
 
                               }
-                         ]
+                         ],
                     },
                ]
           },
           {
                name: 'Common Spaces',
                level: 1,
+               images: [],
                id: 2,
                folders: [
                     {
                          name: 'Bonus Room',
                          images: [],
+                         id: 2.100000,
                          folders: [
                               {
 
@@ -787,6 +186,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Den',
                          images: [],
+                         id: 2.2,
                          folders: [
                               {
 
@@ -796,6 +196,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Dining Area',
                          images: [],
+                         id: 2.3,
                          folders: [
                               {
 
@@ -805,6 +206,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Eat in kitchen',
                          images: [],
+                         id: 2.4,
                          folders: [
                               {
 
@@ -814,6 +216,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Entry Foyer',
                          images: [],
+                         id: 2.5,
                          folders: [
                               {
 
@@ -823,6 +226,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Family Room',
                          images: [],
+                         id: 2.6,
                          folders: [
                               {
 
@@ -832,6 +236,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Garage',
                          images: [],
+                         id: 2.7,
                          folders: [
                               {
 
@@ -841,6 +246,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Hallway',
                          images: [],
+                         id: 2.8,
                          folders: [
                               {
 
@@ -850,6 +256,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Kitchen',
                          images: [],
+                         id: 2.9,
                          folders: [
                               {
 
@@ -859,6 +266,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Living Room',
                          images: [],
+                         id: 2.10,
                          folders: [
                               {
 
@@ -868,6 +276,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Office',
                          images: [],
+                         id: 2.11,
                          folders: [
                               {
 
@@ -877,6 +286,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Staircase',
                          images: [],
+                         id: 2.12,
                          folders: [
                               {
 
@@ -886,6 +296,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Stairlobby',
                          images: [],
+                         id: 2.13,
                          folders: [
                               {
 
@@ -895,6 +306,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Sunroom',
                          images: [],
+                         id: 2.14,
                          folders: [
                               {
 
@@ -906,11 +318,13 @@ const TakePhotosWithAccordions = () => {
           {
                name: 'Bedroom',
                level: 1,
+               images: [],
                id: 3,
                folders: [
                     {
                          name: 'Front-left Bedroom',
                          images: [],
+                         id: 3.111,
                          folders: [
                               {
 
@@ -920,6 +334,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Front-right bedroom',
                          images: [],
+                         id: 3.2,
                          folders: [
                               {
 
@@ -929,6 +344,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Guest Bedroom',
                          images: [],
+                         id: 3.3,
                          folders: [
                               {
 
@@ -938,6 +354,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Master Bedroom',
                          images: [],
+                         id: 3.4,
                          folders: [
                               {
 
@@ -947,6 +364,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Middle-left bedroom',
                          images: [],
+                         id: 3.5,
                          folders: [
                               {
 
@@ -956,6 +374,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Middle-right bedroom',
                          images: [],
+                         id: 3.6,
                          folders: [
                               {
 
@@ -965,6 +384,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Rear-left bedroom',
                          images: [],
+                         id: 3.7,
                          folders: [
                               {
 
@@ -974,6 +394,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Rear-middle bedroom',
                          images: [],
+                         id: 3.8,
                          folders: [
                               {
 
@@ -983,6 +404,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Rear-right bedroom',
                          images: [],
+                         id: 3.9,
                          folders: [
                               {
 
@@ -992,6 +414,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Spare bedroom',
                          images: [],
+                         id: 3.10,
                          folders: [
                               {
 
@@ -1003,11 +426,13 @@ const TakePhotosWithAccordions = () => {
           {
                name: 'Bathrooms',
                level: 1,
-               id: 5,
+               images: [],
+               id: 4,
                folders: [
                     {
                          name: 'Guest Bathroom',
                          images: [],
+                         id: 4.1,
                          folders: [
                               {
 
@@ -1017,6 +442,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Hallway bathroom',
                          images: [],
+                         id: 4.2,
                          folders: [
                               {
 
@@ -1026,6 +452,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Master Bathroom',
                          images: [],
+                         id: 4.3,
                          folders: [
                               {
 
@@ -1035,6 +462,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Pool bathroom',
                          images: [],
+                         id: 4.4,
                          folders: [
                               {
 
@@ -1044,6 +472,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Spare bathroom',
                          images: [],
+                         id: 4.5,
                          folders: [
                               {
 
@@ -1055,11 +484,13 @@ const TakePhotosWithAccordions = () => {
           {
                name: 'Utility/Closets',
                level: 1,
-               id: 6,
+               images: [],
+               id: 5,
                folders: [
                     {
                          name: 'Air-handler unit closet',
                          images: [],
+                         id: 5.1,
                          folders: [
                               {
 
@@ -1069,6 +500,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Elevator lobby',
                          images: [],
+                         id: 5.2,
                          folders: [
                               {
 
@@ -1078,6 +510,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Hallway closet',
                          images: [],
+                         id: 5.3,
                          folders: [
                               {
 
@@ -1087,6 +520,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Laundary Room',
                          images: [],
+                         id: 5.4,
                          folders: [
                               {
 
@@ -1096,6 +530,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Master Bedroom Closet',
                          images: [],
+                         id: 5.5,
                          folders: [
                               {
 
@@ -1105,6 +540,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Mechanical Closet',
                          images: [],
+                         id: 5.6,
                          folders: [
                               {
 
@@ -1114,6 +550,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Pantry walk-in',
                          images: [],
+                         id: 5.7,
                          folders: [
                               {
 
@@ -1123,6 +560,7 @@ const TakePhotosWithAccordions = () => {
                     {
                          name: 'Pantry Closet',
                          images: [],
+                         id: 5.8,
                          folders: [
                               {
 
@@ -1133,17 +571,47 @@ const TakePhotosWithAccordions = () => {
           },
      ]);
 
+     console.log({ data });
+
+
      function handleImageUpload(e) {
           const files = e.target.files;
           if (files) {
-               const urls = Array.from(files).map(file => URL.createObjectURL(file));
-               setImageUrls(prevImageUrls => [...prevImageUrls, ...urls]);
+               const newImageUrls = Array.from(files).map((file) => ({
+                    id: generateUniqueId(), // You need a function to generate a unique ID
+                    imgUrl: URL.createObjectURL(file),
+               }));
+               const updatedData = addImagesToFolder(data, newImageUrls);
+               setData(updatedData);
           }
      };
+
+     function addImagesToFolder(data, newImageUrls) {
+          return data.map((folder) => {
+               if (folder) {
+                    if (folder.id === imgId) {
+                         return {
+                              ...folder,
+                              images: Array.isArray(folder.images) ? [...folder.images, ...newImageUrls] : newImageUrls,
+                         };
+                    }
+                    else if (folder.folders) {
+                         return {
+                              ...folder,
+                              folders: addImagesToFolder(folder.folders, newImageUrls),
+                         };
+                    }
+               }
+               return folder;
+          });
+     };
+
+
 
      const addFolder = (name, parentId, onClose) => {
           const newFolder = {
                name: name,
+               images: [],
                id: generateUniqueId(),
                folders: [], // Subfolders are initially empty
           };
@@ -1163,7 +631,6 @@ const TakePhotosWithAccordions = () => {
                }
                return el;
           });
-
           setData(newData);
           onClose();
      };
@@ -1193,63 +660,66 @@ const TakePhotosWithAccordions = () => {
 
      const renderFolders = (folders) => {
           if (folders && folders.length > 0) {
-               return folders.map((folder) => (
-                    <AccordionItem key={folder.id}>
-                         <h2>
-                              <AccordionButton>
-                                   <Box flex="1" textAlign="left">
-                                        <Box display='flex' justifyContent='space-between' w='full'>
-                                             <Box fontWeight={500}>
-                                                  {folder.name}
-                                             </Box>
-                                             <Box display='flex'>
-                                                  <Box p={1} pr={2}>
-                                                       <FaCamera />
+               return folders.map((folder) => {
+                    console.log({ folder });
+                    return (
+                         <AccordionItem key={folder.id}>
+                              <h2>
+                                   <AccordionButton>
+                                        <Box flex="1" textAlign="left">
+                                             <Box display='flex' justifyContent='space-between' w='full'>
+                                                  <Box fontWeight={500}>
+                                                       {folder.name}
                                                   </Box>
-                                                  <Box p={1} pr={2}>
-                                                       <FaImage onClick={handleImageSelect} />
-                                                       <Input
-                                                            type="file"
-                                                            accept="image/*"
-                                                            ref={fileInputRef}
-                                                            style={{ display: 'none' }}
-                                                            onChange={handleImageUpload}
-                                                            multiple
-                                                       />
-                                                  </Box>
-                                                  <Box p={1} pr={2}>
-                                                       <Menu>
-                                                            <MenuButton bg={'white'}>
-                                                                 <BsThreeDotsVertical />
-                                                            </MenuButton>
-                                                            <MenuList>
-                                                                 <MenuItem>
-                                                                      <InputModal onAdd={addFolder} parentId={folder.id} />
-                                                                 </MenuItem>
-                                                            </MenuList>
-                                                       </Menu>
+                                                  <Box display='flex'>
+                                                       <Box p={1} pr={2}>
+                                                            <FaCamera />
+                                                       </Box>
+                                                       <Box p={1} pr={2}>
+                                                            <FaImage onClick={() => handleImageSelect(folder.id)} />
+                                                            <Input
+                                                                 type="file"
+                                                                 accept="image/*"
+                                                                 ref={fileInputRef}
+                                                                 style={{ display: 'none' }}
+                                                                 onChange={(e) => handleImageUpload(e, folder.id)}
+                                                                 multiple
+                                                            />
+                                                       </Box>
+                                                       <Box p={1} pr={2}>
+                                                            <Menu>
+                                                                 <MenuButton bg={'white'}>
+                                                                      <BsThreeDotsVertical />
+                                                                 </MenuButton>
+                                                                 <MenuList>
+                                                                      <MenuItem>
+                                                                           <InputModal onAdd={addFolder} parentId={folder.id} />
+                                                                      </MenuItem>
+                                                                 </MenuList>
+                                                            </Menu>
+                                                       </Box>
                                                   </Box>
                                              </Box>
                                         </Box>
-                                   </Box>
-                                   <AccordionIcon />
-                              </AccordionButton>
-                         </h2>
-                         <AccordionPanel pb={4}>
-                              <Accordion allowToggle>
-                                   {imageUrls.map((imageUrl, index) => (
-                                        <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl} alt={`Image ${index}`} />
-                                   ))}
-                                   {renderFolders(folder.folders)}
-                              </Accordion>
-                         </AccordionPanel>
-                    </AccordionItem>
-               ));
+                                        <AccordionIcon />
+                                   </AccordionButton>
+                              </h2>
+                              <AccordionPanel pb={4}>
+                                   <Accordion allowToggle>
+                                        {folder?.images?.map((imageUrl, index) => (
+                                             <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl.imgUrl} alt={`Image ${index}`} />
+                                        ))}
+                                        {renderFolders(folder.folders)}
+                                   </Accordion>
+                              </AccordionPanel>
+                         </AccordionItem>
+                    );
+               });
           }
      };
 
      return (
-          <Box bg={'white'} w={'90%'} m={'auto'} p={3}>
+          <Box bg={'white'} w={'90%'} m={'auto'} p={3} pt={5} borderRadius='10px' mt='2%'>
                <Accordion defaultIndex={[0]} allowToggle>
                     {data.map((elem) => (
                          <AccordionItem key={elem.id}>
