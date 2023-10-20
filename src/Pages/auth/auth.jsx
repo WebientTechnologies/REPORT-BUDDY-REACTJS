@@ -17,11 +17,11 @@ import { login } from '../../redux/actions/userAction';
 
 const Login = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
-  // const [email, setEmail] = useState('dlinaraj@premacg.com');
-  // const [password, setPassword] = useState('##Dl1234##');
+  const [email, setEmail] = useState('dlinaraj@premacg.com');
+  const [password, setPassword] = useState('##Dl1234##');
   const [Loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
