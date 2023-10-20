@@ -794,41 +794,35 @@ const TakePhotosWithAccordions = () => {
           });
      };
 
-     function removeFolderById(data, folderId) {
-          // Use a recursive function to search for the folder with the given ID.
-          function recursiveRemove(node) {
-               if (node.id === folderId && node.identity === 'newFolder') {
-                    console.log({ node });
-                    return true;
-               }
-               if (node.folders) {
-                    for (let i = 0; i < node.folders.length; i++) {
-                         if (recursiveRemove(node.folders[i])) {
-                              node.folders.splice(i, 1);
-                              return true;
-                         }
+     const removeFolderById = (folders, idToRemove) => {
+          for (let i = 0; i < folders.length; i++) {
+               if (folders[i].id === idToRemove) {
+                    folders.splice(i, 1); // Remove the folder with the matching ID
+                    return true; // Folder removed
+               } else if (folders[i].folders) {
+                    if (removeFolderById(folders[i].folders, idToRemove)) {
+                         return true; // Folder found and removed in the recursive call
                     }
                }
-               return false;
           }
-
-          for (let i = 0; i < data.length; i++) {
-               if (recursiveRemove(data[i])) {
-                    data.splice(i, 1);
-                    return;
-               }
-          }
+          return false; // Folder not found
      };
 
-
-     const handleRemoveFolder = (val) => {
-          console.log({ val });
-          setData(removeFolderById(data, val));
+     const handleRemoveFolder = (idToRemove) => {
+          setData((prevData) => {
+               const newData = [...prevData];
+               for (let i = 0; i < newData.length; i++) {
+                    if (removeFolderById(newData[i].folders, idToRemove)) {
+                         return newData; // Folder removed, return the updated data
+                    }
+               }
+               return prevData; // Folder not found, return the original data
+          });
      };
 
 
      const renderFolders = (folders) => {
-          if (folders && folders.length > 1) {
+          if (folders && folders.length > 0) {
                return folders.map((folder) => {
                     return (
                          <AccordionItem key={folder.id}>
