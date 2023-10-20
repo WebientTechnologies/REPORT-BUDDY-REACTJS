@@ -68,7 +68,6 @@ function ScopeOfWorkComponent() {
             placeholder="If any scope is added from the interviews, Experts MUST add those scope items in this field. Please list each reportedly damaged building material and/or area that was (were) not listed in the “Assignment Sheet Scope” or “Scope from Received Documents” fields."
           />
         </FormControl>
-
       </Box>
 
       {/* Heading: SOW Statement */}

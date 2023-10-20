@@ -1,4 +1,3 @@
-import { SmallCloseIcon } from "@chakra-ui/icons";
 import {
      Accordion,
      AccordionItem,
@@ -27,7 +26,7 @@ import {
 import { useRef } from "react";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaCamera, FaImage } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
 
 
 const generateUniqueId = () => {
@@ -614,7 +613,7 @@ const TakePhotosWithAccordions = () => {
           },
      ]);
 
-     // console.log({ data });
+     console.log({ data });
 
      function updateFolderName(data, id, newName) {
           return data.map(item => {
@@ -632,7 +631,7 @@ const TakePhotosWithAccordions = () => {
      const handleUpdateName = (id, newName, onClose) => {
           setData(updateFolderName(data, id, newName));
           onClose();
-     }
+     };
 
 
      function handleImageUpload(e) {
@@ -746,9 +745,6 @@ const TakePhotosWithAccordions = () => {
           setIsAllSelected(false);
      };
 
-     console.log({ selectedImg });
-
-
      const addFolder = (name, parentId, onClose) => {
           const newFolder = {
                name: name,
@@ -798,10 +794,40 @@ const TakePhotosWithAccordions = () => {
           });
      };
 
+     function removeFolderById(data, folderId) {
+          // Use a recursive function to search for the folder with the given ID.
+          function recursiveRemove(node) {
+               if (node.id === folderId && node.identity === 'newFolder') {
+                    console.log({ node });
+                    return true;
+               }
+               if (node.folders) {
+                    for (let i = 0; i < node.folders.length; i++) {
+                         if (recursiveRemove(node.folders[i])) {
+                              node.folders.splice(i, 1);
+                              return true;
+                         }
+                    }
+               }
+               return false;
+          }
+
+          for (let i = 0; i < data.length; i++) {
+               if (recursiveRemove(data[i])) {
+                    data.splice(i, 1);
+                    return;
+               }
+          }
+     };
+
+
+     const handleRemoveFolder = (val) => {
+          console.log({ val });
+          setData(removeFolderById(data, val));
+     };
 
 
      const renderFolders = (folders) => {
-          console.log({ folders });
           if (folders && folders.length > 1) {
                return folders.map((folder) => {
                     return (
@@ -814,9 +840,6 @@ const TakePhotosWithAccordions = () => {
                                                        {folder.name}
                                                   </Box>
                                                   <Box display='flex'>
-                                                       <Box p={1} pr={2}>
-                                                            <FaCamera />
-                                                       </Box>
                                                        <Box p={1} pr={2}>
                                                             <FaImage onClick={() => handleImageSelect(folder.id)} />
                                                             <Input
@@ -837,9 +860,18 @@ const TakePhotosWithAccordions = () => {
                                                                       <MenuItem>
                                                                            <InputModal onAdd={addFolder} parentId={folder.id} />
                                                                       </MenuItem>
-                                                                      <MenuItem>
-                                                                           <UpdateNameModal onAdd={handleUpdateName} parentId={folder.id} />
-                                                                      </MenuItem>
+                                                                      {
+                                                                           folder.identity === 'newFolder' &&
+                                                                           <MenuItem>
+                                                                                <UpdateNameModal onAdd={handleUpdateName} parentId={folder.id} />
+                                                                           </MenuItem>
+                                                                      }
+                                                                      {
+                                                                           folder.identity === 'newFolder' &&
+                                                                           <MenuItem>
+                                                                                <Box onClick={() => handleRemoveFolder(folder.id)}>Remove Folder</Box>
+                                                                           </MenuItem>
+                                                                      }
                                                                  </MenuList>
                                                             </Menu>
                                                        </Box>
@@ -852,7 +884,10 @@ const TakePhotosWithAccordions = () => {
                               <AccordionPanel pb={4}>
                                    <Accordion>
                                         <Box display='flex' flexDir='column'>
-                                             <Button width={'fit-content'} onClick={() => handleClearImg(folder.id)} colorScheme="red" size={'sm'} isDisabled={!selectedImg.some(item => item.folderId === folder.id && item.values.length > 0)}>Remove</Button>
+                                             {
+                                                  selectedImg.some(item => item.folderId === folder.id && item.values.length > 0) &&
+                                                  <Button width={'fit-content'} onClick={() => handleClearImg(folder.id)} colorScheme="red" size={'sm'} isDisabled={!selectedImg.some(item => item.folderId === folder.id && item.values.length > 0)}>Remove</Button>
+                                             }
                                              <Box display='flex' flexDir='row'>
                                                   {folder?.images?.map((imageUrl, index) => (
                                                        <Avatar size={'lg'} borderRadius={0} m={1} key={index} src={imageUrl.imgUrl} alt={`Image ${index}`} >
@@ -883,7 +918,7 @@ const TakePhotosWithAccordions = () => {
                     <Button onClick={handleRemoveImages} ml={2} color="red" isDisabled={!isAllSelected} fontWeight={'bold'} size={'sm'}>Remove All</Button>
                </Box>
                <Accordion allowToggle>
-                    {data.map((elem) => (
+                    {data?.map((elem) => (
                          <AccordionItem key={elem.id}>
                               <h2>
                                    <AccordionButton>
