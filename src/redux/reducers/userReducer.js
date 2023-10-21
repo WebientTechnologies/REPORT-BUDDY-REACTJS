@@ -1,7 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 export const userReducer = createReducer(
-  {},
+  {
+    token: localStorage.getItem('token') || '',
+  },
   {
     loginRequest: (state) => {
       state.loading = true;

@@ -11,7 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Text } from "@chakra-ui/react";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdGirl } from "react-icons/md";
@@ -24,7 +24,10 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/userAction";
 
 const Profile = () => {
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <Menu>
       <MenuButton
@@ -34,7 +37,7 @@ const Profile = () => {
         colorScheme="black"
       />
       <MenuList>
-        <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
+        <MenuItem onClick={() => dispatch(logout(navigate))}>Logout</MenuItem>
       </MenuList>
     </Menu>
   );
@@ -75,104 +78,3 @@ function AdminLayout({ children }) {
 }
 
 export default AdminLayout;
-
-const navBar = [
-  { title: "Dashboard", pathname: "/", icon: <AiOutlineHome /> },
-  { title: "Fill Form", pathname: "/fill-form", icon: <AiOutlineHome /> },
-];
-
-function Sidebar({ param }) {
-  return (
-    <Box
-      h="100vh"
-      minH={"100vh"}
-      pos={["absolute", "sticky"]}
-      display={["none", "block"]}
-      zIndex={"10"}
-      maxW={"100vw"}
-      transition={"all"}
-      w="320px"
-      transitionDuration={"500ms"}
-      top={0}
-      px={2}
-    >
-      <Box position={{ md: "sticky" }} top={"0"} h={"100vh"} px={0}>
-        <VStack
-          px={0}
-          transition={"all"}
-          transitionDuration={"500ms"}
-          placeContent={"start"}
-          placeItems={"start"}
-          w="full"
-          h="full"
-        >
-          <VStack w="full" gap={3} h={"100vh"} overflowY={"auto"}>
-            <HStack w="full" mt={2} justifyContent={"space-around"}>
-              {/* <Img
-                    src={
-                      "https://ubfactory.in/wp-content/uploads/2023/04/UB-Factory-Website-Official-Loho-New.png"
-                    }
-                    w={"20"}
-                    mb='2'
-                    
-                    transition={"all"}
-                    px={0}
-                  /> */}
-            </HStack>
-
-            {navBar.map((navItem) => {
-              return <NavItem navItem={navItem} param={param} />;
-            })}
-            <VStack></VStack>
-          </VStack>
-        </VStack>
-      </Box>
-    </Box>
-  );
-}
-
-function NavItem({ navItem }) {
-  const location = useLocation();
-  console.log({ location });
-  return (
-    <RouterLink to={navItem.pathname} style={{ width: "100%" }}>
-      <HStack
-        w="100%"
-        p={2}
-        // bgColor: "gray.50",
-        // color: "black",
-        // fontWeight: "bold",
-        // borderColor: "black",
-
-        bgColor={
-          location.pathname === navItem.pathname ? "gray.50" : "transparent"
-        }
-        textColor={location.pathname === navItem.pathname ? "black" : "black"}
-        fontWeight={location.pathname === navItem.pathname ? "bold" : "medium"}
-        borderColor={
-          location.pathname === navItem.pathname ? "black" : "transparent"
-        }
-        borderBottom={location.pathname === navItem.pathname ? "2px" : "none"}
-        _hover={{ bgColor: "gray.50", color: "black" }}
-        rounded={"sm"}
-      >
-        <Text
-          fontWeight={"bold"}
-          fontSize={"xl"}
-          color={
-            location.pathname === navItem.pathname ? "brand.500" : "gray.400"
-          }
-        >
-          {navItem.icon}
-        </Text>
-        <Text
-          color={
-            location.pathname === navItem.pathname ? "brand.500" : "gray.400"
-          }
-        >
-          {navItem.title}
-        </Text>
-      </HStack>
-    </RouterLink>
-  );
-}

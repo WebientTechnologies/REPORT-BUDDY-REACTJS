@@ -25,7 +25,6 @@ function App() {
   const dispatch = useDispatch();
   const isAuthenticated = localStorage.getItem('token');
 
-
   useEffect(() => {
     if (error) {
       toast.error(error)
@@ -41,6 +40,7 @@ function App() {
   useEffect(() => {
     dispatch(getMyProfile());
   }, [dispatch]);
+
 
   return (
     <Router>
