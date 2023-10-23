@@ -1,47 +1,67 @@
-import { Flex, Heading, Grid, Button, useColorModeValue, Box, Stat, StatLabel, StatNumber, StatHelpText, GridItem, VStack, Tabs, TabList, Tab, TabPanels, TabPanel, TabIndicator, Text, } from '@chakra-ui/react';
+import { Flex, Heading, Box } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { getAllProjectsFunc } from '../redux/actions/dashBoardAction';
-// import DashboardCard from './DashboardCard'; // Import the reusable card component
-// import ReactApexChart from 'react-apexcharts'; // Import the React ApexCharts library
-// import { Carousel } from 'react-responsive-carousel';
-// import { CustomersReview } from './CostumerReviewes';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { QR_Dashboard } from '../DashboardComponentsAccordingtoUser/QR_Dashboard';
+import { TW_Dashboard } from '../DashboardComponentsAccordingtoUser/TW_Destination';
+import { PC_Dashboard } from '../DashboardComponentsAccordingtoUser/PC_Dashboard';
+import { OM_Dashboard } from '../DashboardComponentsAccordingtoUser/OM_Dashboard';
+import { EM_Dashboard } from '../DashboardComponentsAccordingtoUser/EM_Dashboard';
+import { FE_Dashboard } from '../DashboardComponentsAccordingtoUser/FE_Dashboard';
 
 
 function DashBoard() {
 
-  const { dashboardProjects, dashboardProjectsLoading, dashboardProjectsError } = useSelector(state => state.dashboardReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log({ dashboardProjects });
+  const [aboutUser, setAboutUser] = useState('');
+
   const user = JSON.parse(localStorage.getItem('premaUser'));
   console.log({ user });
 
-  // if (projects.pS1PCEmail == email) {
-  //   myprojectCount.value += 1;
-  // }
-  // if (projects.pS1PCEmail == email &&
-  //     projects.pS2IDPApprovedByEM!.length > 5) {
-  //   //print(projects.pS2IDPCompletedByFE);
-  //   myapprovedfbCount.value += 1;
-  // }
-
-
-  const myProjects = dashboardProjects?.filter((el) => el[`PS_1.PC_Email`] === user?.email);
-  const approvedProjects = dashboardProjects?.filter((el) => el[`PS_1.PC_Email`] === user?.email && el['PS_2.IDP_Approved_by_EM'].length > 5);
-  console.log({ myProjects, approvedProjects });
-
-
   useEffect(() => {
-    dispatch(getAllProjectsFunc(navigate));
+    setAboutUser(user?.designation);
   }, [dispatch]);
 
 
   return (
     <Flex flexDirection="column" pb={[8, 16]}>
       <Heading color={'white'} textAlign={'center'} fontWeight={500}>Welcome to Prema Consultancy</Heading>
-      <Tabs variant="unstyled" color={'white'}>
+      <Box>
+        {
+          aboutUser === "QR" && (
+            <QR_Dashboard />
+          )
+        }
+        {
+          aboutUser === "TW" && (
+            <TW_Dashboard />
+          )
+        }
+        {
+          aboutUser === "PC" && (
+            <PC_Dashboard />
+          )
+        }
+        {
+          aboutUser === "OM" && (
+            <OM_Dashboard />
+          )
+        }
+        {
+          aboutUser === "EM" && (
+            <EM_Dashboard />
+          )
+        }
+        {
+          aboutUser === "FE" && (
+            <FE_Dashboard />
+          )
+        }
+      </Box>
+
+      {/* <Tabs variant="unstyled" color={'white'}>
         <TabList>
           <Tab fontWeight={500}>My Projects</Tab>
           <Tab fontWeight={500}>Approved Projects</Tab>
@@ -65,7 +85,8 @@ function DashBoard() {
                 ) : (
                   <Link to={'/live-projects'}>
                     <Flex justifyContent={'center'} fontSize={'2xl'} alignItems={'center'} w="200px" fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
-                      Live Projects
+                      <Text>My Projects</Text>
+                      <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                   </Link>
                 )
@@ -92,21 +113,9 @@ function DashBoard() {
             </Box>
           </TabPanel>
         </TabPanels>
-      </Tabs>
-
+      </Tabs> */}
     </Flex>
   );
 };
 
 export default DashBoard;
-
-
-const MyProjectCard = ({ Project_Name, Project_Number }) => {
-  return (
-    <Box display={'flex'} height={{ base: '100px', md: '150px', lg: '200px' }} borderRadius={'10px'} flexDir='column' m={2} justifyContent='center' bg='blue.700' alignItems={'center'} textAlign='center'>
-      <Text fontWeight={500} fontSize={{ base: '100%' }} color={'white'}>{Project_Name || '---'}</Text>
-      <Text fontWeight={500} fontSize={{ base: '90%' }} color={'white'}>{Project_Number || '---'}</Text>
-    </Box>
-  );
-};
-
