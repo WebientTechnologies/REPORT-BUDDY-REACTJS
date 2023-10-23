@@ -11,7 +11,6 @@ const TW_Dashboard = () => {
      const dispatch = useDispatch();
      const navigate = useNavigate();
 
-     console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
      console.log({ user });
 
@@ -21,8 +20,6 @@ const TW_Dashboard = () => {
      const myrejectedDraftReportByQr = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.TW`] === user?.name && el['PS_4.Stage_1'] === 'Rejected');
      const myrejectedDraftReportByFe = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.TW`] === user?.name && el['PS_4.Stage_3'] === 'Rejected');
      const myrejectedDraftReportByEm = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.TW`] === user?.name && el['PS_4.Stage_5'] === 'Rejected');
-
-     console.log({ myProjects, myapprovedfb, myrejectedDraftReportByQr, myrejectedDraftReportByFe, myrejectedDraftReportByEm });
 
      useEffect(() => {
           dispatch(getAllProjectsFunc(navigate));
