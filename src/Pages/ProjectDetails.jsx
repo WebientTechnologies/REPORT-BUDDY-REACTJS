@@ -1,20 +1,17 @@
 import React from 'react';
 import { Button, Box, Heading, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { safeParse } from '../StringifyAndParsedObj/StringifyAndParsedObj';
 
 function ProjectDetails() {
 
-  const data = {
-    id: 1,
-    name: 'Project A',
-    claimNumber: 'ABC123',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    startDate: '2023-01-15',
-    endDate: '2023-05-30',
-  };
+  const { objectParam } = useParams();
+  const parsedData = safeParse(objectParam);
+  console.log({ parsedData });
+
 
   return (
-    <div>
+    <Box pb={10}>
       <Box textAlign='center'>
         <Link to="/fill-form">
           <Button bg={'black'} color='white' size="lg" m={4}>
@@ -27,37 +24,57 @@ function ProjectDetails() {
         Project Details
       </Heading>
 
-      <Box p={4} borderRadius='10px' bg={'white'} w={{ base: '100%', md: '90%', lg: '70%', xl: '60%' }} m='auto' boxShadow="0px 18px 40px 0px #7090B01F">
+      <Box p={4} height={'auto'} borderRadius='10px' bg={'white'} w={{ base: '100%', md: '90%', xl: '70%' }} m='auto' boxShadow="0px 18px 40px 0px #7090B01F">
         <Table variant="simple" mt={4}>
           <Tbody>
             <Tr>
               <Th>Project ID</Th>
-              <Td>{data.id}</Td>
+              <Td>{parsedData?.ID}</Td>
             </Tr>
             <Tr>
               <Th>Project Name</Th>
-              <Td>{data.name}</Td>
+              <Td>{parsedData?.Project_Name}</Td>
+            </Tr>
+            <Tr>
+              <Th>Project Number</Th>
+              <Td>{parsedData?.Project_Number}</Td>
+            </Tr>
+            <Tr>
+              <Th>Contact Name</Th>
+              <Td>{parsedData?.Contact_Name}</Td>
+            </Tr>
+            <Tr>
+              <Th>Client Project Number</Th>
+              <Td>{parsedData?.Client_Project_Number}</Td>
+            </Tr>
+            <Tr>
+              <Th>Loss Location Street Address</Th>
+              <Td>{parsedData?.Loss_Location_Street_Address}</Td>
+            </Tr>
+            <Tr>
+              <Th>Owner Name</Th>
+              <Td>{parsedData?.Owner_Name}</Td>
+            </Tr>
+            <Tr>
+              <Th>Project Type</Th>
+              <Td>{parsedData?.Project_Type}</Td>
             </Tr>
             <Tr>
               <Th>Claim Number</Th>
-              <Td>{data.claimNumber}</Td>
+              <Td>{parsedData?.Claim_Number}</Td>
             </Tr>
             <Tr>
               <Th>Description</Th>
-              <Td>{data.description}</Td>
+              <Td>{parsedData?.Description}</Td>
             </Tr>
             <Tr>
-              <Th>Start Date</Th>
-              <Td>{data.startDate}</Td>
-            </Tr>
-            <Tr>
-              <Th>End Date</Th>
-              <Td>{data.endDate}</Td>
+              <Th>Scope Of Service</Th>
+              <Td>{parsedData?.Scope_of_Service}</Td>
             </Tr>
           </Tbody>
         </Table>
       </Box>
-    </div>
+    </Box>
   );
 };
 

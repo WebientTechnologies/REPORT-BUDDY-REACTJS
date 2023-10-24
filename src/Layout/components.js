@@ -68,7 +68,7 @@ function AdminLayout({ children }) {
           <HStack w="full" p={3} bg="gray.200" justify={"end"} >
             <Profile />
           </HStack>
-          <Box h={"100%"} w="100%" p={4} bg='#2B3674'>
+          <Box h={"full"} w="100%" p={4} bg='#2B3674'>
             {children}
           </Box>
         </Box>

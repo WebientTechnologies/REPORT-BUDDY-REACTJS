@@ -48,8 +48,8 @@ function App() {
         <Route path='/login' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/' ><Login /></ProtectedRoute>} />
         <Route path='/' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><DashBoard /></AdminLayout></ProtectedRoute>} />
         <Route path='/fill-form' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><FieldForm /></ProtectedRoute>} />
-        <Route path='/live-projects' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><LiveProjects /></AdminLayout></ProtectedRoute>} />
-        <Route path='/project' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ProjectDetails /></AdminLayout></ProtectedRoute>} />
+        <Route path='/live-projects/:string' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><LiveProjects /></AdminLayout></ProtectedRoute>} />
+        <Route path='/project/:objectParam' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ProjectDetails /></AdminLayout></ProtectedRoute>} />
         <Route path='/take-photographs' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></ProtectedRoute>} />
       </Routes>
       <Toaster />
