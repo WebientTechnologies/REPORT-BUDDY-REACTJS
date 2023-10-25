@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import toast, { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { ProtectedRoute } from 'protected-route-react'
+// import { PrivateRoute } from 'protected-route-react'
 import { getMyProfile } from './redux/actions/userAction'
 import Login from './Pages/auth/auth'
 import AdminLayout from './Layout/components'
@@ -31,6 +31,7 @@ import MyRejectedDraftReportsByFeTW from './Pages/TW/MyRejectedDraftReportsByFeT
 import MyRejectedDraftReportsByEmTW from './Pages/TW/MyRejectedDraftReportsByEmTW';
 import PendingReportsTW from './Pages/TW/PendingReportsTW';
 import ApprovedFbTW from './Pages/TW/ApprovedFbTW';
+import PrivateRoute from './PriveteRoute';
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
 
@@ -38,11 +39,10 @@ function App() {
 
   const { user, message, error, loading } = useSelector(state => state?.user | {});
   const dispatch = useDispatch();
-  var isAuthenticated = localStorage.getItem('token');
-
-  useEffect(() => {
-    isAuthenticated = localStorage.getItem('token');
-  }, [user]);
+  // var isAuthenticated = localStorage.getItem('token');
+  // useEffect(() => {
+  //   isAuthenticated = localStorage.getItem('token');
+  // }, [user]);
 
   useEffect(() => {
     if (error) {
@@ -64,29 +64,28 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/login' element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect='/' ><Login /></ProtectedRoute>} />
-        <Route path='/' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><DashBoard /></AdminLayout></ProtectedRoute>} />
-        <Route path='/fill-form' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><FieldForm /></ProtectedRoute>} />
-        <Route path='/live-projects/:string' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><LiveProjects /></AdminLayout></ProtectedRoute>} />
-        <Route path='/approved-projects/OM' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ApprovedProjectsOM /></AdminLayout></ProtectedRoute>} />
-        <Route path='/approved-projects/PC' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ApprovedProjectsPC /></AdminLayout></ProtectedRoute>} />
-        <Route path='/pending-site-visit-FE' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><PendingSiteVisit /></AdminLayout></ProtectedRoute>} />
-        <Route path='/pending-site-fb' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyPendingFb /></AdminLayout></ProtectedRoute>} />
-        <Route path='/reports-to-be-reviewed' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyReportsToBeReviewed /></AdminLayout></ProtectedRoute>} />
-        <Route path='/pending-reports-qr' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><PendingReports /></AdminLayout></ProtectedRoute>} />
-        <Route path='/approved-projects/QR' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ApprovedProjectsQR /></AdminLayout></ProtectedRoute>} />
-        <Route path='/pending-reports-em' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><PendingReportsEM /></AdminLayout></ProtectedRoute>} />
-        <Route path='/my-rejected-fb-projects-em' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyRejectedFbProjects /></AdminLayout></ProtectedRoute>} />
-        <Route path='/my-reports-to-review-em' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyReportsToReviewEM /></AdminLayout></ProtectedRoute>} />
-        <Route path='/my-rejected-draft-reports-by-qr-tw' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyRejectedDraftReportsByQrTW /></AdminLayout></ProtectedRoute>} />
-        <Route path='/my-rejected-draft-reports-by-fe-tw' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyRejectedDraftReportsByFeTW /></AdminLayout></ProtectedRoute>} />
-        <Route path='/my-rejected-draft-reports-by-em-tw' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><MyRejectedDraftReportsByEmTW /></AdminLayout></ProtectedRoute>} />
-        <Route path='/pending-reports-TW' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><PendingReportsTW /></AdminLayout></ProtectedRoute>} />
-        <Route path='/approved-Fb-TW' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ApprovedFbTW /></AdminLayout></ProtectedRoute>} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<PrivateRoute ><AdminLayout><DashBoard /></AdminLayout></PrivateRoute>} />
+        <Route path='/fill-form' element={<PrivateRoute ><FieldForm /></PrivateRoute>} />
+        <Route path='/live-projects/:string' element={<PrivateRoute ><AdminLayout><LiveProjects /></AdminLayout></PrivateRoute>} />
+        <Route path='/approved-projects/OM' element={<PrivateRoute ><AdminLayout><ApprovedProjectsOM /></AdminLayout></PrivateRoute>} />
+        <Route path='/approved-projects/PC' element={<PrivateRoute ><AdminLayout><ApprovedProjectsPC /></AdminLayout></PrivateRoute>} />
+        <Route path='/pending-site-visit-FE' element={<PrivateRoute ><AdminLayout><PendingSiteVisit /></AdminLayout></PrivateRoute>} />
+        <Route path='/pending-site-fb' element={<PrivateRoute ><AdminLayout><MyPendingFb /></AdminLayout></PrivateRoute>} />
+        <Route path='/reports-to-be-reviewed' element={<PrivateRoute ><AdminLayout><MyReportsToBeReviewed /></AdminLayout></PrivateRoute>} />
+        <Route path='/pending-reports-qr' element={<PrivateRoute ><AdminLayout><PendingReports /></AdminLayout></PrivateRoute>} />
+        <Route path='/approved-projects/QR' element={<PrivateRoute ><AdminLayout><ApprovedProjectsQR /></AdminLayout></PrivateRoute>} />
+        <Route path='/pending-reports-em' element={<PrivateRoute ><AdminLayout><PendingReportsEM /></AdminLayout></PrivateRoute>} />
+        <Route path='/my-rejected-fb-projects-em' element={<PrivateRoute ><AdminLayout><MyRejectedFbProjects /></AdminLayout></PrivateRoute>} />
+        <Route path='/my-reports-to-review-em' element={<PrivateRoute ><AdminLayout><MyReportsToReviewEM /></AdminLayout></PrivateRoute>} />
+        <Route path='/my-rejected-draft-reports-by-qr-tw' element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByQrTW /></AdminLayout></PrivateRoute>} />
+        <Route path='/my-rejected-draft-reports-by-fe-tw' element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByFeTW /></AdminLayout></PrivateRoute>} />
+        <Route path='/my-rejected-draft-reports-by-em-tw' element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByEmTW /></AdminLayout></PrivateRoute>} />
+        <Route path='/pending-reports-TW' element={<PrivateRoute ><AdminLayout><PendingReportsTW /></AdminLayout></PrivateRoute>} />
+        <Route path='/approved-Fb-TW' element={<PrivateRoute ><AdminLayout><ApprovedFbTW /></AdminLayout></PrivateRoute>} />
 
-
-        <Route path='/project/:objectParam' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><ProjectDetails /></AdminLayout></ProtectedRoute>} />
-        <Route path='/take-photographs' element={<ProtectedRoute isAuthenticated={isAuthenticated} ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></ProtectedRoute>} />
+        <Route path='/project/:objectParam' element={<PrivateRoute ><AdminLayout><ProjectDetails /></AdminLayout></PrivateRoute>} />
+        <Route path='/take-photographs' element={<PrivateRoute ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></PrivateRoute>} />
       </Routes>
       <Toaster />
     </Router>

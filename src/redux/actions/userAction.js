@@ -41,7 +41,7 @@ export const logout = (navigate) => async (dispatch) => {
     try {
         console.log("logout");
         dispatch({ type: 'logoutSuccess' })
-        .then(() => navigate('/login'));
+        navigate('/login');
     }
     catch (e) { dispatch({ type: 'logoutFail' }); }
 }

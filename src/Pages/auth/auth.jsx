@@ -13,15 +13,17 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import PasswordField from './PasswordFelids';
 import { login } from '../../redux/actions/userAction';
+import { useEffect } from 'react';
 
 
 const Login = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  const token = localStorage.getItem("token");
 
-  // const [email, setEmail] = useState('dlinaraj@premacg.com');
-  // const [password, setPassword] = useState('##Dl1234##');
+  const [email, setEmail] = useState('dlinaraj@premacg.com');
+  const [password, setPassword] = useState('##Dl1234##');
   const [Loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,6 +37,14 @@ const Login = () => {
     setPassword("");
   }
 
+  useEffect(() => {
+    if (!token) {
+      navigate(`/login`);
+    }
+    else {
+      navigate(`/`);
+    }
+  }, [token]);
 
   return (
     <Container h={'100vh'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
