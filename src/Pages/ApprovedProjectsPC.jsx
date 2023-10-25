@@ -16,12 +16,9 @@ function ApprovedProjectsPC() {
      const { dashboardProjects, dashboardProjectsLoading, dashboardProjectsError } = useSelector(state => state.dashboardReducer);
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const [myApprovedProjects, setMyProject] = useState(dashboardProjects || []);
-     console.log({ myApprovedProjects });
 
 
      useEffect(() => {
@@ -34,7 +31,6 @@ function ApprovedProjectsPC() {
 
 
      const handleClick = (name, num) => {
-          console.log({ name, num });
           localStorage.setItem('projectName', name);
           localStorage.setItem('claimNo', num);
      }

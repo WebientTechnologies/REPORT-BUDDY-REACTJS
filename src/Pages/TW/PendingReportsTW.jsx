@@ -15,12 +15,9 @@ function PendingReportsTW() {
      const { dashboardProjects, dashboardProjectsLoading, dashboardProjectsError } = useSelector(state => state.dashboardReducer);
      const dispatch = useDispatch();
      const navigate = useNavigate();
-     console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const [fePendingReportsTWProjects, setMyProject] = useState(dashboardProjects || []);
-     console.log({ fePendingReportsTWProjects });
 
 
      useEffect(() => {
@@ -33,7 +30,6 @@ function PendingReportsTW() {
 
 
      const handleClick = (name, num) => {
-          console.log({ name, num });
           localStorage.setItem('projectName', name);
           localStorage.setItem('claimNo', num);
      }

@@ -16,18 +16,15 @@ const PC_Dashboard = () => {
 
      console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const myProjects = dashboardProjects?.filter((el) => el[`PS_1.PC_Email`] === user?.email);
      const myapprovedfb = dashboardProjects?.filter((el) => el[`PS_1.PC_Email`] === user?.email && el['PS_2.IDP_Approved_by_EM'].length > 5);
-     console.log({ myProjects, myapprovedfb });
     
      const objectParam = {
           name: null,
           email: 'PS_1.PC_Email',
      };
      const string = encodeURIComponent(safeStringify(objectParam));
-     console.log({ string });
 
 
      useEffect(() => {

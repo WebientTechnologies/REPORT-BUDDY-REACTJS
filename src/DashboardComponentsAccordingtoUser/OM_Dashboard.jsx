@@ -16,7 +16,6 @@ const OM_Dashboard = () => {
 
      console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const objectParam = {
           name: null,

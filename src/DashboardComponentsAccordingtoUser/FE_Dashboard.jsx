@@ -15,7 +15,6 @@ const FE_Dashboard = () => {
 
      console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const objectParam = {
           name: 'Project_Assigned_Form.FE',
@@ -23,7 +22,6 @@ const FE_Dashboard = () => {
      }
 
      const string = encodeURIComponent(safeStringify(objectParam));
-     console.log({ string });
 
      const myProjects = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.FE`] === user?.name || el[`PS_1.FE_Email`] === user?.email);
      const mypendingSiteVisit = dashboardProjects?.filter((el) =>

@@ -16,7 +16,6 @@ const QR_Dashboard = () => {
 
      console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const myProjects = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.QR`] === user?.name);
      const mypendingQRReport = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.QR`] === user?.name && el['PS_3.Draft_Report_Completed'].length > 5);
@@ -27,7 +26,6 @@ const QR_Dashboard = () => {
           email: null,
      };
      const string = encodeURIComponent(safeStringify(objectParam));
-     console.log({ string });
 
      useEffect(() => {
           dispatch(getAllProjectsFunc(navigate));

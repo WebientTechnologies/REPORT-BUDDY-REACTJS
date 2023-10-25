@@ -13,14 +13,12 @@ const TW_Dashboard = () => {
      const navigate = useNavigate();
 
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const objectParam = {
           name: 'Project_Assigned_Form.TW',
           email: null,
      };
      const string = encodeURIComponent(safeStringify(objectParam));
-     console.log({ string });
 
      const myProjects = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.TW`] === user?.name);
      const mypendingReport = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.TW`] === user?.name && el['PS_2.IDP_Approved_by_EM'].length > 5 && el[`PS_3.Draft_Report_Start_Date`].length >= 2);

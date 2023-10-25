@@ -38,7 +38,11 @@ function App() {
 
   const { user, message, error, loading } = useSelector(state => state?.user | {});
   const dispatch = useDispatch();
-  const isAuthenticated = localStorage.getItem('token');
+  var isAuthenticated = localStorage.getItem('token');
+
+  useEffect(() => {
+    isAuthenticated = localStorage.getItem('token');
+  }, [user]);
 
   useEffect(() => {
     if (error) {

@@ -15,16 +15,13 @@ function LiveProjects() {
   const { dashboardProjects, dashboardProjectsLoading, dashboardProjectsError } = useSelector(state => state.dashboardReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log({ dashboardProjects });
   const user = JSON.parse(localStorage.getItem('premaUser'));
-  console.log({ user });
   const { string } = useParams();
   const parsedData = safeParse(string);
   console.log({ parsedData });
 
 
   const [myProjects, setMyProject] = useState(dashboardProjects || []);
-  console.log({ myProjects });
 
 
   useEffect(() => {

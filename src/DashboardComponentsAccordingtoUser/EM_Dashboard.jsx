@@ -16,15 +16,12 @@ const EM_Dashboard = () => {
 
      console.log({ dashboardProjects });
      const user = JSON.parse(localStorage.getItem('premaUser'));
-     console.log({ user });
 
      const objectParam = {
           name: 'Project_Assigned_Form.EM',
           email: null,
      }
      const string = encodeURIComponent(safeStringify(objectParam));
-     console.log({ string });
-
 
      const myProjects = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.EM`] === user?.name);
      const mypendingFB = dashboardProjects?.filter((el) =>
