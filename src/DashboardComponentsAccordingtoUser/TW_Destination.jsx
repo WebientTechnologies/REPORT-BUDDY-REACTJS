@@ -42,33 +42,33 @@ const TW_Dashboard = () => {
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`my-rejected-draft-reports-by-qr-tw`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Rejected Draft Reports By QR</Text>
                          <Text>{myrejectedDraftReportByQr?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/my-rejected-draft-reports-by-fe-tw`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Rejected Draft Reports By FE</Text>
                          <Text>{myrejectedDraftReportByFe?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/my-rejected-draft-reports-by-em-tw`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Rejected Draft Reports By Em</Text>
                          <Text>{myrejectedDraftReportByEm?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`approved-Fb-TW`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Approved FB</Text>
                          <Text>{myapprovedfb?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`pending-reports-TW`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
-                         <Text textAlign='center'>My Pemding Reports</Text>
+                         <Text textAlign='center'>My Pending Reports</Text>
                          <Text>{mypendingReport?.length || 0}</Text>
                     </Flex>
                </Link>

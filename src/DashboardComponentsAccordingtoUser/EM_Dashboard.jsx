@@ -61,19 +61,19 @@ const EM_Dashboard = () => {
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/pending-reports-em`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>Pending Reports</Text>
                          <Text>{mypendingFB?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/my-rejected-fb-projects-em`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Rejected FB Projects</Text>
                          <Text>{myrejectedFBProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/my-reports-to-review-em`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Reports To Review</Text>
                          <Text>{myreportsToBeReviewed?.length || 0}</Text>

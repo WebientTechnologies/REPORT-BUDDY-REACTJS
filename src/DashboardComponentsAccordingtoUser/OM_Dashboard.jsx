@@ -22,13 +22,12 @@ const OM_Dashboard = () => {
           name: null,
           email: 'Project_Assigned_Form.Operations_Manager_Email',
      };
+
      const string = encodeURIComponent(safeStringify(objectParam));
-     console.log({ string });
 
      const myProjects = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.Operations_Manager_Email`] === user?.email);
      const myapprovedfb = dashboardProjects?.filter((el) => el[`Project_Assigned_Form.Operations_Manager_Email`] === user?.email && el['PS_2.IDP_Approved_by_EM'].length > 5);
-     console.log({ myProjects, myapprovedfb });
-     
+
      useEffect(() => {
           dispatch(getAllProjectsFunc(navigate));
      }, [dispatch]);
@@ -42,7 +41,7 @@ const OM_Dashboard = () => {
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/approved-projects/OM`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Approved FB</Text>
                          <Text>{myapprovedfb?.length || 0}</Text>

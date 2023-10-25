@@ -1,4 +1,3 @@
-// .jsx
 import { Flex, Heading, Grid, Button, useColorModeValue, Box, Stat, StatLabel, StatNumber, StatHelpText, GridItem, VStack, Tabs, TabList, Tab, TabPanels, TabPanel, TabIndicator, Text, } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -68,19 +67,19 @@ const FE_Dashboard = () => {
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/pending-site-visit-FE`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>Pending Site Visit</Text>
                          <Text>{mypendingSiteVisit?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/pending-site-fb`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Pending FB</Text>
                          <Text>{mypendingFB?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/reports-to-be-reviewed`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Reports To Be Reviewed</Text>
                          <Text>{myreportsToBeReviewed?.length || 0}</Text>

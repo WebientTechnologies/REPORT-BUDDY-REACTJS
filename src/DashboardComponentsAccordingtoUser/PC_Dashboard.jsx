@@ -43,7 +43,7 @@ const PC_Dashboard = () => {
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`/approved-projects/PC`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Approved FB</Text>
                          <Text>{myapprovedfb?.length || 0}</Text>
