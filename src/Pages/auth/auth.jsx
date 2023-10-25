@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import PasswordField from './PasswordFelids';
 import { login } from '../../redux/actions/userAction';
 import { useEffect } from 'react';
+import { homeRoute } from '../../App';
 
 
 const Login = () => {
@@ -39,10 +40,10 @@ const Login = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate(`/login`);
+      navigate(`${homeRoute}/login`);
     }
     else {
-      navigate(`/`);
+      navigate(`${homeRoute}/`);
     }
   }, [token]);
 

@@ -3,23 +3,14 @@ import {
   Flex,
   HStack,
   IconButton,
-  Img,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Text } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
-import { MdGirl } from "react-icons/md";
-import { TbBrandBooking, TbServicemark } from "react-icons/tb";
-import { RiAdvertisementFill } from "react-icons/ri";
 import { CiUser } from "react-icons/ci";
-import { FiUser } from "react-icons/fi";
-import { Link as RouterLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/userAction";
 
@@ -75,6 +66,6 @@ function AdminLayout({ children }) {
       </Flex>
     </Box>
   );
-}
+};
 
 export default AdminLayout;

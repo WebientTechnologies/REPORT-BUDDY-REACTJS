@@ -214,6 +214,7 @@ The EF Scale is used to assign a 'rating' fortornadoes based on estimated wind s
       </Box>
     </Box>
   );
-}
+};
+
 
 export default Wrht;

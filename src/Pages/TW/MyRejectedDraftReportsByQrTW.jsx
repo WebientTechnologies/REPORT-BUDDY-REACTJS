@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { getAllProjectsFunc } from '../../redux/actions/dashBoardAction';
 import CustomTable from '../../component/CustomTable';
 import { safeStringify } from '../../StringifyAndParsedObj/StringifyAndParsedObj';
+import { homeRoute } from '../../App';
 
 
 function MyRejectedDraftReportsByQrTW() {
@@ -32,7 +33,7 @@ function MyRejectedDraftReportsByQrTW() {
      const handleClick = (name, num) => {
           localStorage.setItem('projectName', name);
           localStorage.setItem('claimNo', num);
-     }
+     };
 
 
      const allProjectsTableColumns = useMemo(
@@ -44,7 +45,7 @@ function MyRejectedDraftReportsByQrTW() {
                          Cell: ({ row }) => {
                               const { ID, Project_Name, Claim_Number } = row.original;
                               const objectParam = encodeURIComponent(safeStringify(row?.original));
-                              return <Link to={`/project/${objectParam}`}>
+                              return <Link to={`${homeRoute}/project/${objectParam}`}>
                                    <Box onClick={() => handleClick(Project_Name, Claim_Number)} color='teal.700'>{ID ? ID : '---'}</Box>
                               </Link>
                          }

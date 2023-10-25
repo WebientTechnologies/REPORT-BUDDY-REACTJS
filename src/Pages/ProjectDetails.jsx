@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Box, Heading, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Button, Box, Heading, Table, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { Link, useParams } from 'react-router-dom';
 import { safeParse } from '../StringifyAndParsedObj/StringifyAndParsedObj';
+import { homeRoute } from '../App';
 
 function ProjectDetails() {
 
@@ -13,7 +14,7 @@ function ProjectDetails() {
   return (
     <Box pb={10}>
       <Box textAlign='center'>
-        <Link to="/fill-form">
+        <Link to={`${homeRoute}/fill-form`}>
           <Button bg={'black'} color='white' size="lg" m={4}>
             Field buddy
           </Button>

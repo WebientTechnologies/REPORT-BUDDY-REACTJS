@@ -14,6 +14,7 @@ import "react-quill/dist/quill.snow.css"; // Import styles
 import { quillModules } from "./data";
 import { DeleteIcon } from "@chakra-ui/icons";
 
+
 function DocumentReviewComponent() {
   // State to store document review data
   const [documents, setDocuments] = useState([
@@ -40,9 +41,9 @@ function DocumentReviewComponent() {
       documentReviewNotes: "",
       noteworthyItems: "",
     };
-
     setDocuments([...documents, newDocumentReview]);
   };
+
 
   return (
     <Box>

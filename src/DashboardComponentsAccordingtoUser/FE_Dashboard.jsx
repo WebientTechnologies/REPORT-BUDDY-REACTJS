@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { getAllProjectsFunc } from '../redux/actions/dashBoardAction';
 import { safeStringify } from '../StringifyAndParsedObj/StringifyAndParsedObj';
+import { homeRoute } from '../App';
 
 
 const FE_Dashboard = () => {
@@ -59,25 +60,25 @@ const FE_Dashboard = () => {
 
      return (
           <Box bg={'white'} p={3} mt={5} w='full' display='grid' gridTemplateColumns={{ base: 'repeat(1,1fr)', md: 'repeat(2,1fr)', lg: 'repeat(3,1fr)', xl: 'repeat(4,1fr)' }}>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`${homeRoute}/live-projects/${string}`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text>My Projects</Text>
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/pending-site-visit-FE`} m={2}>
+               <Link to={`${homeRoute}/pending-site-visit-FE`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>Pending Site Visit</Text>
                          <Text>{mypendingSiteVisit?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/pending-site-fb`} m={2}>
+               <Link to={`${homeRoute}/pending-site-fb`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Pending FB</Text>
                          <Text>{mypendingFB?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/reports-to-be-reviewed`} m={2}>
+               <Link to={`${homeRoute}/reports-to-be-reviewed`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Reports To Be Reviewed</Text>
                          <Text>{myreportsToBeReviewed?.length || 0}</Text>

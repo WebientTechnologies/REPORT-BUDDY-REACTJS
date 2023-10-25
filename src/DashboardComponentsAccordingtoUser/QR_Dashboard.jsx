@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { getAllProjectsFunc } from '../redux/actions/dashBoardAction';
 import { safeStringify } from '../StringifyAndParsedObj/StringifyAndParsedObj';
+import { homeRoute } from '../App';
 
 
 const QR_Dashboard = () => {
@@ -34,19 +35,19 @@ const QR_Dashboard = () => {
 
      return (
           <Box bg={'white'} p={3} mt={5} w='full' display='grid' gridTemplateColumns={{ base: 'repeat(1,1fr)', md: 'repeat(2,1fr)', lg: 'repeat(3,1fr)', xl: 'repeat(4,1fr)' }}>
-               <Link to={`/live-projects/${string}`} m={2}>
+               <Link to={`${homeRoute}/live-projects/${string}`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text>My Projects</Text>
                          <Text>{myProjects?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/pending-reports-qr`} m={2}>
+               <Link to={`${homeRoute}/pending-reports-qr`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>Pending Reports</Text>
                          <Text>{mypendingQRReport?.length || 0}</Text>
                     </Flex>
                </Link>
-               <Link to={`/approved-projects/QR`} m={2}>
+               <Link to={`${homeRoute}/approved-projects/QR`} m={2}>
                     <Flex justifyContent={'center'} flexDir={'column'} fontSize={'2xl'} alignItems={'center'} p={4} fontWeight={500} h="200px" bg="blue.800" color={'white'} m="8" rounded={'lg'}>
                          <Text textAlign='center'>My Approved FB</Text>
                          <Text>{myapprovedfb?.length || 0}</Text>

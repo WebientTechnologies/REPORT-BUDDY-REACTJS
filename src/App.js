@@ -1,13 +1,9 @@
-// App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Header from './components/Header'
 import './App.css'
-// import LoadingOverlay from 'react-loading-overlay'
 import { useSelector } from 'react-redux'
 import toast, { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-// import { PrivateRoute } from 'protected-route-react'
 import { getMyProfile } from './redux/actions/userAction'
 import Login from './Pages/auth/auth'
 import AdminLayout from './Layout/components'
@@ -34,6 +30,7 @@ import ApprovedFbTW from './Pages/TW/ApprovedFbTW';
 import PrivateRoute from './PriveteRoute';
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
+export const homeRoute = '/pemo';
 
 function App() {
 
@@ -64,28 +61,28 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/' element={<PrivateRoute ><AdminLayout><DashBoard /></AdminLayout></PrivateRoute>} />
-        <Route path='/fill-form' element={<PrivateRoute ><FieldForm /></PrivateRoute>} />
-        <Route path='/live-projects/:string' element={<PrivateRoute ><AdminLayout><LiveProjects /></AdminLayout></PrivateRoute>} />
-        <Route path='/approved-projects/OM' element={<PrivateRoute ><AdminLayout><ApprovedProjectsOM /></AdminLayout></PrivateRoute>} />
-        <Route path='/approved-projects/PC' element={<PrivateRoute ><AdminLayout><ApprovedProjectsPC /></AdminLayout></PrivateRoute>} />
-        <Route path='/pending-site-visit-FE' element={<PrivateRoute ><AdminLayout><PendingSiteVisit /></AdminLayout></PrivateRoute>} />
-        <Route path='/pending-site-fb' element={<PrivateRoute ><AdminLayout><MyPendingFb /></AdminLayout></PrivateRoute>} />
-        <Route path='/reports-to-be-reviewed' element={<PrivateRoute ><AdminLayout><MyReportsToBeReviewed /></AdminLayout></PrivateRoute>} />
-        <Route path='/pending-reports-qr' element={<PrivateRoute ><AdminLayout><PendingReports /></AdminLayout></PrivateRoute>} />
-        <Route path='/approved-projects/QR' element={<PrivateRoute ><AdminLayout><ApprovedProjectsQR /></AdminLayout></PrivateRoute>} />
-        <Route path='/pending-reports-em' element={<PrivateRoute ><AdminLayout><PendingReportsEM /></AdminLayout></PrivateRoute>} />
-        <Route path='/my-rejected-fb-projects-em' element={<PrivateRoute ><AdminLayout><MyRejectedFbProjects /></AdminLayout></PrivateRoute>} />
-        <Route path='/my-reports-to-review-em' element={<PrivateRoute ><AdminLayout><MyReportsToReviewEM /></AdminLayout></PrivateRoute>} />
-        <Route path='/my-rejected-draft-reports-by-qr-tw' element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByQrTW /></AdminLayout></PrivateRoute>} />
-        <Route path='/my-rejected-draft-reports-by-fe-tw' element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByFeTW /></AdminLayout></PrivateRoute>} />
-        <Route path='/my-rejected-draft-reports-by-em-tw' element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByEmTW /></AdminLayout></PrivateRoute>} />
-        <Route path='/pending-reports-TW' element={<PrivateRoute ><AdminLayout><PendingReportsTW /></AdminLayout></PrivateRoute>} />
-        <Route path='/approved-Fb-TW' element={<PrivateRoute ><AdminLayout><ApprovedFbTW /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/login`} element={<Login />} />
+        <Route path={`${homeRoute}`} element={<PrivateRoute ><AdminLayout><DashBoard /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/fill-form`} element={<PrivateRoute ><FieldForm /></PrivateRoute>} />
+        <Route path={`${homeRoute}/live-projects/:string`} element={<PrivateRoute ><AdminLayout><LiveProjects /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/approved-projects/OM`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsOM /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/approved-projects/PC`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsPC /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/pending-site-visit-FE`} element={<PrivateRoute ><AdminLayout><PendingSiteVisit /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/pending-site-fb`} element={<PrivateRoute ><AdminLayout><MyPendingFb /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/reports-to-be-reviewed`} element={<PrivateRoute ><AdminLayout><MyReportsToBeReviewed /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/pending-reports-qr`} element={<PrivateRoute ><AdminLayout><PendingReports /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/approved-projects/QR`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsQR /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/pending-reports-em`} element={<PrivateRoute ><AdminLayout><PendingReportsEM /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/my-rejected-fb-projects-em`} element={<PrivateRoute ><AdminLayout><MyRejectedFbProjects /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/my-reports-to-review-em`} element={<PrivateRoute ><AdminLayout><MyReportsToReviewEM /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/my-rejected-draft-reports-by-qr-tw`} element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByQrTW /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/my-rejected-draft-reports-by-fe-tw`} element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByFeTW /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/my-rejected-draft-reports-by-em-tw`} element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByEmTW /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/pending-reports-TW`} element={<PrivateRoute ><AdminLayout><PendingReportsTW /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/approved-Fb-TW`} element={<PrivateRoute ><AdminLayout><ApprovedFbTW /></AdminLayout></PrivateRoute>} />
 
-        <Route path='/project/:objectParam' element={<PrivateRoute ><AdminLayout><ProjectDetails /></AdminLayout></PrivateRoute>} />
-        <Route path='/take-photographs' element={<PrivateRoute ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/project/:objectParam`} element={<PrivateRoute ><AdminLayout><ProjectDetails /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/take-photographs`} element={<PrivateRoute ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></PrivateRoute>} />
       </Routes>
       <Toaster />
     </Router>

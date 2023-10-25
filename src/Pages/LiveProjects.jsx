@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { getAllProjectsFunc } from '../redux/actions/dashBoardAction';
 import { useParams } from "react-router-dom";
 import { safeParse, safeStringify } from '../StringifyAndParsedObj/StringifyAndParsedObj';
+import { homeRoute } from '../App';
 
 
 function LiveProjects() {
@@ -20,13 +21,12 @@ function LiveProjects() {
   const parsedData = safeParse(string);
   console.log({ parsedData });
 
-
   const [myProjects, setMyProject] = useState(dashboardProjects || []);
-
 
   useEffect(() => {
     dispatch(getAllProjectsFunc(navigate));
   }, [dispatch]);
+
 
   useEffect(() => {
     if (parsedData?.email && parsedData?.name) {
@@ -42,10 +42,9 @@ function LiveProjects() {
 
 
   const handleClick = (name, num) => {
-    console.log({ name, num });
     localStorage.setItem('projectName', name);
     localStorage.setItem('claimNo', num);
-  }
+  };
 
 
   const allProjectsTableColumns = useMemo(
@@ -57,7 +56,7 @@ function LiveProjects() {
           Cell: ({ row }) => {
             const { ID, Project_Name, Claim_Number } = row.original;
             const objectParam = encodeURIComponent(safeStringify(row?.original));
-            return <Link to={`/project/${objectParam}`}>
+            return <Link to={`${homeRoute}/project/${objectParam}`}>
               <Box onClick={() => handleClick(Project_Name, Claim_Number)} color='teal.700'>{ID ? ID : '---'}</Box>
             </Link>
           }

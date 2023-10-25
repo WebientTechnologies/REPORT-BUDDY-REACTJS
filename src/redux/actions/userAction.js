@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from '../store.js';
+import { homeRoute } from '../../App.js';
 
 export const login = (email, password, navigate) => async (dispatch) => {
     try {
@@ -41,7 +42,7 @@ export const logout = (navigate) => async (dispatch) => {
     try {
         console.log("logout");
         dispatch({ type: 'logoutSuccess' })
-        navigate('/login');
+        navigate(`${homeRoute}/login`);
     }
     catch (e) { dispatch({ type: 'logoutFail' }); }
 }

@@ -38,6 +38,7 @@ import { LuBarChart2 } from "react-icons/lu";
 import { SiFlood } from "react-icons/si";
 import webientInfo from "../Images/Get PRO.png";
 import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { homeRoute } from "../App";
 
 const tabData = [
   { icon: <BiSolidHome />, label: "Scope Of Work (SOW)", component: <ScopeOfWorkComponent /> },
@@ -73,7 +74,7 @@ export function FieldForm() {
     e.preventDefault();
     // Handle form submission here (e.g., send data to the server).
     // After handling the submission, switch to the next tab.
-    if (tabIndex === tabData.length - 1) return navigate('/');
+    if (tabIndex === tabData.length - 1) return navigate(`${homeRoute}`);
     switchToNextTab();
   };
 
@@ -155,10 +156,9 @@ export function FieldForm() {
                   {
                     localStorage.getItem('claimNo') || ''
                   }
-                  {/* Pages / Field Buddy */}
                 </Box>
                 <Box>
-                  <Link to='/take-photographs'>
+                  <Link to={`${homeRoute}/take-photographs`}>
                     <Button>Take Photographs</Button>
                   </Link>
                 </Box>
