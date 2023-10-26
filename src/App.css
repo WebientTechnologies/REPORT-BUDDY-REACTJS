@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.SidebarContainer::-webkit-scrollbar {
+  width: 0.1em;
+  background-color: transparent;
+}
+
+.SidebarContainer::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.SidebarContainer::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+
+
+.ql-container.ql-snow {
+  border: none !important;
+}
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+}
