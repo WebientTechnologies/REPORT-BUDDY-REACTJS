@@ -63,7 +63,7 @@ function App() {
       <Routes>
         <Route path={`${homeRoute}/login`} element={<Login />} />
         <Route path={`${homeRoute}`} element={<PrivateRoute ><AdminLayout><DashBoard /></AdminLayout></PrivateRoute>} />
-        <Route path={`${homeRoute}/fill-form`} element={<PrivateRoute ><FieldForm /></PrivateRoute>} />
+        <Route path={`${homeRoute}/fill-form`} element={<FieldForm />} />
         <Route path={`${homeRoute}/live-projects/:string`} element={<PrivateRoute ><AdminLayout><LiveProjects /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/approved-projects/OM`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsOM /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/approved-projects/PC`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsPC /></AdminLayout></PrivateRoute>} />

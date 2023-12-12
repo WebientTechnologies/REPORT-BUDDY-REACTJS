@@ -18,6 +18,9 @@ import {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ReactSelect from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import { pushBackNewDataIntoInterview, updateIntervieweeData, updateIntervieweeDataForImage } from "../redux/actions/formDataAction";
+import { FormLabel } from "@chakra-ui/react";
 
 const contactMethodOptions = [
   { value: "present", label: "Present at Site" },
@@ -56,32 +59,16 @@ const interviewSignificanceOptions = [
   { value: "access_and_info", label: "Interviewee Provided Access and Info" },
 ];
 
-function Interviewee() {
-  const [interviews, setInterviews] = useState([
-    {
-      id: "Interviewee 1",
-      contactMethod: "",
-      message: "",
-      title: "",
-      firstName: "",
-      lastName: "",
-      roofingContract: "",
-      companyName: "",
-      interviewSignificance: "",
-      frontBusinessCard: null,
-      backBusinessCard: null,
-      documentImage: null,
-    },
-  ]);
+function Interviewee({ form, setForm }) {
 
-  const handleAddInterview = () => {
-    const nextInterviewId = `Interviewee ${interviews.length + 1}`;
-    setInterviews([
-      ...interviews,
-      {
+    const interviewees = form.interviewee;
+  
+    const handleAddInterview = () => {
+      const nextInterviewId = `Interviewee ${interviewees.length + 1}`;
+      const newInterviewData = {
         id: nextInterviewId,
         contactMethod: "",
-        message: "",
+        buildingType: "",
         title: "",
         firstName: "",
         lastName: "",
@@ -91,104 +78,150 @@ function Interviewee() {
         frontBusinessCard: null,
         backBusinessCard: null,
         documentImage: null,
-      },
-    ]);
-  };
+      };
+  
+      // Use setForm to update the form in the parent component
+      setForm((prevForm) => {
+        const newForm = { ...prevForm };
+        newForm.interviewee.push(newInterviewData);
+        return newForm;
+      });
+    };
+  
+    const handleContactMethodChange = (selectedOption, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, contactMethod: selectedOption.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleTitleChange = (selectedOption, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, title: selectedOption.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleFirstNameChange = (value, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, firstName: value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleLastNameChange = (event, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, lastName: event.target.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleRoofingContractChange = (selectedOption, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, roofingContract: selectedOption.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleCompanyNameChange = (event, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, companyName: event.target.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleInterviewSignificanceChange = (selectedOption, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, interviewSignificance: selectedOption.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleFrontBusinessCardUpload = (event, interviewId) => {
+      const file = event.target.files[0];
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, frontBusinessCard: file }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleBackBusinessCardUpload = (event, interviewId) => {
+      const file = event.target.files[0];
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, backBusinessCard: file }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+    const handleDocumentImageUpload = (event, interviewId) => {
+      const file = event.target.files[0];
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, documentImage: file }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
 
-  const handleContactMethodChange = (selectedOption, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].contactMethod = selectedOption.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleTitleChange = (selectedOption, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].title = selectedOption.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleFirstNameChange = (event, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].firstName = event.target.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleLastNameChange = (event, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].lastName = event.target.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleRoofingContractChange = (selectedOption, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].roofingContract = selectedOption.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleCompanyNameChange = (event, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].companyName = event.target.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleInterviewSignificanceChange = (selectedOption, interviewId) => {
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].interviewSignificance =
-      selectedOption.value;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleFrontBusinessCardUpload = (event, interviewId) => {
-    const file = event.target.files[0];
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].frontBusinessCard = file;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleBackBusinessCardUpload = (event, interviewId) => {
-    const file = event.target.files[0];
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].backBusinessCard = file;
-    setInterviews(updatedInterviews);
-  };
-
-  const handleDocumentImageUpload = (event, interviewId) => {
-    const file = event.target.files[0];
-    const updatedInterviews = [...interviews];
-    const interviewIndex = updatedInterviews.findIndex(
-      (interview) => interview.id === interviewId
-    );
-    updatedInterviews[interviewIndex].documentImage = file;
-    setInterviews(updatedInterviews);
-  };
-
+    
   return (
     <Box>
       <Heading as="h2" fontWeight={500} textAlign='center' size="xl" mb={4}>
@@ -196,7 +229,7 @@ function Interviewee() {
       </Heading>
 
       <Accordion allowToggle>
-        {interviews.map((interview) => (
+        {interviewees.map((interview) => (
           <AccordionItem key={interview.id}>
             <h2>
             <AccordionButton bgColor={'blackAlpha.50'} _expanded={{ bg: 'blackAlpha.600', color: 'white' }}>
@@ -208,12 +241,27 @@ function Interviewee() {
             </h2>
             <AccordionPanel>
               <SimpleGrid columns={[1, 2]} columnGap={4} rowGap={2} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
-                {/* Contact Method */}
-                <FormControl>
-                  <label>Contact Method</label>
+
+              <FormControl isRequired>
+                  <FormLabel>Building Type</FormLabel>
                   <ReactSelect
                     placeholder="Select Contact Method"
                     options={contactMethodOptions}
+                  required
+                    value={contactMethodOptions.find(
+                      (option) => option.value === interview.buildingType
+                    )}
+                  />
+                </FormControl>
+
+                {/* Contact Method */}
+                <FormControl isRequired>
+                  <FormLabel>Contact Method</FormLabel>
+                  <ReactSelect
+                    placeholder="Select Contact Method"
+                    options={contactMethodOptions}
+                    required
+                    isRequired
                     onChange={(selectedOption) =>
                       handleContactMethodChange(selectedOption, interview.id)
                     }
@@ -224,11 +272,13 @@ function Interviewee() {
                 </FormControl>
 
                 {/* Personal Information */}
-                <FormControl>
+                <FormControl isRequired mt={4}>
                   <label>Title</label>
                   <ReactSelect
                     placeholder="Select Mr. / Ms."
                     options={titleOptions}
+                    required
+                    isRequired
                     onChange={(selectedOption) =>
                       handleTitleChange(selectedOption, interview.id)
                     }
@@ -238,22 +288,26 @@ function Interviewee() {
                   />
                 </FormControl>
 
-                <FormControl mt={4}>
-                  <label>First Name</label>
+                <FormControl isRequired mt={4}>
+                  <FormLabel>First Name</FormLabel>
                   <Input
                     type="text"
                     placeholder="Enter First Name"
                     value={interview.firstName}
+                    required
+                    isRequired
                     onChange={(event) =>
-                      handleFirstNameChange(event, interview.id)
+                      handleFirstNameChange(event.target.value, interview.id)
                     }
                   />
                 </FormControl>
 
-                <FormControl mt={4}>
-                  <label>Last Name</label>
+                <FormControl isRequired mt={4}>
+                  <FormLabel>Last Name</FormLabel>
                   <Input
                     type="text"
+                    required
+                    isRequired
                     placeholder="Enter Last Name"
                     value={interview.lastName}
                     onChange={(event) =>
@@ -263,28 +317,33 @@ function Interviewee() {
                 </FormControl>
 
                 {/* Roofing Contract */}
-                <FormControl mt={4}>
-                  <label>Roofing Contract</label>
-                  <Select
+                <FormControl isRequired mt={4}>
+                  <FormLabel>Roofing Contract</FormLabel>
+                  <ReactSelect
                     options={roofingOptions.map((option) => ({
                       value: option,
                       label: option,
                     }))}
+                    required
+                    isRequired
                     onChange={(selectedOption) =>
                       handleRoofingContractChange(selectedOption, interview.id)
                     }
                     placeholder="Select Roofing Contract"
-                    value={roofingOptions.find(
-                      (option) => option === interview.roofingContract
-                    )}
+                    value={{
+                       label: roofingOptions.find((option) => {return (option == interview.roofingContract ? {value: option, label: option}: false)}),
+                       value : roofingOptions.find((option) => {return (option == interview.roofingContract ? {value: option, label: option}: false)})}
+                      }
                   />
                 </FormControl>
 
-                <FormControl mt={4}>
-                  <label>Company Name</label>
+                <FormControl isRequired mt={4}>
+                  <FormLabel>Company Name</FormLabel>
                   <Input
                     placeholder="Enter Company Name"
                     type="text"
+                    required
+                    isRequired
                     value={interview.companyName}
                     onChange={(event) =>
                       handleCompanyNameChange(event, interview.id)
@@ -293,8 +352,8 @@ function Interviewee() {
                 </FormControl>
 
                 {/* Interview Significance */}
-                <FormControl mt={4}>
-                  <label>Interviewee Significance</label>
+                <FormControl mt={4} isRequired>
+                  <FormLabel>Interviewee Significance</FormLabel>
                   <ReactSelect
                     placeholder="Select Interviewee Significance"
                     options={interviewSignificanceOptions}
@@ -304,6 +363,8 @@ function Interviewee() {
                         interview.id
                       )
                     }
+                    required
+                    isRequired
                     value={interviewSignificanceOptions.find(
                       (option) =>
                         option.value === interview.interviewSignificance
@@ -312,36 +373,43 @@ function Interviewee() {
                 </FormControl>
 
                 {/* Document Uploads */}
-                <FormControl mt={4}>
-                  <label>Business Card Front</label>
+                <FormControl mt={4} isRequired>
+                  <FormLabel>Business Card Front</FormLabel>
                   <Input
                     placeholder="Upload Business Card Front"
                     type="file"
                     accept="image/*"
+                    required
+                    isRequired
+                    
                     onChange={(event) =>
                       handleFrontBusinessCardUpload(event, interview.id)
                     }
                   />
                 </FormControl>
 
-                <FormControl mt={4}>
-                  <label>Business Card Back</label>
+                <FormControl mt={4} isRequired>
+                  <FormLabel>Business Card Back</FormLabel>
                   <Input
                     placeholder="Upload Business Card Back"
                     type="file"
                     accept="image/*"
+                    required
+                    isRequired
                     onChange={(event) =>
                       handleBackBusinessCardUpload(event, interview.id)
                     }
                   />
                 </FormControl>
 
-                <FormControl mt={4}>
-                  <label>Other Document</label>
+                <FormControl mt={4} isRequired>
+                  <FormLabel>Other Document</FormLabel>
                   <Input
                     placeholder="Upload Other Document"
                     type="file"
                     accept="image/*"
+                    required
+                    isRequired
                     onChange={(event) =>
                       handleDocumentImageUpload(event, interview.id)
                     }
@@ -364,6 +432,7 @@ function Interviewee() {
           rounded="md"
           ml={"auto"}
           my={4}
+        
         >
           Add Interview
         </Button>

@@ -15,33 +15,25 @@ import { quillModules } from "./data";
 import { DeleteIcon } from "@chakra-ui/icons";
 
 
-function DocumentReviewComponent() {
-  // State to store document review data
-  const [documents, setDocuments] = useState([
-    {
-      document: null,
-      constructionEstimate: "",
-      documentReviewNotes: "",
-      noteworthyItems: "",
-    },
-  ]);
-
-  // Function to handle document upload
+function DocumentReviewComponent({form , setForm}) {
+  // State to store documents review data
+const documents= form.documents;
+  // Function to handle documents upload
   const handleDocumentUpload = (file, index) => {
     const updatedDocuments = [...documents];
-    updatedDocuments[index].document = file;
-    setDocuments(updatedDocuments);
+    updatedDocuments[index].documents = file;
+    setForm(prev=>({...prev , documents: updatedDocuments}));
   };
 
-  // Function to add a new document review
+  // Function to add a new documents review
   const addDocumentReview = () => {
     const newDocumentReview = {
-      document: null,
+      documents: null,
       constructionEstimate: "",
       documentReviewNotes: "",
       noteworthyItems: "",
     };
-    setDocuments([...documents, newDocumentReview]);
+    setForm(prev=>({...prev , documents: [...prev.documents, newDocumentReview]}));
   };
 
 
@@ -88,7 +80,7 @@ function DocumentReviewComponent() {
               onChange={(value) => {
                 const updatedDocuments = [...documents];
                 updatedDocuments[index].constructionEstimate = value;
-                setDocuments(updatedDocuments);
+                setForm(prev=>({...prev , documents: updatedDocuments}));
               }}
               placeholder="Construction Estimate and Photo Sheet – prepared by Company XX and dated Month Date, Year"
             />
@@ -107,15 +99,15 @@ function DocumentReviewComponent() {
               onChange={(value) => {
                 const updatedDocuments = [...documents];
                 updatedDocuments[index].documentReviewNotes = value;
-                setDocuments(updatedDocuments);
+                setForm(prev=>({...prev , documents: updatedDocuments}));
               }}
-              placeholder="This document contained a one-pageConstruction Estimate and 10-pagePhoto Sheet prepared by a field adjuster from Company XX, Mr./Ms. FirstName LastName, The Construction Estimate was dated Month Date, Year. The Photo Sheet contained 20 colorphotographs showing the conditions of he exterior, interior, and roof of the subject structure, which were generally similar to those observed during our site investigation"
+              placeholder="This documents contained a one-pageConstruction Estimate and 10-pagePhoto Sheet prepared by a field adjuster from Company XX, Mr./Ms. FirstName LastName, The Construction Estimate was dated Month Date, Year. The Photo Sheet contained 20 colorphotographs showing the conditions of he exterior, interior, and roof of the subject structure, which were generally similar to those observed during our site investigation"
             />
           </FormControl>
 
           {/* sub sub heading for noteworthy items */}
           <Heading as="h4" fontWeight={500} textAlign='center' size="sm" mb={2}>
-            The following items in this document were particularly noteworthy
+            The following items in this documents were particularly noteworthy
           </Heading>
 
           {/* React Quill for noteworthy items */}
@@ -127,9 +119,9 @@ function DocumentReviewComponent() {
               onChange={(value) => {
                 const updatedDocuments = [...documents];
                 updatedDocuments[index].noteworthyItems = value;
-                setDocuments(updatedDocuments);
+                setForm(prev=>({...prev , documents: updatedDocuments}));
               }}
-              placeholder="State in a bullet point format the particularly noteworthy items from the document."
+              placeholder="State in a bullet point format the particularly noteworthy items from the documents."
             />
           </FormControl>
         </Fragment>

@@ -7,7 +7,7 @@ export const login = (email, password, navigate) => async (dispatch) => {
         dispatch({ type: "loginRequest" });
         const res = await axios.post(`${API_BASE_URL}/login-user`, { email, password }, { withCredentials: true });
         console.log(res);
-        navigate('/');
+        navigate(`${homeRoute}`);
         dispatch({ type: 'loginSuccess', payload: res?.data || {} });
     }
     catch (error) {

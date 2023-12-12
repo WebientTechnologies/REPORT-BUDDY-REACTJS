@@ -29,21 +29,44 @@ import {
 import ReactSelect from "react-select";
 import { AddIcon } from "@chakra-ui/icons";
 
-function FloodData() {
-
-
+function FloodData({setForm, form}) {
+const floodData = form.floodData;
+const addFormData = ()=>{
+  const newFloodData= {
+    usgsRiverGageData: "",
+    usgsHighWaterMarkData: "",
+    noaaBuoyStreamGageData: "",
+    fetchDistanceData: "",
+  };
+  setForm((prevForm) => ({
+    ...prevForm,
+    floodData: [...prevForm.floodData, newFloodData],
+  }));
+}
   return (
     <Box p="4">
       <Heading as="h2" textAlign='center' fontWeight={500} size="xl">
         Flood Data
       </Heading>
-
-      <Box w="100%" my="8">
+{
+  floodData.map((flood, index)=><>
+   <Box w="100%" my="8">
         <Heading as="h6" size="sm" my={2} textAlign='center' fontWeight={500}>
           USGS River Gage Data
         </Heading>
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
+          value={flood.usgsRiverGageData}
+          onChange={(value) =>
+            setForm((prevForm) => ({
+              ...prevForm,
+              floodData: prevForm.floodData.map((item, i) =>
+                i === index
+                  ? { ...item, usgsRiverGageData: value }
+                  : item
+              ),
+            }))
+          }
             modules={quillModules}
             placeholder={`According to the USGS – National WaterInformation System’s Water Resources onlinewebsite, the gage height of the closest USGSstream gage, USGS 0XXXXXXX on XXXX River atCity, State, rose from approximately XX.X feet onMonth, Date, Year to approximately XX.X feet onMonth, Date, Year (Figure X)., This gage wasapproximately X miles northeast of the subjectproperty`}
             style={{ height: "150px", fontSize: "12px" }}
@@ -58,6 +81,17 @@ function FloodData() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={flood.usgsHighWaterMarkData}
+          onChange={(value) =>
+            setForm((prevForm) => ({
+              ...prevForm,
+              floodData: prevForm.floodData.map((item, i) =>
+                i === index
+                  ? { ...item, usgsHighWaterMarkData: value }
+                  : item
+              ),
+            }))
+          }
             placeholder={`The USGS deployed storm sensors prior to the storm and surveyed high-water marks throughout the flood-affected areas. According to the USGS – Flood Event Viewer’s online website, a survey point, XXXXXXXXX, which was approximately X.XX miles northwest of the subject property, documented a high-water mark of X.XX feet above the local ground (Figure X). This high-water mark elevation was XX.X feet NAVD88.
             `}
             style={{ height: "150px", fontSize: "12px" }}
@@ -72,6 +106,17 @@ function FloodData() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={flood.noaaBuoyStreamGageData}
+          onChange={(value) =>
+            setForm((prevForm) => ({
+              ...prevForm,
+              floodData: prevForm.floodData.map((item, i) =>
+                i === index
+                  ? { ...item, noaaBuoyStreamGageData: value }
+                  : item
+              ),
+            }))
+          }
             placeholder={`According to the NOAA buoy stream gage data, a coastal gage at City, State, which was about XX miles north of the subject property, reached a maximum height of approximately XX.X feet NAVD88 during the storm (Figure X).`}
             style={{ height: "150px", fontSize: "12px" }}
           />
@@ -84,6 +129,17 @@ function FloodData() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={flood.fetchDistanceData}
+          onChange={(value) =>
+            setForm((prevForm) => ({
+              ...prevForm,
+              floodData: prevForm.floodData.map((item, i) =>
+                i === index
+                  ? { ...item, fetchDistanceData: value }
+                  : item
+              ),
+            }))
+          }
             placeholder={
               `Fetch is the distance from the dock to land in any direction over open water. The fetch distance to the northwest, southwest, and southeast was approximately XXX feet, XXX feet, and XXX feet, respectively, from the subject property (Figure X)`
             }
@@ -92,6 +148,9 @@ function FloodData() {
         </FormControl>
       </Box>
 
+  </>)
+}
+     
       <HStack justifyContent={'end'}>
         <Button
           bg="black"
@@ -99,6 +158,7 @@ function FloodData() {
           color="white"
           rounded="md"
           ml="auto"
+          onClick={addFormData}
           pr="4"
           mb={2}
         >+ Add Flood Data

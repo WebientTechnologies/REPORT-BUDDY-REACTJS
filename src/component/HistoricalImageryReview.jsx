@@ -30,8 +30,17 @@ import {
 import ReactSelect from "react-select";
 import { AddIcon } from "@chakra-ui/icons";
 
-function HistoricalImageryReview() {
-
+function HistoricalImageryReview({form, setForm}) {
+const historicalImageryReview = form.historicalImageryReview;
+const handleQuillChange = (field, value) => {
+  setForm((prevForm) => ({
+    ...prevForm,
+    historicalImageryReview: {
+      ...prevForm.historicalImageryReview,
+      [field]: value,
+    },
+  }));
+};
   return (
     <Box p="4">
       <Heading as="h2" fontWeight={500} textAlign='center' size="xl">
@@ -59,6 +68,9 @@ function HistoricalImageryReview() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={historicalImageryReview.aerial}
+            onChange={(value) => handleQuillChange("aerial", value)}
+
             placeholder={`State in a bullet point format the particularly noteworthy items from the image.`}
             style={{ height: "150px", fontSize: "12px" }}
           />
@@ -86,6 +98,9 @@ function HistoricalImageryReview() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={historicalImageryReview.realtor}
+            onChange={(value) => handleQuillChange("realtor", value)}
+
             placeholder={`State in a bullet point format the particularly noteworthy items from the image. `}
             style={{ height: "150px", fontSize: "12px" }}
           />
@@ -113,6 +128,9 @@ function HistoricalImageryReview() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={historicalImageryReview.zillow}
+            onChange={(value) => handleQuillChange("zillow", value)}
+
             placeholder={`State in a bullet point format the particularly noteworthy items from the image. `}
             style={{ height: "150px", fontSize: "12px" }}
           />
@@ -140,6 +158,9 @@ function HistoricalImageryReview() {
         <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
           <ReactQuill
             modules={quillModules}
+            value={historicalImageryReview.redfin}
+            onChange={(value) => handleQuillChange("redfin", value)}
+
             placeholder={`State in a bullet point format the particularly noteworthy items from the image. `}
             style={{ height: "150px", fontSize: "12px" }}
           />

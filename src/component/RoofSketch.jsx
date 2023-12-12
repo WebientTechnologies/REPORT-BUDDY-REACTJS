@@ -9,52 +9,26 @@ import {
   HStack,
 } from "@chakra-ui/react";
 
-function FieldSketchesComponent() {
+function FieldSketchesComponent({form , setForm}) {
   // State to store field sketches data
-  const [sketches, setSketches] = useState([
-    {
-      interiorDamageSketch: {
-        image: null,
-        notes: "",
-      },
-      roofSketch: {
-        image: null,
-        notes: "",
-      },
-    },
-  ]);
+
+const sketches= form.sketches;
 
   // Function to handle image upload
-  const handleImageUpload = (file, sketchType, index) => {
+  const handleImageUpload = (file, sketchType, ) => {
     // Update the sketch data with the uploaded image
     const updatedSketches = [...sketches];
-    updatedSketches[index][sketchType].image = file;
-    setSketches(updatedSketches);
+    updatedSketches[sketchType].image = file;
+    setForm(prev=>({...prev , sketches: updatedSketches}));
   };
 
-  // Function to add a new set of sketches
-  const addSketches = () => {
-    const newSketches = {
-      interiorDamageSketch: {
-        image: null,
-        notes: "",
-      },
-      roofSketch: {
-        image: null,
-        notes: "",
-      },
-    };
-
-    setSketches([...sketches, newSketches]);
-  };
 
   return (
     <Box>
       <Heading as="h3" fontWeight={500} textAlign='center' size="lg" mb={4}>
         Field Sketches
       </Heading>
-      {sketches.map((sketch, index) => (
-        <Box key={index}>
+        <Box >
           {/* Interior Damage Sketch sub heading */}
           <Heading as="h3" fontWeight={500} textAlign='center' size="md" mb={2}>
             Interior Damage Sketch
@@ -72,8 +46,7 @@ function FieldSketchesComponent() {
               onChange={(e) =>
                 handleImageUpload(
                   e.target.files[0],
-                  "interiorDamageSketch",
-                  index
+                  "interiorDamageSketch"
                 )
               }
             />
@@ -85,12 +58,12 @@ function FieldSketchesComponent() {
             <Input
               type="text"
               placeholder="Add notes..."
-              value={sketch.interiorDamageSketch.notes}
+              value={sketches.interiorDamageSketch}
               onChange={(e) => {
-                const updatedSketches = [...sketches];
-                updatedSketches[index].interiorDamageSketch.notes =
+                const updatedSketches ={...sketches};
+                updatedSketches.interiorDamageSketch =
                   e.target.value;
-                setSketches(updatedSketches);
+                  setForm(prev=>({...prev , sketches: updatedSketches}));
               }}
             />
           </FormControl>
@@ -110,7 +83,7 @@ function FieldSketchesComponent() {
               type="file"
               accept="image/*"
               onChange={(e) =>
-                handleImageUpload(e.target.files[0], "roofSketch", index)
+                handleImageUpload(e.target.files[0], "roofSketch")
               }
             />
           </FormControl>
@@ -121,28 +94,16 @@ function FieldSketchesComponent() {
             <Input
               type="text"
               placeholder="Add notes..."
-              value={sketch.roofSketch.notes}
+              value={sketches.roofSketch}
               onChange={(e) => {
-                const updatedSketches = [...sketches];
-                updatedSketches[index].roofSketch.notes = e.target.value;
-                setSketches(updatedSketches);
+                const updatedSketches = {...sketches};
+                updatedSketches.roofSketch = e.target.value;
+                setForm(prev=>({...prev , sketches: updatedSketches}));
               }}
             />
           </FormControl>
         </Box>
-      ))}
-      <HStack justifyContent={'end'}>
-        <Button
-          bg="black"
-          _hover={{ bg: "gray.700" }}
-          color="white"
-          rounded="md"
-          ml="auto"
-          pr="4"
-          mb={2}
-          onClick={addSketches}>Add Sketch</Button>
 
-      </HStack>
     </Box>
   );
 }

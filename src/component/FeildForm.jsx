@@ -37,21 +37,52 @@ import { HiCircleStack } from "react-icons/hi2";
 import { LuBarChart2 } from "react-icons/lu";
 import { SiFlood } from "react-icons/si";
 import webientInfo from "../Images/Get PRO.png";
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { homeRoute } from "../App";
 
+
+
+
 const tabData = [
-  { icon: <BiSolidHome />, label: "Scope Of Work (SOW)", component: <ScopeOfWorkComponent /> },
-  { icon: <LiaHandsSolid />, label: "Property Background", component: <PropertyForm /> },
-  { icon: <BsChatLeftText />, label: "Interviewee(s)", component: <Interviewee /> },
-  { icon: <BsFillGrid1X2Fill />, label: "Interview Questions", component: <InterviewQnAComponent /> },
-  { icon: <MdLandslide />, label: "Field Sketches", component: <FieldSketchesComponent /> },
-  { icon: <IoMdLock />, label: "Document Reviews", component: <DocumentReviewComponent /> },
-  { icon: <HiCircleStack />, label: "WRHT Data", component: <Wrht /> },
-  { icon: <LuBarChart2 />, label: "Lightning Strike", component: <LightningStrike /> },
-  { icon: <SiFlood />, label: "Flood Data", component: <FloodData /> },
-  { icon: <BiSolidUser />, label: "Historical Image Review", component: <HistoricalImageryReview /> },
-  { icon: <IoMdLock />, label: "Soil Data", component: <SoilData /> },
+  {
+    icon: <BiSolidHome />,
+    label: "Scope Of Work (SOW)",
+    Component: ScopeOfWorkComponent,
+  },
+  {
+    icon: <LiaHandsSolid />,
+    label: "Property Background",
+    Component: PropertyForm,
+  },
+  { icon: <BsChatLeftText />, label: "Interviewee(s)", Component: Interviewee },
+  {
+    icon: <BsFillGrid1X2Fill />,
+    label: "Interview Questions",
+    Component: InterviewQnAComponent,
+  },
+  {
+    icon: <MdLandslide />,
+    label: "Field Sketches",
+    Component: FieldSketchesComponent,
+  },
+  {
+    icon: <IoMdLock />,
+    label: "Document Reviews",
+    Component: DocumentReviewComponent,
+  },
+  { icon: <HiCircleStack />, label: "WRHT Data", Component: Wrht },
+  {
+    icon: <LuBarChart2 />,
+    label: "Lightning Strike",
+    Component: LightningStrike,
+  },
+  { icon: <SiFlood />, label: "Flood Data", Component: FloodData },
+  {
+    icon: <BiSolidUser />,
+    label: "Historical Image Review",
+    Component: HistoricalImageryReview,
+  },
+  { icon: <IoMdLock />, label: "Soil Data", Component: SoilData },
 ];
 
 export function FieldForm() {
@@ -66,7 +97,6 @@ export function FieldForm() {
     setTabIndex((prevIndex) =>
       prevIndex < tabData.length - 1 ? prevIndex + 1 : 0
     );
-
   };
   const navigate = useNavigate();
 
@@ -78,6 +108,111 @@ export function FieldForm() {
     switchToNextTab();
   };
 
+  const [form, setForm] = useState({
+    sowData: {
+      descriptionOfLoss: "",
+      additionalDetails: "",
+      scopeFromReceivedDocuments: "",
+      scopeFromInterview: "",
+      sowStatement: "",
+      selectedStandardScope: null,
+    },
+    propertyData: {
+      structures: [{}], // Initial structure with one element
+      appraisersRecord: {
+        propertyAppraiserRecord: "",
+        permitInformation: "",
+        topographicMap: "",
+      },
+    },
+    interviewee: [
+      {
+        id: "Interviewee 1",
+        contactMethod: "",
+        message: "",
+        title: "",
+        firstName: "",
+        lastName: "",
+        roofingContract: "",
+        companyName: "",
+        interviewSignificance: "",
+        frontBusinessCard: null,
+        backBusinessCard: null,
+        documentImage: null,
+      },
+    ],
+    qna: {
+      questions: [
+        {
+          label: "When was the property purchased?",
+          type: "text",
+          answer: "",
+        },
+        {
+          label: "When was the structure built?",
+          type: "text",
+          answer: "",
+        },
+        {
+          label: "When was the roof last replaced?",
+          type: "file",
+          answer: "",
+        },
+      ],
+      structures: [
+        {
+          name: "",
+          rooms: [
+            {
+              name: "",
+              damages: [
+                {
+                  type: "",
+                  description: "",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    sketches:{
+        interiorDamageSketch: "",
+        roofSketch: ""
+    },
+    documents: [
+      {
+        document: null,
+        constructionEstimate: "",
+        documentReviewNotes: "",
+        noteworthyItems: "",
+      },
+    ],
+    wrht: {
+      windAndRainfallData: "",
+      hailData1: "",
+      hailData2: "",
+      tornadoData: "",
+      additionalWeatherData: "",
+    },
+    lightningStrike: "",
+    floodData: [
+      {
+        usgsRiverGageData: "",
+        usgsHighWaterMarkData: "",
+        noaaBuoyStreamGageData: "",
+        fetchDistanceData: "",
+      },
+    ],
+    historicalImageryReview: {
+      aerial: "",
+      realtor: "",
+      zillow: "",
+      redfin: "",
+    },
+    soilData:""
+  });
+
   return (
     <Box
       as="form"
@@ -87,22 +222,37 @@ export function FieldForm() {
       overflow={"hidden"}
       mx="auto"
     >
-      <Tabs index={tabIndex} onChange={handleTabsChange} display={"flex"} bg={'#2B3674'}>
+      <Tabs
+        index={tabIndex}
+        onChange={handleTabsChange}
+        display={"flex"}
+        bg={"#2B3674"}
+      >
         <TabList
           display={"flex"}
           flexDir={"column"}
           h={"100vh"}
           overflowY={"auto"}
           position={"sticky"}
-          w={['0', "300px"]}
+          w={["0", "300px"]}
           justifyContent={"start"}
           gap={"2"}
           alignItems={"start"}
-          bg={'white'}
-          fontSize={{ base: '90%', xl: '100%' }}
+          bg={"white"}
+          fontSize={{ base: "90%", xl: "100%" }}
           className="SidebarContainer"
         >
-          <Box display='flex' color='#2B3674' fontWeight={700} fontSize={{ base: '150%' }} justifyContent={'center'} alignItems='center' pb={5} pt={8} w={'100%'}>
+          <Box
+            display="flex"
+            color="#2B3674"
+            fontWeight={700}
+            fontSize={{ base: "150%" }}
+            justifyContent={"center"}
+            alignItems="center"
+            pb={5}
+            pt={8}
+            w={"100%"}
+          >
             Field Buddy
           </Box>
           {tabData.map((tab, index) => (
@@ -110,31 +260,39 @@ export function FieldForm() {
               key={index}
               _selected={{
                 bgColor: "gray.50",
-                color: '#2B3674',
-                fontWeight: '500',
-                borderRight: '5px solid #4318FF',
+                color: "#2B3674",
+                fontWeight: "500",
+                borderRight: "5px solid #4318FF",
               }}
               _activeLink={{
                 bgColor: "gray.50",
                 color: "#4318FF",
-                fontWeight: '500',
+                fontWeight: "500",
               }}
               textAlign={"start"}
               w="full"
-              color={'#A3AED0'}
+              color={"#A3AED0"}
               _active={{
                 bgColor: "gray.50",
                 color: "#4318FF",
-                fontWeight: '500',
-              }}>
-
+                fontWeight: "500",
+              }}
+            >
               {tab.icon}
               <Text w="full" textAlign={"start"} px="4" display={"block"}>
                 {tab.label}
               </Text>
             </Tab>
           ))}
-          <Box pb={5} pt={7} w='full' h='full' display='flex' alignItems={'flex-end'} justifyContent='center'>
+          <Box
+            pb={5}
+            pt={7}
+            w="full"
+            h="full"
+            display="flex"
+            alignItems={"flex-end"}
+            justifyContent="center"
+          >
             <SidebarDocs />
           </Box>
         </TabList>
@@ -147,15 +305,15 @@ export function FieldForm() {
         >
           {tabData.map((tab, index) => (
             <TabPanel key={index}>
-              <Box display='flex' justifyContent='space-between' alignItems='center' w='full'>
-                <Box p={3} fontWeight={500} color='#FFFFFF'>
-                  {
-                    localStorage.getItem('projectName') || ''
-                  }
-                  {' '}
-                  {
-                    localStorage.getItem('claimNo') || ''
-                  }
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                w="full"
+              >
+                <Box p={3} fontWeight={500} color="#FFFFFF">
+                  {localStorage.getItem("projectName") || ""}{" "}
+                  {localStorage.getItem("claimNo") || ""}
                 </Box>
                 <Box>
                   <Link to={`${homeRoute}/take-photographs`}>
@@ -164,8 +322,16 @@ export function FieldForm() {
                 </Box>
               </Box>
 
-              <Box bg={'white'} w={'95%'} m='auto' mt={5} mr={{ base: 'auto', sm: 1 }} p={4} borderRadius={'15px'}>
-                {tab.component}
+              <Box
+                bg={"white"}
+                w={"95%"}
+                m="auto"
+                mt={5}
+                mr={{ base: "auto", sm: 1 }}
+                p={4}
+                borderRadius={"15px"}
+              >
+                {<tab.Component form={form} setForm={setForm} />}
                 <Button
                   bg="black"
                   _hover={{ bg: "gray.700" }}
@@ -185,66 +351,70 @@ export function FieldForm() {
       </Tabs>
     </Box>
   );
-};
+}
 
 export default FieldForm;
-
 
 function SidebarDocs() {
   const bgColor = "linear-gradient(135deg, #868CFF 0%, #4318FF 100%)";
   const borderColor = useColorModeValue("white", "navy.800");
   return (
     <Flex
-      justify='center'
-      direction='column'
-      align='center'
+      justify="center"
+      direction="column"
+      align="center"
       bg={bgColor}
-      borderRadius='30px'
-      position='relative'>
+      borderRadius="30px"
+      position="relative"
+    >
       <Flex
-        border='5px solid'
+        border="5px solid"
         borderColor={borderColor}
-        bg='linear-gradient(135deg, #868CFF 0%, #4318FF 100%)'
-        borderRadius='50%'
-        w='94px'
-        h='94px'
-        align='center'
-        justify='center'
-        mx='auto'
-        position='absolute'
-        left='50%'
-        top='-47px'
-        transform='translate(-50%, 0%)'>
-        <AiOutlineInfoCircle size={'50%'} color="white" />
+        bg="linear-gradient(135deg, #868CFF 0%, #4318FF 100%)"
+        borderRadius="50%"
+        w="94px"
+        h="94px"
+        align="center"
+        justify="center"
+        mx="auto"
+        position="absolute"
+        left="50%"
+        top="-47px"
+        transform="translate(-50%, 0%)"
+      >
+        <AiOutlineInfoCircle size={"50%"} color="white" />
       </Flex>
       <Flex
-        direction='column'
-        mb='12px'
-        align='center'
-        justify='center'
-        width={'70%'}
-        m={'auto'}
-        px='15px'
-        pt='55px'
-        pb={'4%'}>
+        direction="column"
+        mb="12px"
+        align="center"
+        justify="center"
+        width={"70%"}
+        m={"auto"}
+        px="15px"
+        pt="55px"
+        pb={"4%"}
+      >
         <Text
           fontSize={{ base: "lg", xl: "18px" }}
-          color='white'
-          fontWeight='bold'
-          lineHeight='150%'
-          textAlign='center'
+          color="white"
+          fontWeight="bold"
+          lineHeight="150%"
+          textAlign="center"
           // px='10px'
           mt="10px"
-          mb='6px'>
+          mb="6px"
+        >
           Filed Buddy
         </Text>
         <Text
-          fontSize='12px'
+          fontSize="12px"
           color={"white"}
-          fontWeight='500'
+          fontWeight="500"
           // px='10px'
-          mb='6px'
-          textAlign='center'>
+          mb="6px"
+          textAlign="center"
+        >
           Developed By Webient Team
         </Text>
       </Flex>
