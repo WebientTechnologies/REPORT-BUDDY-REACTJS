@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import {
   Box,
   FormControl,
-  Select,
   Input,
   Button,
   Heading,
@@ -15,11 +14,8 @@ import {
   AccordionIcon,
   HStack,
 } from "@chakra-ui/react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ReactSelect from "react-select";
-import { useDispatch, useSelector } from "react-redux";
-import { pushBackNewDataIntoInterview, updateIntervieweeData, updateIntervieweeDataForImage } from "../redux/actions/formDataAction";
 import { FormLabel } from "@chakra-ui/react";
 
 const contactMethodOptions = [
@@ -146,7 +142,21 @@ function Interviewee({ form, setForm }) {
           ? { ...interview, roofingContract: selectedOption.value }
           : interview
       );
+ 
     
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
+    
+
+    const handleBuildingTypeChange = (selectedOption, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview, buildingType: selectedOption.value }
+          : interview
+      );
       setForm((prevForm) => ({
         ...prevForm,
         interviewee: updatedInterviews,
@@ -248,6 +258,10 @@ function Interviewee({ form, setForm }) {
                     placeholder="Select Contact Method"
                     options={contactMethodOptions}
                   required
+                  onChange={(selectedOption) =>
+                    handleBuildingTypeChange(selectedOption, interview.id)
+                  }
+                  name="buildingType"
                     value={contactMethodOptions.find(
                       (option) => option.value === interview.buildingType
                     )}
@@ -262,6 +276,7 @@ function Interviewee({ form, setForm }) {
                     options={contactMethodOptions}
                     required
                     isRequired
+                    name="contactMethod"
                     onChange={(selectedOption) =>
                       handleContactMethodChange(selectedOption, interview.id)
                     }
@@ -279,6 +294,7 @@ function Interviewee({ form, setForm }) {
                     options={titleOptions}
                     required
                     isRequired
+                    name="title"
                     onChange={(selectedOption) =>
                       handleTitleChange(selectedOption, interview.id)
                     }
@@ -295,6 +311,7 @@ function Interviewee({ form, setForm }) {
                     placeholder="Enter First Name"
                     value={interview.firstName}
                     required
+                    name="firstName"
                     isRequired
                     onChange={(event) =>
                       handleFirstNameChange(event.target.value, interview.id)
@@ -308,6 +325,7 @@ function Interviewee({ form, setForm }) {
                     type="text"
                     required
                     isRequired
+                    name="lastName"
                     placeholder="Enter Last Name"
                     value={interview.lastName}
                     onChange={(event) =>
@@ -324,6 +342,8 @@ function Interviewee({ form, setForm }) {
                       value: option,
                       label: option,
                     }))}
+                    name="roofingContract"
+
                     required
                     isRequired
                     onChange={(selectedOption) =>
@@ -337,12 +357,14 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
 
-                <FormControl isRequired mt={4}>
-                  <FormLabel>Company Name</FormLabel>
+                <FormControl isRequired mt={4} >
+                  <FormLabel for="companyName">Company Name</FormLabel>
                   <Input
                     placeholder="Enter Company Name"
                     type="text"
                     required
+                    name="companyName"
+                    id="companyName"
                     isRequired
                     value={interview.companyName}
                     onChange={(event) =>

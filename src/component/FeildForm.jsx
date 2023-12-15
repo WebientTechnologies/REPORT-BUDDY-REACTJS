@@ -39,6 +39,10 @@ import { SiFlood } from "react-icons/si";
 import webientInfo from "../Images/Get PRO.png";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { homeRoute } from "../App";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { postFormData } from "../redux/actions/dashBoardAction";
+import toast from "react-hot-toast";
 
 
 
@@ -91,20 +95,50 @@ export function FieldForm() {
   const handleTabsChange = (index) => {
     setTabIndex(index);
   };
+  const dispatch = useDispatch();;
 
-  const switchToNextTab = () => {
+  const formSubmit = ()=>{
+    let data = {
+      ...form,
+      businessCardBack :form.interviewee.map(interviewee => interviewee.backBusinessCard) ,
+      businessCardFront :form.interviewee.map(interviewee => interviewee.frontBusinessCard),
+      document: form.interviewee.map(interviewee => interviewee.documentImage),
+      interviewee: form.interviewee.map(interviewee => ({
+      contactMethod: interviewee.contactMethod,
+      title: interviewee.title,
+      firstName:interviewee.firstName,
+      lastName: interviewee.lastName,
+      roofingContract: interviewee.roofingContract,
+      companyName: interviewee.companyName,
+      interviewSignificance:interviewee.interviewSignificance,
+       })),
+       sow: {...form.sowData , selectedStandardScope: form.sowData.selectedStandardScope.value}
+    }
+    dispatch(postFormData(data))
+  }
+  const switchToNextTab = (e) => {
+    e?.preventDefault();
+
+    debugger
+    if(tabIndex === tabData.length-1)
+    {
+      formSubmit();
+    }
     // Increment the current tab index or reset to 0 if on the last tab
     setTabIndex((prevIndex) =>
       prevIndex < tabData.length - 1 ? prevIndex + 1 : 0
     );
+    
   };
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
+    debugger
+
     // Handle form submission here (e.g., send data to the server).
     // After handling the submission, switch to the next tab.
-    if (tabIndex === tabData.length - 1) return navigate(`${homeRoute}`);
+    if (tabIndex === tabData.length - 1) return formSubmit();
     switchToNextTab();
   };
 
@@ -162,18 +196,21 @@ export function FieldForm() {
       structures: [
         {
           name: "",
-          rooms: [
-            {
-              name: "",
-              damages: [
-                {
-                  type: "",
-                  description: "",
-                },
-              ],
-            },
-          ],
-        },
+          buildDate: "", 
+          roofReplacementDate: "", 
+          exteriorDamageDescription: "",
+          exteriorDamageNotes: "", 
+          roofDamageDescription: "", 
+          roofNotes: "", 
+          rooms: [{
+            name: "",
+            damages: [{
+              location: "", 
+              atticAccessInfo: "", 
+              notes: "",  
+            }],
+          }],
+        }
       ],
     },
     sketches:{
@@ -215,8 +252,7 @@ export function FieldForm() {
 
   return (
     <Box
-      as="form"
-      onSubmit={onSubmit}
+      
       w="full"
       maxH={"100vh"}
       overflow={"hidden"}
@@ -330,6 +366,8 @@ export function FieldForm() {
                 mr={{ base: "auto", sm: 1 }}
                 p={4}
                 borderRadius={"15px"}
+                as="form"
+      onSubmit={onSubmit}
               >
                 {<tab.Component form={form} setForm={setForm} />}
                 <Button

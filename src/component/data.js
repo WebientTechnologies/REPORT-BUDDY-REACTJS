@@ -39,14 +39,22 @@ export const quillModules = {
 
 
   export const interiorDamageOptions = [
-    
+     "option1",
+       "option2",
+     "option3",    
   ]
   export const roomAreaOptions = [
-
+    "option1",
+    "option2",
+  "option3",    
   ]
   export const damageLocationOptions = [
-
+    "option1",
+    "option2",
+  "option3",    
   ]
   export const atticAccessOptions = [
-
+    "option1",
+    "option2",
+  "option3",    
   ]

@@ -24,3 +24,23 @@ export const getAllProjectsFunc = (navigate) => (dispatch) => {
                }
           });
 };
+
+export const postFormData = (data, navigate) => (dispatch) => {
+     const token = localStorage.getItem("token") || '';
+     axios.post(`${API_BASE_URL}/project-details`, data,{
+          headers: {
+               Authorization: `Bearer ${JSON.parse(token)}`,
+               "Content-Type": 'multipart/form-data'
+          }
+     })
+          .then((response) => {
+               console.log({ response });
+               return response;
+          })
+          .catch((e) => {
+               if (e?.response?.status === 401 || e?.response?.status === 500) {
+                    console.log({ e });
+               }
+               return e;
+          });
+};

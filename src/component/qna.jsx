@@ -34,12 +34,28 @@ import { updateQnaData } from "../redux/actions/formDataAction";
 function InterviewQnAComponent({ setForm, form }) {
   // State to store Q&A data
   const qna = form.qna;
-
   const addStructure = () => {
-    // Create a new structure object
+    // Create a new structure object with additional properties
     const newStructure = {
       name: "",
-      rooms: [],
+      buildDate: "",
+      roofReplacementDate: "",
+      exteriorDamageDescription: "",
+      exteriorDamageNotes: "",
+      roofDamageDescription: "",
+      roofNotes: "",
+      rooms: [
+        {
+          name: "",
+          damages: [
+            {
+              location: "",
+              atticAccessInfo: "",
+              notes: "",
+            },
+          ],
+        },
+      ],
     };
 
     // Dispatch the action to update Q&A data in Redux
@@ -53,10 +69,16 @@ function InterviewQnAComponent({ setForm, form }) {
   };
 
   const addRoomToStructure = (structureIndex) => {
-    // Create a new room object
+    // Create a new room object with additional properties
     const newRoom = {
       name: "",
-      damages: [],
+      damages: [
+        {
+          location: "",
+          atticAccessInfo: "",
+          notes: "",
+        },
+      ],
     };
 
     // Dispatch the action to update Q&A data in Redux
@@ -78,26 +100,25 @@ function InterviewQnAComponent({ setForm, form }) {
 
   const addDamageToRoom = (structureIndex, roomIndex) => {
     const newDamageItem = {
-      type: "",
-      description: "",
+      location: "", // Example: Add damage location
+      atticAccessInfo: "", // Example: Add attic access information
+      notes: "", // Example: Add notes
     };
+    debugger;
 
-    const updatedFormData = {
+    if (!qna || !qna.structures || !qna.structures[structureIndex] || !qna.structures[structureIndex].rooms) {
+      console.log(!qna , !qna.structure ,!qna.structures[structureIndex] , !qna.structures[structureIndex].rooms)
+      return;
+    }
+    
+    let updatedFormData = {
       ...form,
-      structures: form.structures.map((structure, sIndex) =>
-        sIndex === structureIndex
-          ? {
-              ...structure,
-              rooms: structure.rooms.map((room, rIndex) =>
-                rIndex === roomIndex
-                  ? { ...room, damages: [...room.damages, newDamageItem] }
-                  : room
-              ),
-            }
-          : structure
-      ),
     };
 
+
+  const   updatedDamages = [...qna?.structures[structureIndex]?.rooms[roomIndex]?.damages,newDamageItem];
+
+  updatedFormData.qna.structures[structureIndex].rooms[roomIndex].damages = updatedDamages;
     setForm(updatedFormData);
   };
 
@@ -241,18 +262,16 @@ function InterviewQnAComponent({ setForm, form }) {
                 >
                   <Text>Interior damage general information</Text>
                   <ReactSelect
-                    options={interiorDamageOptions}
+                    options={interiorDamageOptions.map((i) => ({
+                      label: i,
+                      value: i,
+                    }))}
                     placeholder="Select interior damage type"
                     isSearchable={false}
-                    value={
-                      structure.interiorDamageGeneralInfo
-                        ? interiorDamageOptions.find(
-                            (option) =>
-                              option.value ===
-                              structure.interiorDamageGeneralInfo
-                          )
-                        : null
-                    }
+                    value={{
+                      label: structure.interiorDamageGeneralInfo,
+                      value: structure.interiorDamageGeneralInfo,
+                    }}
                     onChange={(selectedOption) => {
                       setForm((prevForm) => {
                         const updatedStructures = [...prevForm.qna.structures];
@@ -369,8 +388,9 @@ function InterviewQnAComponent({ setForm, form }) {
                             const updatedStructures = [
                               ...prevForm.qna.structures,
                             ];
-                            updatedStructures[structureIndex].roofDamageDescription =
-                              value;
+                            updatedStructures[
+                              structureIndex
+                            ].roofDamageDescription = value;
 
                             return {
                               ...prevForm,
@@ -400,8 +420,7 @@ function InterviewQnAComponent({ setForm, form }) {
                             const updatedStructures = [
                               ...prevForm.qna.structures,
                             ];
-                            updatedStructures[structureIndex].roofNotes =
-                              value;
+                            updatedStructures[structureIndex].roofNotes = value;
 
                             return {
                               ...prevForm,
@@ -412,7 +431,6 @@ function InterviewQnAComponent({ setForm, form }) {
                             };
                           });
                         }}
-
                       />
                     </Box>
                   </Box>
@@ -447,9 +465,26 @@ function InterviewQnAComponent({ setForm, form }) {
                           >
                             <Text>Select Room/Area {roomIndex + 1}</Text>
                             <ReactSelect
-                              options={roomAreaOptions}
                               placeholder="Select room/area"
                               isSearchable={false}
+                              options={roomAreaOptions.map((i) => ({
+                                label: i,
+                                value: i,
+                              }))}
+                              value={{ label: room.name, value: room.name }} // Add the value prop
+                              onChange={(selectedOption) => {
+                                // Add your onChange logic here to update the state
+                                // For example, if using setForm:
+                                setForm((prevForm) => {
+                                  const updatedForm = { ...prevForm };
+                                  updatedForm.qna.structures[
+                                    structureIndex
+                                  ].rooms[roomIndex].name =
+                                    selectedOption.value;
+                                  return updatedForm;
+                                });
+                              }}
+
                               // Add your onChange logic here
                             />
                           </Box>
@@ -484,10 +519,30 @@ function InterviewQnAComponent({ setForm, form }) {
                                   >
                                     <Text>Damage location</Text>
                                     <ReactSelect
-                                      options={damageLocationOptions}
                                       placeholder="Select damage location"
                                       isSearchable={false}
-                                      // Add your onChange logic here
+                                      options={damageLocationOptions.map(
+                                        (i) => ({ label: i, value: i })
+                                      )}
+                                      value={
+                                        damage.location && {
+                                          label: damage.location,
+                                          value: damage.location,
+                                        }
+                                      } // Add the value prop
+                                      onChange={(selectedOption) => {
+                                        // Add your onChange logic here to update the state
+                                        // For example, if using setForm:
+                                        setForm((prevForm) => {
+                                          const updatedForm = { ...prevForm };
+                                          updatedForm.qna.structures[
+                                            structureIndex
+                                          ].rooms[roomIndex].damages[
+                                            damageIndex
+                                          ].location = selectedOption.value;
+                                          return updatedForm;
+                                        });
+                                      }}
                                     />
                                   </Box>
                                   <Box
@@ -498,15 +553,53 @@ function InterviewQnAComponent({ setForm, form }) {
                                   >
                                     <Text>Attic access information</Text>
                                     <ReactSelect
-                                      options={atticAccessOptions}
                                       placeholder="Select attic access information"
                                       isSearchable={false}
-                                      // Add your onChange logic here
+                                      options={atticAccessOptions.map((i) => ({
+                                        label: i,
+                                        value: i,
+                                      }))}
+                                      value={
+                                        damage.atticAccessInfo && {
+                                          label: damage.atticAccessInfo,
+                                          value: damage.atticAccessInfo,
+                                        }
+                                      } // Add the value prop
+                                      onChange={(selectedOption) => {
+                                        // Add your onChange logic here to update the state
+                                        // For example, if using setForm:
+                                        setForm((prevForm) => {
+                                          const updatedForm = { ...prevForm };
+                                          updatedForm.qna.structures[
+                                            structureIndex
+                                          ].rooms[roomIndex].damages[
+                                            damageIndex
+                                          ].atticAccessInfo =
+                                            selectedOption.value;
+                                          return updatedForm;
+                                        });
+                                      }}
                                     />
                                   </Box>
                                   <Box w="100%">
                                     <Text>Notes</Text>
-                                    <Input type="text" />
+                                    <Input
+                                      type="text"
+                                      value={damage.notes} // Add the value prop
+                                      onChange={(e) => {
+                                        // Add your onChange logic here to update the state
+                                        // For example, if using setForm:
+                                        setForm((prevForm) => {
+                                          const updatedForm = { ...prevForm };
+                                          updatedForm.qna.structures[
+                                            structureIndex
+                                          ].rooms[roomIndex].damages[
+                                            damageIndex
+                                          ].notes = e.target.value;
+                                          return updatedForm;
+                                        });
+                                      }}
+                                    />
                                   </Box>
                                 </AccordionPanel>
                               </AccordionItem>

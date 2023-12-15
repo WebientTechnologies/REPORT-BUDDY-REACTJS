@@ -17,7 +17,7 @@ const sketches= form.sketches;
   // Function to handle image upload
   const handleImageUpload = (file, sketchType, ) => {
     // Update the sketch data with the uploaded image
-    const updatedSketches = [...sketches];
+    const updatedSketches = {...sketches};
     updatedSketches[sketchType].image = file;
     setForm(prev=>({...prev , sketches: updatedSketches}));
   };

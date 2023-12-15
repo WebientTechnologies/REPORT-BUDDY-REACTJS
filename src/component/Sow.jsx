@@ -45,7 +45,7 @@ function ScopeOfWorkComponent({ setForm, form }) {
       ...prevForm,
       sowData: {
         ...prevForm.sowData,
-        selectedStandardScope: selectedOption,
+        selectedStandardScope: selectedOption.value,
       },
     }));
   };
@@ -182,6 +182,7 @@ function ScopeOfWorkComponent({ setForm, form }) {
           isSearchable={false}
           required
           onChange={handleStandardScopeChange}
+          value = {{label: sowData.selectedStandardScope, value: sowData.selectedStandardScope}}
         />
       </FormControl>
 
