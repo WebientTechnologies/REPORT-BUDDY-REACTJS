@@ -20,14 +20,8 @@ import {
 import { MdExpandMore } from "react-icons/md"; // Import accordion icon
 import ReactQuill from "react-quill";
 import {
-  atticAccessOptions,
-  damageLocationOptions,
-  interiorDamageOptions,
   quillModules,
-  roomAreaOptions,
-} from "./data";
-import ReactSelect from "react-select";
-import { AddIcon } from "@chakra-ui/icons";
+} from "../data";
 
 function FloodData({setForm, form}) {
 const floodData = form.floodData;

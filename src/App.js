@@ -8,10 +8,10 @@ import { getMyProfile } from './redux/actions/userAction'
 import Login from './Pages/auth/auth'
 import AdminLayout from './Layout/components'
 import DashBoard from './Pages/dashbord'
-import FieldForm from './component/FeildForm'
+import FieldForm from './component/feildForm/FeildForm'
 import LiveProjects from './Pages/LiveProjects'
 import ProjectDetails from './Pages/ProjectDetails'
-import { TakePhotosWithAccordions } from './component/TakePhotosWithAccordions'
+import { TakePhotosWithAccordions } from './component/feildForm/TakePhotosWithAccordions'
 import ApprovedProjectsOM from './Pages/ApprovedProjectsOM'
 import ApprovedProjectsPC from './Pages/ApprovedProjectsPC';
 import PendingSiteVisit from './Pages/FE/PendingSiteVisit';
@@ -28,6 +28,7 @@ import MyRejectedDraftReportsByEmTW from './Pages/TW/MyRejectedDraftReportsByEmT
 import PendingReportsTW from './Pages/TW/PendingReportsTW';
 import ApprovedFbTW from './Pages/TW/ApprovedFbTW';
 import PrivateRoute from './PriveteRoute';
+import FormValue from './component/SeeForm/FeildForm';
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
 export const homeRoute = '/pemo';
@@ -64,6 +65,7 @@ function App() {
         <Route path={`${homeRoute}/login`} element={<Login />} />
         <Route path={`${homeRoute}`} element={<PrivateRoute ><AdminLayout><DashBoard /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/fill-form`} element={<FieldForm />} />
+        <Route path={`${homeRoute}/see-form`} element={<FormValue />} />
         <Route path={`${homeRoute}/live-projects/:string`} element={<PrivateRoute ><AdminLayout><LiveProjects /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/approved-projects/OM`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsOM /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/approved-projects/PC`} element={<PrivateRoute ><AdminLayout><ApprovedProjectsPC /></AdminLayout></PrivateRoute>} />

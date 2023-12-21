@@ -25,11 +25,11 @@ import {
   interiorDamageOptions,
   quillModules,
   roomAreaOptions,
-} from "./data";
+} from "../data";
 import ReactSelect from "react-select";
 import { AddIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { updateQnaData } from "../redux/actions/formDataAction";
+import { updateQnaData } from "../../redux/actions/formDataAction";
 
 function InterviewQnAComponent({ setForm, form }) {
   // State to store Q&A data

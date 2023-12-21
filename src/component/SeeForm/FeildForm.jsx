@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -36,13 +36,14 @@ import { IoMdLock } from "react-icons/io";
 import { HiCircleStack } from "react-icons/hi2";
 import { LuBarChart2 } from "react-icons/lu";
 import { SiFlood } from "react-icons/si";
-import webientInfo from "../Images/Get PRO.png";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { homeRoute } from "../App";
+import { API_BASE_URL, homeRoute } from "../../App";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { postFormData } from "../redux/actions/dashBoardAction";
+import { postFormData } from "../../redux/actions/dashBoardAction";
 import toast from "react-hot-toast";
+import CommentsModal from "./Utils/comments";
+import LogsModal from "./Utils/logs";
 
 
 
@@ -58,7 +59,10 @@ const tabData = [
     label: "Property Background",
     Component: PropertyForm,
   },
-  { icon: <BsChatLeftText />, label: "Interviewee(s)", Component: Interviewee },
+  { icon: <BsChatLeftText />, 
+    label: "Interviewee(s)",
+    Component: Interviewee 
+  },
   {
     icon: <BsFillGrid1X2Fill />,
     label: "Interview Questions",
@@ -91,38 +95,40 @@ const tabData = [
 
 export function FieldForm() {
   const [tabIndex, setTabIndex] = useState(0);
+  const [getForm, setGetForm] = useState(null)
+
+
+ const getFormData= ()=>{
+    const token = localStorage.getItem("token") || '';
+
+  axios.get(`${API_BASE_URL}/get-form/1`,{
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`,
+      "Content-Type": 'multipart/form-data'
+ }
+  }).then(res=>{
+    setGetForm(res.data.data[0])
+  }).catch((errr)=>console.log('err ',errr))
+
+  }
+  useEffect(() => {
+    getFormData();
+ 
+  }, [])
+  
+
 
   const handleTabsChange = (index) => {
     setTabIndex(index);
   };
-  const dispatch = useDispatch();;
 
-  const formSubmit = ()=>{
-    let data = {
-      ...form,
-      businessCardBack :form.interviewee.map(interviewee => interviewee.backBusinessCard) ,
-      businessCardFront :form.interviewee.map(interviewee => interviewee.frontBusinessCard),
-      document: form.interviewee.map(interviewee => interviewee.documentImage),
-      interviewee: form.interviewee.map(interviewee => ({
-      contactMethod: interviewee.contactMethod,
-      title: interviewee.title,
-      firstName:interviewee.firstName,
-      lastName: interviewee.lastName,
-      roofingContract: interviewee.roofingContract,
-      companyName: interviewee.companyName,
-      interviewSignificance:interviewee.interviewSignificance,
-       })),
-       sow: {...form.sowData , selectedStandardScope: form.sowData.selectedStandardScope.value}
-    }
-    dispatch(postFormData(data))
-  }
   const switchToNextTab = (e) => {
     e?.preventDefault();
 
     debugger
     if(tabIndex === tabData.length-1)
     {
-      formSubmit();
+      // formSubmit();
     }
     // Increment the current tab index or reset to 0 if on the last tab
     setTabIndex((prevIndex) =>
@@ -130,125 +136,84 @@ export function FieldForm() {
     );
     
   };
-  const navigate = useNavigate();
+  const [commentFelid, setCommentFelid] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [logFelid, setLogFelid] = useState(null);
+  const [logs, setLogs] = useState([]);
+
+
+
+  useEffect(() => {
+    if (commentFelid) {
+      axios
+        .get(
+          `${API_BASE_URL}/get-comments/${getForm.projectId}/${commentFelid}`
+        )
+        .then((res) => {
+          setComments(res.data.data);
+        });
+    }
+  }, [commentFelid, getForm?.projectId]);
+  
+  useEffect(() => {
+    if (logFelid) {
+      const token = localStorage.getItem("token") || "";
+
+      axios
+        .get(`${API_BASE_URL}/get-form/${getForm.projectId}/${logFelid}`, {
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+          },
+        })
+        .then((res) => {
+          setLogs(res.data.data);
+        });
+    }
+  }, [logFelid, getForm?.projectId]);
+
 
   const onSubmit = (e) => {
     e.preventDefault();
-    debugger
-
-    // Handle form submission here (e.g., send data to the server).
-    // After handling the submission, switch to the next tab.
-    if (tabIndex === tabData.length - 1) return formSubmit();
+    debugger;
     switchToNextTab();
   };
 
-  const [form, setForm] = useState({
-    sowData: {
-      descriptionOfLoss: "",
-      additionalDetails: "",
-      scopeFromReceivedDocuments: "",
-      scopeFromInterview: "",
-      sowStatement: "",
-      selectedStandardScope: null,
-    },
-    propertyData: {
-      structures: [{}], // Initial structure with one element
-      appraisersRecord: {
-        propertyAppraiserRecord: "",
-        permitInformation: "",
-        topographicMap: "",
-      },
-    },
-    interviewee: [
-      {
-        id: "Interviewee 1",
-        contactMethod: "",
-        message: "",
-        title: "",
-        firstName: "",
-        lastName: "",
-        roofingContract: "",
-        companyName: "",
-        interviewSignificance: "",
-        frontBusinessCard: null,
-        backBusinessCard: null,
-        documentImage: null,
-      },
-    ],
-    qna: {
-      questions: [
+  const closeModal = (setNewComment) => {
+    setNewComment("");
+    setCommentFelid(null);
+    setComments([])
+
+  };
+  const closeLogsModal = () => {
+    setLogFelid(null);
+    setLogs([])
+  };
+
+  const handleAddComment = (comment) => {
+    const token = localStorage.getItem("token") || "";
+
+    axios
+      .post(
+        `${API_BASE_URL}/create-comment`,
         {
-          label: "When was the property purchased?",
-          type: "text",
-          answer: "",
+          projectId: getForm.projectId,
+          fieldName: commentFelid,
+          fieldValue: comment,
         },
         {
-          label: "When was the structure built?",
-          type: "text",
-          answer: "",
-        },
-        {
-          label: "When was the roof last replaced?",
-          type: "file",
-          answer: "",
-        },
-      ],
-      structures: [
-        {
-          name: "",
-          buildDate: "", 
-          roofReplacementDate: "", 
-          exteriorDamageDescription: "",
-          exteriorDamageNotes: "", 
-          roofDamageDescription: "", 
-          roofNotes: "", 
-          rooms: [{
-            name: "",
-            damages: [{
-              location: "", 
-              atticAccessInfo: "", 
-              notes: "",  
-            }],
-          }],
+          headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`,
+            // "Content-Type": 'multipart/form-data'
+          },
         }
-      ],
-    },
-    sketches:{
-        interiorDamageSketch: "",
-        roofSketch: ""
-    },
-    documents: [
-      {
-        document: null,
-        constructionEstimate: "",
-        documentReviewNotes: "",
-        noteworthyItems: "",
-      },
-    ],
-    wrht: {
-      windAndRainfallData: "",
-      hailData1: "",
-      hailData2: "",
-      tornadoData: "",
-      additionalWeatherData: "",
-    },
-    lightningStrike: "",
-    floodData: [
-      {
-        usgsRiverGageData: "",
-        usgsHighWaterMarkData: "",
-        noaaBuoyStreamGageData: "",
-        fetchDistanceData: "",
-      },
-    ],
-    historicalImageryReview: {
-      aerial: "",
-      realtor: "",
-      zillow: "",
-      redfin: "",
-    },
-    soilData:""
-  });
+      )
+      .then((res) => {
+        setComments((prev) => [...prev, res.data.data]);
+      });
+  };
+
+
+  
 
   return (
     <Box
@@ -258,6 +223,21 @@ export function FieldForm() {
       overflow={"hidden"}
       mx="auto"
     >
+         <CommentsModal
+        isOpen={!!commentFelid}
+        onClose={closeModal}
+        onSubmit={handleAddComment}
+        field={commentFelid}
+        comments={comments}
+      />
+         <LogsModal
+        isOpen={!!logFelid}
+        onClose={closeLogsModal}
+        // onSubmit={handleAddComment}
+        field={logFelid}
+        comments={logs}
+      />
+
       <Tabs
         index={tabIndex}
         onChange={handleTabsChange}
@@ -369,7 +349,13 @@ export function FieldForm() {
                 as="form"
       onSubmit={onSubmit}
               >
-                {<tab.Component form={form} setForm={setForm} />}
+                {<tab.Component 
+                setLogFelid = {setLogFelid}
+                setCommentFelid= {setCommentFelid}
+                getForm = {getForm} 
+                getFormData={getFormData}
+                
+                />}
                 <Button
                   bg="black"
                   _hover={{ bg: "gray.700" }}

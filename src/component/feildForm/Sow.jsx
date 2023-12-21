@@ -4,8 +4,8 @@ import { Box, Heading, Text, FormControl, FormLabel } from "@chakra-ui/react";
 import ReactQuill from "react-quill";
 import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
-import { quillModules, selectOptionForStandardScope } from "./data";
-import { updateSowData } from "../redux/actions/formDataAction";
+import { quillModules, selectOptionForStandardScope } from "../data";
+import { updateSowData } from "../../redux/actions/formDataAction";
 
 function ScopeOfWorkComponent({ setForm, form }) {
   const sowData = form.sowData;

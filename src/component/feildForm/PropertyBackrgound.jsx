@@ -4,8 +4,8 @@ import ReactQuill from "react-quill";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import "react-quill/dist/quill.snow.css";
-import { quillModules } from "./data";
-import { updatePropertyData } from "../redux/actions/formDataAction";
+import { quillModules } from "../data";
+import { updatePropertyData } from "../../redux/actions/formDataAction";
 
 const FormStructure = ({ index, setForm, form }) => {
   const dispatch = useDispatch();
@@ -115,8 +115,7 @@ const PropertyForm = ({form , setForm}) => {
     });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (name,value) => {
     setForm((prevForm) => {
       const newForm = { ...prevForm };
       newForm.propertyData.appraisersRecord[name] = value;
@@ -189,7 +188,9 @@ const PropertyForm = ({form , setForm}) => {
           style={{ height: "150px" }}
           value={appraisersRecord.propertyAppraiserRecord}
           required
+          onChange={(value)=>handleChange('propertyAppraiserRecord',value)}
           isRequired
+        
            />
         </FormControl>
 
@@ -221,7 +222,7 @@ const PropertyForm = ({form , setForm}) => {
           required
           isRequired
           value={appraisersRecord.permitInformation}
-        
+          onChange={(value)=>handleChange('permitInformation',value)}
            />
         </FormControl>
 
@@ -253,6 +254,8 @@ const PropertyForm = ({form , setForm}) => {
           value={appraisersRecord.topographicMap}
           required
           isRequired
+          onChange={(value)=>handleChange('topographicMap',value)}
+
         
            />
         </FormControl>

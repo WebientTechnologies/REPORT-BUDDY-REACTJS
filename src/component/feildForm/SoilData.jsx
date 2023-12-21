@@ -25,7 +25,7 @@ import {
   interiorDamageOptions,
   quillModules,
   roomAreaOptions,
-} from "./data";
+} from "../data";
 import ReactSelect from "react-select";
 import { AddIcon } from "@chakra-ui/icons";
 

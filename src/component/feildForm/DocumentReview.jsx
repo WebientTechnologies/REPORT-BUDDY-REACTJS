@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import ReactQuill from "react-quill"; // Import React Quill
 import "react-quill/dist/quill.snow.css"; // Import styles
-import { quillModules } from "./data";
+import { quillModules } from "../data";
 import { DeleteIcon } from "@chakra-ui/icons";
 
 
