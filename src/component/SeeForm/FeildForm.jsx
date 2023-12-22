@@ -22,7 +22,7 @@ import Interviewee from "./Interviewee";
 import InterviewQnAComponent from "./qna";
 import FieldSketchesComponent from "./RoofSketch";
 import DocumentReviewComponent from "./DocumentReview";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link, useParams } from "react-router-dom";
 import Wrht from "./WRHT";
 import FloodData from "./FloodData";
 import LightningStrike from "./LightningStrike";
@@ -96,12 +96,13 @@ const tabData = [
 export function FieldForm() {
   const [tabIndex, setTabIndex] = useState(0);
   const [getForm, setGetForm] = useState(null)
+  let { projectId } = useParams();
 
 
  const getFormData= ()=>{
     const token = localStorage.getItem("token") || '';
 
-  axios.get(`${API_BASE_URL}/get-form/1`,{
+  axios.get(`${API_BASE_URL}/get-form/${projectId}`,{
     headers: {
       Authorization: `Bearer ${JSON.parse(token)}`,
       "Content-Type": 'multipart/form-data'
@@ -114,7 +115,8 @@ export function FieldForm() {
   useEffect(() => {
     getFormData();
  
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId])
   
 
 
@@ -124,12 +126,6 @@ export function FieldForm() {
 
   const switchToNextTab = (e) => {
     e?.preventDefault();
-
-    debugger
-    if(tabIndex === tabData.length-1)
-    {
-      // formSubmit();
-    }
     // Increment the current tab index or reset to 0 if on the last tab
     setTabIndex((prevIndex) =>
       prevIndex < tabData.length - 1 ? prevIndex + 1 : 0

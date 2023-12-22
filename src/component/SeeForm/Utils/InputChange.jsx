@@ -7,6 +7,7 @@ import { quillModules } from "../../data";
 import axios from "axios";
 import { API_BASE_URL } from "../../../App";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const InputChange = ({
   inputType,
@@ -32,9 +33,11 @@ const InputChange = ({
     setQuillValue(value);
   };
   const token = localStorage.getItem("token") || '';
+  let { projectId } = useParams();
+
 
   const handleSave = () => {
-    axios.put(`${API_BASE_URL}/edit-form/1`, {
+    axios.put(`${API_BASE_URL}/edit-form/${projectId}`, {
       fieldName,
       value: inputType === 'select' ?selectedOption.value : quillValue,
     },

@@ -18,7 +18,7 @@ import Interviewee from "./Interviewee";
 import InterviewQnAComponent from "./qna";
 import FieldSketchesComponent from "./RoofSketch";
 import DocumentReviewComponent from "./DocumentReview";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link, useParams } from "react-router-dom";
 import Wrht from "./WRHT";
 import FloodData from "./FloodData";
 import LightningStrike from "./LightningStrike";
@@ -91,10 +91,11 @@ export function FieldForm() {
     setTabIndex(index);
   };
   const dispatch = useDispatch();;
+  let { projectId } = useParams();
 
   const formSubmit = ()=>{
     let data = {
-      projectId: '1',
+      projectId: projectId,
       ...form,
       businessCardBack :form?.interviewee?.map(interviewee => interviewee.backBusinessCard) ,
       businessCardFront :form?.interviewee?.map(interviewee => interviewee.frontBusinessCard),

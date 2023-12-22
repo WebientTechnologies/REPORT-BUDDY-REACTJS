@@ -1,25 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Box, Heading, Table, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { Link, useParams } from 'react-router-dom';
 import { safeParse } from '../StringifyAndParsedObj/StringifyAndParsedObj';
-import { homeRoute } from '../App';
+import { API_BASE_URL, homeRoute } from '../App';
+import axios from 'axios';
 
 function ProjectDetails() {
 
   const { objectParam } = useParams();
   const parsedData = safeParse(objectParam);
   console.log({ parsedData });
+  const [getForm, setGetForm] = useState(null)
 
+
+ const getFormData= ()=>{
+    const token = localStorage.getItem("token") || '';
+
+  axios.get(`${API_BASE_URL}/get-form/${parsedData?.ID}`,{
+    headers: {
+      Authorization: `Bearer ${JSON.parse(token)}`,
+      "Content-Type": 'multipart/form-data'
+ }
+  }).then(res=>{
+    setGetForm(res.data.data)
+  }).catch((errr)=>console.log('err ',errr))
+
+  }
+  useEffect(() => {
+    getFormData();
+ 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parsedData?.ID])
 
   return (
     <Box pb={10}>
-      <Box textAlign='center'>
-        <Link to={`${homeRoute}/fill-form`}>
+      {getForm && (getForm.length >= 1 ?<Box textAlign='center'>
+        <Link to={`${homeRoute}/see-form/${parsedData?.ID}`}>
           <Button bg={'black'} color='white' size="lg" m={4}>
-            Field buddy
+            See Field buddy
           </Button>
         </Link>
-      </Box>
+      </Box>:<Box textAlign='center'>
+      <Link to={`${homeRoute}/fill-form/${parsedData?.ID}`}>
+        <Button bg={'black'} color='white' size="lg" m={4}>
+        Fill Field buddy
+        </Button>
+      </Link>
+    </Box>)}
 
       <Heading size="lg" mt={1} textAlign='center' mb={5} color={'white'}>
         Project Details
