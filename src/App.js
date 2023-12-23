@@ -31,7 +31,7 @@ import PrivateRoute from './PriveteRoute';
 import FormValue from './component/SeeForm/FeildForm';
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
-export const homeRoute = '/pemo';
+export const homeRoute = '';
 
 function App() {
 

@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/pemo/static/css/main.d2a31917.css",
-    "main.js": "/pemo/static/js/main.b7c76d89.js",
+    "main.js": "/pemo/static/js/main.13992dde.js",
     "index.html": "/pemo/index.html",
     "main.d2a31917.css.map": "/pemo/static/css/main.d2a31917.css.map",
-    "main.b7c76d89.js.map": "/pemo/static/js/main.b7c76d89.js.map"
+    "main.13992dde.js.map": "/pemo/static/js/main.13992dde.js.map"
   },
   "entrypoints": [
     "static/css/main.d2a31917.css",
-    "static/js/main.b7c76d89.js"
+    "static/js/main.13992dde.js"
   ]
 }
