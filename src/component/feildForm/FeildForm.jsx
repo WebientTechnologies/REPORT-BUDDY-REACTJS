@@ -97,6 +97,7 @@ export function FieldForm() {
     let data = {
       projectId: projectId,
       ...form,
+      qna: undefined,
       businessCardBack :form?.interviewee?.map(interviewee => interviewee.backBusinessCard) ,
       businessCardFront :form?.interviewee?.map(interviewee => interviewee.frontBusinessCard),
       document: form.interviewee.map(interviewee => interviewee.documentImage),

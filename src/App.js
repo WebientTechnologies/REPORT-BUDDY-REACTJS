@@ -82,7 +82,6 @@ function App() {
         <Route path={`${homeRoute}/my-rejected-draft-reports-by-em-tw`} element={<PrivateRoute ><AdminLayout><MyRejectedDraftReportsByEmTW /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/pending-reports-TW`} element={<PrivateRoute ><AdminLayout><PendingReportsTW /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/approved-Fb-TW`} element={<PrivateRoute ><AdminLayout><ApprovedFbTW /></AdminLayout></PrivateRoute>} />
-
         <Route path={`${homeRoute}/project/:objectParam`} element={<PrivateRoute ><AdminLayout><ProjectDetails /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/take-photographs`} element={<PrivateRoute ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></PrivateRoute>} />
       </Routes>
