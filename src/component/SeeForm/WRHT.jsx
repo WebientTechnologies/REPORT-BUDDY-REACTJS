@@ -100,30 +100,6 @@ getFormData= {getFormData}
       </Box>
       <Box w="100%" my="8">
         <Heading as="h6" fontWeight={500} textAlign="center" size="sm" my={2}>
-          Hail Data
-        </Heading>
-        <FormControl
-          mb={4}
-          isRequired
-          height={"250px"}
-          borderRadius={"10px"}
-          boxShadow="0px 18px 40px 0px #7090B01F"
-          p={3}
-        >
-          <InputChange
-            inputType={"quill"}
-            setCommentFelid={setCommentFelid}
-            setLogFelid={setLogFelid}
-getFormData= {getFormData}
-            defaultValue={hailData2}
-            fieldName={`wrht.hailData2`}
-            height="150px"
-            placeholder={`We obtained weather data from Month Date,Year through Month Date, Year (date of our siteinvestigation) from the website of https://hailreports.com. utilizes informationfrom the NWS to display the storm data. The dataon the website is updated every few minutesdirectly from the NOAA data source and trainedstorm spotters. The archived weather data duringthis period did not show any report of hail fallingwithin 25 miles of the subject property.`}
-          />
-        </FormControl>
-      </Box>
-      <Box w="100%" my="8">
-        <Heading as="h6" fontWeight={500} textAlign="center" size="sm" my={2}>
           Tornado Data
         </Heading>
         <FormControl

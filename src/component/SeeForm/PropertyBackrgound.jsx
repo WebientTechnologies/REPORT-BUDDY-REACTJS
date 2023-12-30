@@ -38,6 +38,24 @@ const FormStructure = ({ index, getForm, setLogFelid, setCommentFelid ,getFormDa
         boxShadow="0px 18px 40px 0px #7090B01F"
         p={3}
       >
+                <GridItem colSpan={1}>
+          <FormControl required isRequired>
+            <FormLabel>Building Type</FormLabel>
+            <InputChange
+              inputType={"select"}
+              setCommentFelid={setCommentFelid}
+              setLogFelid={setLogFelid}
+getFormData= {getFormData}
+              options={options}
+              defaultValue={options.find(
+                (option) => option.value === structures[index].buildingType || ""
+              )}
+              fieldName={`propertyData.structures.${index}.buildingType`}
+              placeholder="Select construction type"
+            />
+          </FormControl>
+        </GridItem>
+
         <GridItem colSpan={1}>
           <FormControl required isRequired>
             <FormLabel>Number of Stories</FormLabel>
@@ -62,8 +80,8 @@ getFormData= {getFormData}
               setCommentFelid={setCommentFelid}
               setLogFelid={setLogFelid}
 getFormData= {getFormData}
-              defaultValue={structures[index].storyLocation || ""}
-              fieldName={`propertyData.structures.${index}.storyLocation`}
+              defaultValue={structures[index].storyBySubLoc || ""}
+              fieldName={`propertyData.structures.${index}.storyBySubLoc`}
               placeholder="Enter story # where the subject unit is located"
             />
           </FormControl>

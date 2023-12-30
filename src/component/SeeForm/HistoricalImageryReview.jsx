@@ -122,6 +122,40 @@ getFormData= {getFormData}
         </FormControl>
       </Box>
       <Box w="100%" my="8">
+        <Heading as="h6" textAlign='center' fontWeight={500} size="sm" my={2}>
+        google Images
+        </Heading>
+        <HStack alignItems={"center"} justifyContent={"center"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
+          <Button
+            bg="black"
+            _hover={{ bg: "gray.700" }}
+            color="white"
+            rounded="md"
+            pr="4"
+            mt={2}
+            mb={4}
+            marginRight={0}
+          >
+            View Data File
+          </Button>
+        </HStack>
+
+        <FormControl mb={4} isRequired height={"200px"} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
+          
+        <InputChange
+          inputType={"quill"}
+          setCommentFelid={setCommentFelid}
+          setLogFelid={setLogFelid}
+getFormData= {getFormData}
+          defaultValue={historicalImageryReview?.google}
+          fieldName="historicalImageryReview.google"
+          height="150px"
+          placeholder={`State in a bullet point format the particularly noteworthy items from the image. `}
+          />
+
+        </FormControl>
+      </Box>
+      <Box w="100%" my="8">
         <Heading as="h6" fontWeight={500} textAlign='center' size="sm" my={2}>
           Redfin.com Images
         </Heading>

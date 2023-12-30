@@ -35,7 +35,6 @@ function Wrht({ form, setForm }) {
     wrht: {
       windAndRainfallData,
       hailData1,
-      hailData2,
       tornadoData,
       additionalWeatherData,
     },
@@ -97,27 +96,6 @@ function Wrht({ form, setForm }) {
             value={hailData1}
             onChange={(value) => handleWrhtDataChange("hailData1", value)}
             modules={quillModules}
-            placeholder={`We obtained weather data from Month Date,Year through Month Date, Year (date of our siteinvestigation) from the website of https://hailreports.com. utilizes informationfrom the NWS to display the storm data. The dataon the website is updated every few minutesdirectly from the NOAA data source and trainedstorm spotters. The archived weather data duringthis period did not show any report of hail fallingwithin 25 miles of the subject property.`}
-            style={{ height: "150px", fontSize: "12px" }}
-          />
-        </FormControl>
-      </Box>
-      <Box w="100%" my="8">
-        <Heading as="h6" fontWeight={500} textAlign="center" size="sm" my={2}>
-          Hail Data
-        </Heading>
-        <FormControl
-          mb={4}
-          isRequired
-          height={"200px"}
-          borderRadius={"10px"}
-          boxShadow="0px 18px 40px 0px #7090B01F"
-          p={3}
-        >
-          <ReactQuill
-            modules={quillModules}
-            value={hailData2}
-            onChange={(value) => handleWrhtDataChange("hailData2", value)}
             placeholder={`We obtained weather data from Month Date,Year through Month Date, Year (date of our siteinvestigation) from the website of https://hailreports.com. utilizes informationfrom the NWS to display the storm data. The dataon the website is updated every few minutesdirectly from the NOAA data source and trainedstorm spotters. The archived weather data duringthis period did not show any report of hail fallingwithin 25 miles of the subject property.`}
             style={{ height: "150px", fontSize: "12px" }}
           />

@@ -40,16 +40,20 @@ const sketches= form.sketches;
               Click here to upload a sketch showing the locations of the
               damages.
             </Text>
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={(e) =>
-                handleImageUpload(
-                  e.target.files[0],
-                  "interiorDamageSketch"
-                )
-              }
-            />
+            <HStack alignItems={"center"} justifyContent={"center"} borderRadius={'10px'}  p={3}>
+          <Button
+            bg="black"
+            _hover={{ bg: "gray.700" }}
+            color="white"
+            rounded="md"
+            pr="4"
+            mt={2}
+            mb={4}
+            marginRight={0}
+          >
+            View Data File
+          </Button>
+        </HStack>
           </FormControl>
 
           {/* Text input with placeholder for interior damage sketch notes */}
@@ -79,13 +83,20 @@ const sketches= form.sketches;
               Click here to upload a sketch showing the locations of the
               damages.
             </Text>
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={(e) =>
-                handleImageUpload(e.target.files[0], "roofSketch")
-              }
-            />
+        <HStack alignItems={"center"} justifyContent={"center"} borderRadius={'10px'}  p={3}>
+          <Button
+            bg="black"
+            _hover={{ bg: "gray.700" }}
+            color="white"
+            rounded="md"
+            pr="4"
+            mt={2}
+            mb={4}
+            marginRight={0}
+          >
+            View Data File
+          </Button>
+        </HStack>
           </FormControl>
 
           {/* Text input with placeholder for roof sketch notes */}

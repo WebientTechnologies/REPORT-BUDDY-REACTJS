@@ -64,7 +64,6 @@ function Interviewee({ form, setForm }) {
       const newInterviewData = {
         id: nextInterviewId,
         contactMethod: "",
-        buildingType: "",
         title: "",
         firstName: "",
         lastName: "",
@@ -251,23 +250,6 @@ function Interviewee({ form, setForm }) {
             </h2>
             <AccordionPanel>
               <SimpleGrid columns={[1, 2]} columnGap={4} rowGap={2} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
-
-              <FormControl isRequired>
-                  <FormLabel>Building Type</FormLabel>
-                  <ReactSelect
-                    placeholder="Select Contact Method"
-                    options={contactMethodOptions}
-                  required
-                  onChange={(selectedOption) =>
-                    handleBuildingTypeChange(selectedOption, interview.id)
-                  }
-                  name="buildingType"
-                    value={contactMethodOptions.find(
-                      (option) => option.value === interview.buildingType
-                    )}
-                  />
-                </FormControl>
-
                 {/* Contact Method */}
                 <FormControl isRequired>
                   <FormLabel>Contact Method</FormLabel>
@@ -287,7 +269,7 @@ function Interviewee({ form, setForm }) {
                 </FormControl>
 
                 {/* Personal Information */}
-                <FormControl isRequired mt={4}>
+                <FormControl isRequired >
                   <label>Title</label>
                   <ReactSelect
                     placeholder="Select Mr. / Ms."
@@ -304,7 +286,7 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
 
-                <FormControl isRequired mt={4}>
+                <FormControl isRequired >
                   <FormLabel>First Name</FormLabel>
                   <Input
                     type="text"
@@ -319,7 +301,7 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
 
-                <FormControl isRequired mt={4}>
+                <FormControl isRequired >
                   <FormLabel>Last Name</FormLabel>
                   <Input
                     type="text"
@@ -335,7 +317,7 @@ function Interviewee({ form, setForm }) {
                 </FormControl>
 
                 {/* Roofing Contract */}
-                <FormControl isRequired mt={4}>
+                <FormControl isRequired >
                   <FormLabel>Roofing Contract</FormLabel>
                   <ReactSelect
                     options={roofingOptions.map((option) => ({
@@ -357,7 +339,7 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
 
-                <FormControl isRequired mt={4} >
+                <FormControl isRequired  >
                   <FormLabel for="companyName">Company Name</FormLabel>
                   <Input
                     placeholder="Enter Company Name"
@@ -374,7 +356,7 @@ function Interviewee({ form, setForm }) {
                 </FormControl>
 
                 {/* Interview Significance */}
-                <FormControl mt={4} isRequired>
+                <FormControl  isRequired>
                   <FormLabel>Interviewee Significance</FormLabel>
                   <ReactSelect
                     placeholder="Select Interviewee Significance"
@@ -395,7 +377,7 @@ function Interviewee({ form, setForm }) {
                 </FormControl>
 
                 {/* Document Uploads */}
-                <FormControl mt={4} isRequired>
+                <FormControl  isRequired>
                   <FormLabel>Business Card Front</FormLabel>
                   <Input
                     placeholder="Upload Business Card Front"
@@ -410,7 +392,7 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
 
-                <FormControl mt={4} isRequired>
+                <FormControl  isRequired>
                   <FormLabel>Business Card Back</FormLabel>
                   <Input
                     placeholder="Upload Business Card Back"
@@ -424,7 +406,7 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
 
-                <FormControl mt={4} isRequired>
+                <FormControl  isRequired>
                   <FormLabel>Other Document</FormLabel>
                   <Input
                     placeholder="Upload Other Document"
@@ -438,8 +420,6 @@ function Interviewee({ form, setForm }) {
                   />
                 </FormControl>
               </SimpleGrid>
-              <Divider my={4} />
-              <Divider my={4} />
             </AccordionPanel>
           </AccordionItem>
         ))}

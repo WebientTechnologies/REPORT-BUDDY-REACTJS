@@ -62,11 +62,20 @@ const documents= form.documents;
           </Heading>
           {/* Click here to upload Document input button */}
           <FormControl mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
-            <Input
-              type="file"
-              accept=".pdf"
-              onChange={(e) => handleDocumentUpload(e.target.files[0], index)}
-            />
+          <HStack alignItems={"center"} justifyContent={"center"} p={3}>
+          <Button
+            bg="black"
+            _hover={{ bg: "gray.700" }}
+            color="white"
+            rounded="md"
+            pr="4"
+            mt={2}
+            mb={4}
+            marginRight={0}
+          >
+            View Data File
+          </Button>
+        </HStack>
           </FormControl>
 
           {/* sub sub heading for noteworthy items */}

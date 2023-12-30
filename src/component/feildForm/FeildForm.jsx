@@ -98,9 +98,9 @@ export function FieldForm() {
       projectId: projectId,
       ...form,
       qna: undefined,
-      businessCardBack :form?.interviewee?.map(interviewee => interviewee.backBusinessCard) ,
-      businessCardFront :form?.interviewee?.map(interviewee => interviewee.frontBusinessCard),
-      document: form.interviewee.map(interviewee => interviewee.documentImage),
+      // businessCardBack :form?.interviewee?.map(interviewee => interviewee.backBusinessCard) ,
+      // businessCardFront :form?.interviewee?.map(interviewee => interviewee.frontBusinessCard),
+      // document: form.interviewee.map(interviewee => interviewee.documentImage),
       interviewee: form.interviewee.map(interviewee => ({
       contactMethod: interviewee.contactMethod,
       title: interviewee.title,
@@ -109,7 +109,6 @@ export function FieldForm() {
       roofingContract: interviewee.roofingContract,
       companyName: interviewee.companyName,
       interviewSignificance:interviewee.interviewSignificance,
-      buildingType: interviewee.buildingType,
        })),
        sow: {...form?.sowData , selectedStandardScope: form?.sowData?.selectedStandardScope?.value},
        
@@ -161,7 +160,6 @@ export function FieldForm() {
   const onSubmit = (e) => {
     e.preventDefault();
     debugger
-
     // Handle form submission here (e.g., send data to the server).
     // After handling the submission, switch to the next tab.
     if (tabIndex === tabData.length - 1) return formSubmit();
@@ -254,9 +252,7 @@ export function FieldForm() {
     wrht: {
       windAndRainfallData: "",
       hailData1: "",
-      hailData2: "",
       tornadoData: "",
-      additionalWeatherData: "",
     },
     lightningStrike: "",
     floodData: [
@@ -272,6 +268,7 @@ export function FieldForm() {
       realtor: "",
       zillow: "",
       redfin: "",
+      google: "",
     },
     soilData:""
   });

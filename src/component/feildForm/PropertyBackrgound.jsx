@@ -29,6 +29,23 @@ const FormStructure = ({ index, setForm, form }) => {
   return (
     <Box marginBottom="20px">
       <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={4} mb={4} borderRadius={'10px'} boxShadow="0px 18px 40px 0px #7090B01F" p={3}>
+      <GridItem colSpan={1}>
+          <FormControl
+          required
+          isRequired>
+            <FormLabel>Building Type</FormLabel>
+            <Select
+              options={options}
+              required
+              isRequired
+              name="buildingType"
+              placeholder="Select Building type"
+              value={options.find((option) => option.value === structures[index].buildingType)}
+              onChange={(selectedOption) => handleChange({ target: { name: "buildingType", value: selectedOption.value } })}
+            />
+          </FormControl>
+        </GridItem>
+      
         <GridItem colSpan={1}>
           <FormControl     
             required
@@ -46,6 +63,7 @@ const FormStructure = ({ index, setForm, form }) => {
             />
           </FormControl>
         </GridItem>
+        
         <GridItem colSpan={1}>
           <FormControl     
           required
@@ -55,9 +73,9 @@ const FormStructure = ({ index, setForm, form }) => {
               type="text"
               required
               isRequired
-              name="storyLocation"
+              name="storyBySubLoc"
               placeholder="Enter story # where the subject unit is located"
-              value={structures[index].storyLocation || ""}
+              value={structures[index].storyBySubLoc || ""}
               onChange={handleChange}
             />
           </FormControl>
