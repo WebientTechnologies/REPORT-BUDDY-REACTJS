@@ -29,6 +29,7 @@ import PendingReportsTW from './Pages/TW/PendingReportsTW';
 import ApprovedFbTW from './Pages/TW/ApprovedFbTW';
 import PrivateRoute from './PriveteRoute';
 import FormValue from './component/SeeForm/FeildForm';
+import ImageEditor from './component/feildForm/editImage';
 
 export const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1`;
 export const homeRoute = '';
@@ -83,7 +84,8 @@ function App() {
         <Route path={`${homeRoute}/pending-reports-TW`} element={<PrivateRoute ><AdminLayout><PendingReportsTW /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/approved-Fb-TW`} element={<PrivateRoute ><AdminLayout><ApprovedFbTW /></AdminLayout></PrivateRoute>} />
         <Route path={`${homeRoute}/project/:objectParam`} element={<PrivateRoute ><AdminLayout><ProjectDetails /></AdminLayout></PrivateRoute>} />
-        <Route path={`${homeRoute}/take-photographs`} element={<PrivateRoute ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/take-photographs/:rootId`} element={<PrivateRoute ><AdminLayout><TakePhotosWithAccordions /></AdminLayout></PrivateRoute>} />
+        <Route path={`${homeRoute}/edit-photographs`} element={<PrivateRoute ><AdminLayout><ImageEditor /></AdminLayout></PrivateRoute>} />
       </Routes>
       <Toaster />
     </Router>

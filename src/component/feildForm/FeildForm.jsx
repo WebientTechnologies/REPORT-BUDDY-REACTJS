@@ -109,6 +109,7 @@ export function FieldForm() {
       roofingContract: interviewee.roofingContract,
       companyName: interviewee.companyName,
       interviewSignificance:interviewee.interviewSignificance,
+      'mr/miss': interviewee['mr/miss']
        })),
        sow: {...form?.sowData , selectedStandardScope: form?.sowData?.selectedStandardScope?.value},
        
@@ -197,6 +198,8 @@ export function FieldForm() {
         frontBusinessCard: null,
         backBusinessCard: null,
         documentImage: null,
+        'mr/miss':""
+
       },
     ],
     qna: {

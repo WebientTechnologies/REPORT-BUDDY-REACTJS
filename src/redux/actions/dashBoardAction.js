@@ -30,7 +30,7 @@ export const postFormData = (data, navigate) => (dispatch) => {
      axios.post(`${API_BASE_URL}/project-details`, data,{
           headers: {
                Authorization: `Bearer ${JSON.parse(token)}`,
-               "Content-Type": 'multipart/form-data'
+               // "Content-Type": 'multipart/form-data'
           }
      })
           .then((response) => {

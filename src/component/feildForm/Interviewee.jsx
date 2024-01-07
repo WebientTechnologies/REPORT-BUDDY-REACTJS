@@ -108,6 +108,18 @@ function Interviewee({ form, setForm }) {
         interviewee: updatedInterviews,
       }));
     };
+    const handleMrMissChange = (selectedOption, interviewId) => {
+      const updatedInterviews = interviewees.map((interview) =>
+        interview.id === interviewId
+          ? { ...interview,  'mr/miss': selectedOption.value }
+          : interview
+      );
+    
+      setForm((prevForm) => ({
+        ...prevForm,
+        interviewee: updatedInterviews,
+      }));
+    };
     
     const handleFirstNameChange = (value, interviewId) => {
       const updatedInterviews = interviewees.map((interview) =>
@@ -270,9 +282,9 @@ function Interviewee({ form, setForm }) {
 
                 {/* Personal Information */}
                 <FormControl isRequired >
-                  <label>Title</label>
+                  <FormLabel>Title</FormLabel>
                   <ReactSelect
-                    placeholder="Select Mr. / Ms."
+                    placeholder="Title"
                     options={titleOptions}
                     required
                     isRequired
@@ -282,6 +294,23 @@ function Interviewee({ form, setForm }) {
                     }
                     value={titleOptions.find(
                       (option) => option.value === interview.title
+                    )}
+                  />
+                </FormControl>
+
+                <FormControl isRequired >
+                  <FormLabel>Mr / Mrs / Ms.</FormLabel>
+                  <ReactSelect
+                    placeholder="Select Mr. / Mrs."
+                    options={titleOptions}
+                    required
+                    isRequired
+                    name= 'mr/miss'
+                    onChange={(selectedOption) =>
+                      handleMrMissChange(selectedOption, interview.id)
+                    }
+                    value={titleOptions.find(
+                      (option) => option.value === interview['mr/miss']
                     )}
                   />
                 </FormControl>
